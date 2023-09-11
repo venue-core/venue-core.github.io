@@ -50,6 +50,7 @@ export default function InputsPage({
           defaultValue = "";
           break;
       }
+      if (v.default) defaultValue = v.default;
       const current = inputs[v.id];
       if (current !== undefined) {
         acc[v.id] = current;

@@ -7,7 +7,7 @@ import Form from "./form";
 
 export const metadata = {
   title: "Waitlist - Venue",
-  description: "Engage your audience intelligently",
+  description: "Empower venue managers to close more deals more efficiently",
 };
 
 export default function Waitlist() {
@@ -27,6 +27,7 @@ export default function Waitlist() {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-24 pb-12 md:pt-40 md:pb-20">
           <div className="lg:flex lg:space-x-20">
+            {/* Left side */}
             <Auth />
             {/* Right side */}
             <div className="relative w-full max-w-md mx-auto">
@@ -37,7 +38,6 @@ export default function Waitlist() {
               />
               <div className="p-6 md:p-8">
                 <div className="text-xl font-bold mb-6">Join Waitlist</div>
-                {/* Form */}
                 <Form />
               </div>
             </div>

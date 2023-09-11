@@ -12,10 +12,8 @@ import { Availability } from "@/components/datetime/context/data";
 import { useSelectedDate } from "@/components/datetime/context/selected-date";
 
 export default function Time({
-  goNext,
   setAvailability,
 }: {
-  goNext: () => void;
   setAvailability: (a: Availability) => void;
 }) {
   const { selectedDate } = useSelectedDate();
@@ -57,7 +55,6 @@ export default function Time({
                   setSelectedTime={setSelectedTime}
                   availability={availability}
                   setAvailability={setAvailability}
-                  goNext={goNext}
                 />
               ))}
             </ul>
@@ -97,13 +94,11 @@ function TimeSlot({
   setAvailability,
   selectedTime,
   setSelectedTime,
-  goNext,
 }: {
   availability: Availability;
   setAvailability: (a: Availability) => void;
   selectedTime: string | null;
   setSelectedTime: (time: string | null) => void;
-  goNext: () => void;
 }) {
   const timeFormatter = useDateFormatter({ timeStyle: "short" });
   const isSelected = selectedTime === availability.startTime;
@@ -145,7 +140,6 @@ function TimeSlot({
           className="btn-sm w-full focus-visible:ring-inset focus-visible:ring-offset-0 bg-blue-100 text-blue-700 hover:bg-blue-200 focus-visible:ring-blue-500"
           onClick={(evt) => {
             evt.stopPropagation();
-            goNext();
             setAvailability(availability);
           }}
         >

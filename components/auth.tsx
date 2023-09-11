@@ -9,41 +9,23 @@ export default function Auth() {
     <div className="hidden lg:block grow lg:mt-20 mb-12 lg:mb-0 flex flex-col items-center">
       {/* Avatars */}
       <div className="flex -space-x-3 -ml-0.5 mb-6">
-        <Image
-          className="rounded-full border-2 border-slate-900 box-content"
-          src={Avatar01}
-          width={40}
-          height={40}
-          alt="Avatar 01"
-        />
-        <Image
-          className="rounded-full border-2 border-slate-900 box-content"
-          src={Avatar02}
-          width={40}
-          height={40}
-          alt="Avatar 02"
-        />
-        <Image
-          className="rounded-full border-2 border-slate-900 box-content"
-          src={Avatar03}
-          width={40}
-          height={40}
-          alt="Avatar 03"
-        />
-        <Image
-          className="rounded-full border-2 border-slate-900 box-content"
-          src={Avatar04}
-          width={40}
-          height={40}
-          alt="Avatar 04"
-        />
+        {AVATARS.map((avatar, i) => (
+          <Image
+            key={i}
+            className="rounded-full border-2 border-slate-900 box-content"
+            src={avatar}
+            width={40}
+            height={40}
+            alt={`Avatar ${i}`}
+          />
+        ))}
       </div>
       {/* Headline */}
       <h2 className="h2 mb-8 text-center lg:text-left">
-        Start providing{" "}
+        Accurate price quotes has never been{" "}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-          accurate
-        </span>{" "}price quotes
+          easier
+        </span>
       </h2>
       {/* List */}
       <ul className="inline-flex flex-col text-lg text-slate-500 space-y-3">
@@ -64,10 +46,17 @@ export default function Auth() {
   );
 }
 
+const AVATARS = [
+  Avatar01,
+  Avatar02,
+  Avatar03,
+  Avatar04,
+] as const
+
 const BULLETS = [
   "Close deals faster",
   "Boost venue manager productivity",
   "Target quality leads",
-  "Seamless integration",
-  "Self-service pricing tool",
+  // "Seamless integration into website",
+  // "Self-service pricing tool",
 ] as const

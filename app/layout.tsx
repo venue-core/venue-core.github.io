@@ -14,7 +14,7 @@ const inter = Inter({
 
 export const metadata = {
   title: "Avatar",
-  description: "Engage your audience intelligently",
+  description: "Empower venue managers to close more deals more efficiently",
 };
 
 export default function RootLayout({

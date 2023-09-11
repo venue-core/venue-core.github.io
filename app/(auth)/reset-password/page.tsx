@@ -5,7 +5,7 @@ import Form from "./form";
 
 export const metadata = {
   title: "Reset Password - Venue",
-  description: "Engage your audience intelligently",
+  description: "Empower venue managers to close more deals more efficiently",
 };
 
 export default function ResetPassword() {

@@ -37,6 +37,7 @@ export interface Variable {
   label?: string;
   subtext?: string;
   description?: string;
+  default?: string | number;
 }
 
 export enum Category {

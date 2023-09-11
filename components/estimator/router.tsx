@@ -65,7 +65,7 @@ export default function Router() {
         {/*<!-- End Icon -->*/}
       </div>
 
-      <div className="pb-4 overflow-y-scroll">
+      <div className="h-full pb-4 overflow-y-scroll">
         <PageView
           inputs={inputs}
           setInputs={setInputs}

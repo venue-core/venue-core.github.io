@@ -7,7 +7,7 @@ import Form from "./form";
 
 export const metadata = {
   title: "Log in - Venue",
-  description: "Engage your audience intelligently",
+  description: "Empower venue managers to close more deals more efficiently",
 };
 
 export default function Login() {
@@ -29,7 +29,7 @@ export default function Login() {
           <div className="lg:flex lg:space-x-20">
             <Auth />
             {/* Right side */}
-            <div className="relative w-full max-w-md mx-auto md:mt-32">
+            <div className="relative w-full max-w-md mx-auto md:mt-24">
               {/* Bg gradient */}
               <div
                 className="absolute inset-0 opacity-40 md:bg-gradient-to-t md:from-transparent md:to-slate-300 -z-10"

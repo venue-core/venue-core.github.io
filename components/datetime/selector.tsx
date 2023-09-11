@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect } from "react";
-
 import Calendar from "@/components/datetime/calendar";
 import { AvailabilitiesProvider } from "@/components/datetime/context/availabilities";
 import { SelectedDateProvider } from "@/components/datetime/context/selected-date";
@@ -19,8 +15,6 @@ export default function DatetimeSelector({
   setInputs: (i: Inputs) => void;
   goNext: () => void;
 }) {
-  // TODO: if input has MONTH, DAY, DATE, YEAR, TIME set, then set default value inside provider
-  useEffect(() => {}, []);
   return (
     <SelectedDateProvider>
       <AvailabilitiesProvider>
@@ -41,7 +35,6 @@ export default function DatetimeSelector({
             </div>
             <div>
               <Time
-                goNext={goNext}
                 setAvailability={(a) => {
                   const start = new Date(a.startTime);
                   const end = new Date(a.endTime);
@@ -57,6 +50,7 @@ export default function DatetimeSelector({
                     [DAY.id]: day,
                     [TIME.id]: { start, end },
                   });
+                  goNext();
                 }}
               />
             </div>

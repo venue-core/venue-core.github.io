@@ -6,7 +6,7 @@ import Solution from "@/components/solution";
 
 export const metadata = {
   title: "Home - Venue",
-  description: "Engage your audience intelligently",
+  description: "Empower venue managers to close more deals more efficiently",
 };
 
 export default function Home() {

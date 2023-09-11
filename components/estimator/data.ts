@@ -42,7 +42,8 @@ export const VARIABLES: Variable[] = [
     min: 1,
     max: 150,
     label: "How many guests will be at the event?",
-    subtext: "Include the number of people within your own personal party."
+    subtext: "Include the number of people within your own personal party.",
+    default: 75,
   },
   {
     id: "V7",
@@ -524,7 +525,7 @@ const ADDITIONAL_SETUP_TIME: LineItem = {
 export const LINE_ITEMS: LineItem[] = [
   VENUE_ITEM,
   MENU_SERVICES,
-  GRATUITY,
+  // GRATUITY,
   PARKING_ATTENDANT_FEE,
   CEREMONY_FEE,
   ADDITIONAL_EVENT_TIME,
