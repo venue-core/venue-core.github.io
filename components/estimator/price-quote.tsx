@@ -318,7 +318,7 @@ function getLineItemPrice(
           .filter((t) => t.type === "TAG")
           .map((t) => t.value);
         if (categories.includes(li.category)) return true;
-        return _.intersection(tags, li.tags|| []).length > 0
+        return _.intersection(tags, li.tags || []).length > 0;
       }).reduce(
         (acc, li) => acc + getLineItemPrice(li, inputs, level + 1, true),
         0

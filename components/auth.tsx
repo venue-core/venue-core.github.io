@@ -46,12 +46,7 @@ export default function Auth() {
   );
 }
 
-const AVATARS = [
-  Avatar01,
-  Avatar02,
-  Avatar03,
-  Avatar04,
-] as const
+const AVATARS = [Avatar01, Avatar02, Avatar03, Avatar04] as const;
 
 const BULLETS = [
   "Close deals faster",
@@ -59,4 +54,4 @@ const BULLETS = [
   "Target quality leads",
   // "Seamless integration into website",
   // "Self-service pricing tool",
-] as const
+] as const;

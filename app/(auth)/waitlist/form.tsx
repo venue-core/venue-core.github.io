@@ -36,7 +36,8 @@ export default function Form() {
     return (
       <div>
         <div>
-          Thanks! You're all set. You will receive an email from us within 24 hours.
+          Thanks! You're all set. You will receive an email from us within 24
+          hours.
         </div>
         <Link
           className="mt-4 btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 w-full group"
