@@ -1,5 +1,4 @@
 import React from "react";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import _ from "lodash";
 
 import {
@@ -46,9 +45,7 @@ export default function PriceQuote({
   const lineItems = getLineItems(customer);
   const costs = lineItems
     .map((li) => {
-      const matched = li.options.find((term) =>
-        matches(term, inputs, customer)
-      );
+      const matched = li.options.find((term) => meetsConditions(term, inputs));
       const minimum = Math.max(matched?.minimum || 0, li.minimum || 0);
       if (matched) {
         const price = getLineItemPrice(customer, li, inputs);
@@ -276,19 +273,19 @@ function isValid(costs: Cost[]) {
   return costs.every((c) => !c.missing);
 }
 
-function matches(option: Term, inputs: Inputs, customer: Customer): boolean {
-  const conditions = getConditions(customer);
+function meetsConditions(option: Term, inputs: Inputs): boolean {
   const debug = false;
   return option.conditions.some((group) => {
     if (debug) console.log(group);
-    return group
-      .map((cId) => conditions[cId])
-      .filter(Boolean)
-      .every((c) => evaluateCondition(c, inputs, debug));
+    return group.every((c) => evaluateCondition(c, inputs, debug));
   });
 }
 
-function evaluateCondition(c: Condition, inputs: Inputs, debug: boolean) {
+export function evaluateCondition(
+  c: Condition,
+  inputs: Inputs,
+  debug: boolean
+) {
   const { variableId } = c;
   const value = inputs[variableId];
   if (debug) console.log(value);
@@ -329,7 +326,7 @@ function getLineItemPrice(
     console.error("RECURSIVE STACK OVERFLOW calculating list item price");
     return 0;
   }
-  const matched = li.options.find((term) => matches(term, inputs, customer));
+  const matched = li.options.find((term) => meetsConditions(term, inputs));
   const minimum = Math.max(matched?.minimum || 0, li.minimum || 0);
   let multiple: number;
   if (matched) {

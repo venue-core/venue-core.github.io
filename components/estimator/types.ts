@@ -4,7 +4,7 @@ export interface Venue {
   timezone: string;
   email: string;
   phone: string;
-  depositPercentage?: number; // TODO: redo deposit / payment data models
+  depositPercentage?: number; // TODO: redo deposit / payment schedule data models
   minimum?: number;
   notes?: string[];
 }
@@ -21,6 +21,7 @@ enum PrimitiveVariableType {
   Boolean = "BOOLEAN",
   Float = "FLOAT",
   Integer = "INTEGER",
+  MultiSelect = 'MULTI_SELECT',
   Select = "SELECT",
   Text = "TEXT",
 }
@@ -32,10 +33,13 @@ export enum PageType {
   Calendar = 'CALENDAR',
   CalendarTime = 'CALENDAR_AND_TIME',
   Form = 'FORM',
+  Intro = 'INTRO',
+  Time = 'TIME',
 }
 
 export interface Page {
   id: string;
+  title: string;
   type: PageType;
   rank: number;
 }
@@ -43,7 +47,7 @@ export interface Page {
 export interface Field {
   id: string;
   pageId: string;
-  question: string;
+  label: string;
   subtext?: string;
   description?: string;
   row: number;
@@ -65,6 +69,7 @@ export interface Variable {
   subtext?: string;
   description?: string;
   default?: string | number;
+  conditions?: Condition[];
 }
 
 export enum Category {
@@ -94,7 +99,7 @@ export interface Term {
   id: string;
   name: string;
   // TODO: maybe add a type for more explicit price calculation
-  conditions: string[][];
+  conditions: Condition[][];
   items?: LineItem[];
   basePrice?: number;
   targets?: { type: 'TAG' | 'CATEGORY', value: string }[];
@@ -121,7 +126,7 @@ export interface Condition {
 }
 
 export type Inputs = {
-  [variableId: string]: boolean | number | string | { start: Date; end: Date };
+  [variableId: string]: boolean | number | string | { start: Date; end: Date } | (string | number)[];
 };
 
 export enum View {

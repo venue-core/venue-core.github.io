@@ -27,6 +27,26 @@ export const VENUE: Venue = {
   ]
 };
 
+const HEADCOUNT_VAR = {
+  id: "V6",
+  venueId: VENUE.id,
+  name: "Headcount",
+  type: VariableType.Integer,
+  required: true,
+  min: 1,
+  max: 150,
+  label: "How many guests will be at the event?",
+  subtext: "Include the number of people within your own personal party.",
+  default: 75,
+};
+
+const HEADCOUNT_OVER_100: Condition = {
+  id: "C-19",
+  variableId: HEADCOUNT_VAR.id,
+  type: ConditionType.GTE,
+  condition: 100,
+};
+
 export const VARIABLES: Variable[] = [
   { id: "V1", venueId: VENUE.id, name: "Year", type: VariableType.Year, required: true },
   { id: "V2", venueId: VENUE.id, name: "Month", type: VariableType.Month, required: true },
@@ -45,18 +65,7 @@ export const VARIABLES: Variable[] = [
     type: VariableType.TimeRange,
     required: true,
   },
-  {
-    id: "V6",
-    venueId: VENUE.id,
-    name: "Headcount",
-    type: VariableType.Integer,
-    required: true,
-    min: 1,
-    max: 150,
-    label: "How many guests will be at the event?",
-    subtext: "Include the number of people within your own personal party.",
-    default: 75,
-  },
+  HEADCOUNT_VAR,
   {
     id: "V7",
     venueId: VENUE.id,
@@ -108,12 +117,55 @@ export const VARIABLES: Variable[] = [
   {
     id: "V12",
     venueId: VENUE.id,
+    name: "Dining Option",
+    type: VariableType.Select,
+    required: false,
+    options: [
+      "à la carte",
+      "Buffet", // TODO: conditions to display certain options, only can choose this if >=100
+    ],
+    label: "Which dining option would you like?",
+    subtext: "Buffets can only be served to party sizes greater than 100"
+  },
+  {
+    id: "V13",
+    venueId: VENUE.id,
     name: "Buffet Option",
     type: VariableType.Select,
     required: false,
-    options: ["à la carte", "Kansas City Barbeque", "Asian"],
+    options: ["Kansas City Barbeque", "Asian"],
     label: "Which buffet option would you like?",
-    subtext: "Buffets can only be serve to party sizes greater than 100"
+    subtext: "Buffets can only be serve to party sizes greater than 100",
+    conditions: [
+      {
+        id: "C-V13",
+        type: ConditionType.Equal,
+        condition: "Buffet",
+        variableId: "V12",
+      },
+      HEADCOUNT_OVER_100,
+    ]
+  },
+  {
+    id: "V14",
+    venueId: VENUE.id,
+    name: "A la carte entrees",
+    type: VariableType.MultiSelect,
+    required: false,
+    label: "Please select 1-3 entree choices.",
+    options: [
+      "A", "B", "C"
+    ],
+    min: 1,
+    max: 3,
+    conditions: [
+      {
+        id: "C-V14",
+        type: ConditionType.Equal,
+        condition: "à la carte",
+        variableId: "V12",
+      },
+    ]
   },
 ];
 
@@ -133,7 +185,7 @@ const time = VARIABLES.find((v) => v.type === VariableType.TimeRange);
 if (!time) throw new Error("Time range variable not found");
 export const TIME = time;
 
-const headcount = VARIABLES.find((v) => v.name === "Headcount");
+const headcount = HEADCOUNT_VAR;
 if (!headcount) throw new Error("Headcount variable not found");
 const attendant = VARIABLES.find((v) => v.name === "Parking Attendant");
 if (!attendant) throw new Error("Parking Attendant variable not found");
@@ -145,6 +197,8 @@ const additionalSetupTime = VARIABLES.find((v) => v.name === "Additional Setup T
 if (!additionalSetupTime) throw new Error("Additional Setup Time variable not found");
 const additionalEventTime = VARIABLES.find((v) => v.name === "Additional Event Time");
 if (!additionalEventTime) throw new Error("Additional Event Time variable not found");
+const dining = VARIABLES.find((v) => v.name === "Dining Option");
+if (!dining) throw new Error("Dining Option variable not found");
 const buffet = VARIABLES.find((v) => v.name === "Buffet Option");
 if (!buffet) throw new Error("Buffet Option variable not found");
 
@@ -240,9 +294,9 @@ const HAS_ADDITIONAL_SETUP_TIME: Condition = {
   type: ConditionType.GTE,
   condition: 1,
 };
-const BUFFET_A_LA_CARTE: Condition = {
+const DINING_A_LA_CARTE: Condition = {
   id: "C-16",
-  variableId: buffet.id,
+  variableId: dining.id,
   type: ConditionType.Equal,
   condition: "à la carte"
 };
@@ -257,12 +311,6 @@ const BUFFET_ASIAN: Condition = {
   variableId: buffet.id,
   type: ConditionType.Equal,
   condition: "Asian"
-};
-const HEADCOUNT_OVER_100: Condition = {
-  id: "C-19",
-  variableId: headcount.id,
-  type: ConditionType.GTE,
-  condition: 1, // TODO: revert this back to 100
 };
 
 export const CONDITIONS = [
@@ -280,7 +328,7 @@ export const CONDITIONS = [
   IS_NOT_OUTDOOR_DINING,
   HAS_ADDITIONAL_EVENT_TIME,
   HAS_ADDITIONAL_SETUP_TIME,
-  BUFFET_A_LA_CARTE,
+  DINING_A_LA_CARTE,
   BUFFET_KANSAS_CITY_BARBEQUE,
   BUFFET_ASIAN,
   HEADCOUNT_OVER_100,
@@ -294,57 +342,49 @@ const VENUE_TERMS: Term[] = [
     id: "TV-1",
     name: "Peak Season - Weekdays - Up to 90",
     basePrice: 5400,
-    conditions: [[PEAK_SEASON.id, WEEKDAYS.id, HEADCOUNT_UP_TO_90.id]],
+    conditions: [[PEAK_SEASON, WEEKDAYS, HEADCOUNT_UP_TO_90]],
   },
   {
     id: "TV-2",
     name: "Peak Season - Weekdays - 91 - 150",
     basePrice: 6900,
-    conditions: [
-      [PEAK_SEASON.id, WEEKDAYS.id, ...HEADCOUNT_91_TO_150.map((c) => c.id)],
-    ],
+    conditions: [[PEAK_SEASON, WEEKDAYS, ...HEADCOUNT_91_TO_150]],
   },
   {
     id: "TV-3",
     name: "Peak Season - Fridays / Sundays - Up to 90",
     basePrice: 7500,
-    conditions: [[PEAK_SEASON.id, FRIDAYS_SUNDAYS.id, HEADCOUNT_UP_TO_90.id]],
+    conditions: [[PEAK_SEASON, FRIDAYS_SUNDAYS, HEADCOUNT_UP_TO_90]],
   },
   {
     id: "TV-4",
     name: "Peak Season - Fridays / Sundays - 91 - 150",
     basePrice: 8400,
-    conditions: [
-      [
-        PEAK_SEASON.id,
-        FRIDAYS_SUNDAYS.id,
-        ...HEADCOUNT_91_TO_150.map((c) => c.id),
-      ],
-    ],
+    conditions: [[PEAK_SEASON, FRIDAYS_SUNDAYS, ...HEADCOUNT_91_TO_150]],
   },
   {
     id: "TV-5",
     name: "Peak Season - Saturdays - Up to 150",
     basePrice: 9900,
-    conditions: [[PEAK_SEASON.id, SATURDAYS.id, HEADCOUNT_UP_TO_150.id]],
+    conditions: [[PEAK_SEASON, SATURDAYS, HEADCOUNT_UP_TO_150]],
   },
   {
     id: "TV-6",
     name: "Winter - Weekdays - Up to 90",
     basePrice: 4200,
-    conditions: [[WINTER.id, WEEKDAYS.id, HEADCOUNT_UP_TO_90.id]],
+    conditions: [[WINTER, WEEKDAYS, HEADCOUNT_UP_TO_90]],
   },
   {
     id: "TV-7",
     name: "Winter - Fridays / Sundays - Up to 90",
     basePrice: 5400,
-    conditions: [[WINTER.id, FRIDAYS_SUNDAYS.id, HEADCOUNT_UP_TO_90.id]],
+    conditions: [[WINTER, FRIDAYS_SUNDAYS, HEADCOUNT_UP_TO_90]],
   },
   {
     id: "TV-8",
     name: "Winter - Saturdays - Up to 90",
     basePrice: 7500,
-    conditions: [[WINTER.id, SATURDAYS.id, HEADCOUNT_UP_TO_90.id]],
+    conditions: [[WINTER, SATURDAYS, HEADCOUNT_UP_TO_90]],
   },
 ];
 
@@ -378,7 +418,7 @@ const PARKING_ATTENDANT_FEE: LineItem = {
     {
       id: "TPA-1",
       name: "Parking Attendant Fee",
-      conditions: [[WANT_PARKING_ATTENDANT.id]],
+      conditions: [[WANT_PARKING_ATTENDANT]],
       basePrice: 500,
     },
   ],
@@ -396,7 +436,7 @@ const CEREMONY_FEE: LineItem = {
     {
       id: "TC-1",
       name: "Wedding Ceremony Fee",
-      conditions: [[WANT_WEDDING_CEREMONY.id]],
+      conditions: [[WANT_WEDDING_CEREMONY]],
       basePrice: 2000,
     },
   ],
@@ -415,25 +455,25 @@ const CEREMONY_FEE: LineItem = {
 const MENU_TERMS: Term[] = [
   {
     id: "TM-1",
-    name: "Buffet - à la carte",
+    name: "Dining - à la carte",
     items: [
       // TODO: implement line items for a la carte
     ],
-    conditions: [[BUFFET_A_LA_CARTE.id, HEADCOUNT_OVER_100.id]],
+    conditions: [[DINING_A_LA_CARTE]],
   },
   {
     id: "TM-3",
     name: "Theme Buffet - Kansas City Barbeque",
     basePrice: 73.50,
     multipleVariableId: headcount.id,
-    conditions: [[BUFFET_KANSAS_CITY_BARBEQUE.id, HEADCOUNT_OVER_100.id]],
+    conditions: [[BUFFET_KANSAS_CITY_BARBEQUE, HEADCOUNT_OVER_100]],
   },
   {
     id: "TM-4",
     name: "Theme Buffet - Asian Buffet",
     basePrice: 73.50,
     multipleVariableId: headcount.id,
-    conditions: [[BUFFET_ASIAN.id, HEADCOUNT_OVER_100.id]],
+    conditions: [[BUFFET_ASIAN, HEADCOUNT_OVER_100]],
   },
 ]
 
@@ -483,7 +523,7 @@ const ADMIN_FEE: LineItem = {
         { type: 'CATEGORY', value: Category.Menu },
         { type: 'CATEGORY', value: Category.Miscellaneous },
       ],
-      conditions: [[IS_NOT_OUTDOOR_DINING.id], []],
+      conditions: [[IS_NOT_OUTDOOR_DINING], []],
     },
     {
       id: 'TAF-2',
@@ -494,7 +534,7 @@ const ADMIN_FEE: LineItem = {
         { type: 'CATEGORY', value: Category.Menu },
         { type: 'CATEGORY', value: Category.Miscellaneous },
       ],
-      conditions: [[IS_OUTDOOR_DINING.id]],
+      conditions: [[IS_OUTDOOR_DINING]],
     },
   ],
 };
@@ -511,7 +551,7 @@ const ADDITIONAL_EVENT_TIME: LineItem = {
       name: '$1,250 / hour',
       basePrice: 1_250,
       multipleVariableId: additionalEventTime.id,
-      conditions: [[HAS_ADDITIONAL_EVENT_TIME.id]]
+      conditions: [[HAS_ADDITIONAL_EVENT_TIME]]
     },
   ],
 };
@@ -528,7 +568,7 @@ const ADDITIONAL_SETUP_TIME: LineItem = {
       name: '$250 / hour',
       basePrice: 250,
       multipleVariableId: additionalSetupTime.id,
-      conditions: [[HAS_ADDITIONAL_SETUP_TIME.id]]
+      conditions: [[HAS_ADDITIONAL_SETUP_TIME]]
     },
   ],
 }

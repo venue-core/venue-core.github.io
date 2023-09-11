@@ -1,13 +1,16 @@
 import { useForm, UseFormReturnType } from "@mantine/form";
 import cx from "classnames";
+import _ from "lodash";
 
 import { Customer, getVariables } from "@/components/estimator/data";
+import { evaluateCondition } from "@/components/estimator/price-quote";
 import {
   DefaultVariableType,
   Inputs,
   Variable,
   VariableType,
 } from "@/components/estimator/types";
+import {XMarkIcon} from "@heroicons/react/20/solid";
 
 const SKIP_VARIABLES = new Set<VariableType>(
   Object.values(DefaultVariableType)
@@ -44,6 +47,9 @@ export default function InputsPage({
         case VariableType.Integer:
           defaultValue = v.min || 0;
           break;
+        case VariableType.MultiSelect:
+          defaultValue = [];
+          break;
         case VariableType.Select:
           defaultValue = v.options?.[0] || "";
           break;
@@ -78,9 +84,11 @@ export default function InputsPage({
         goNext();
       })}
     >
-      {variables.map((v) => (
-        <Input key={v.id} variable={v} form={form} />
-      ))}
+      {variables
+        .filter((v) => meetsConditions(v, form.values))
+        .map((v) => (
+          <Input key={v.id} variable={v} form={form} />
+        ))}
       <div className="mt-4 flex justify-end">
         <button
           type="submit"
@@ -96,6 +104,12 @@ export default function InputsPage({
   );
 }
 
+function meetsConditions(variable: Variable, inputs: Inputs) {
+  if (!variable.conditions) return true;
+  const debug = false;
+  return variable.conditions.every((c) => evaluateCondition(c, inputs, debug));
+}
+
 function Input({
   variable,
   form,
@@ -107,7 +121,7 @@ function Input({
   const base = {
     id: variable.id,
     className: "form-input text-sm py-2 w-full",
-    required: true,
+    required: variable.required,
     ...inputProps,
   };
   let node: React.ReactNode;
@@ -155,6 +169,22 @@ function Input({
           step={variable.interval || 1}
         />
       );
+      break;
+    case VariableType.MultiSelect:
+      if (!variable.options) {
+        console.error(
+          `Options not defined for select variable: ${variable.name}`
+        );
+        return null;
+      }
+      node = <MultiSelect
+        {...base}
+        selected={base.value}
+        options={variable.options}
+        min={variable.min}
+        max={variable.max}
+        onChange={selected => form.setFieldValue(base.id, selected)}
+      />
       break;
     case VariableType.Select:
       if (!variable.options) {
@@ -211,4 +241,47 @@ const NUM_TYPES: Set<VariableType> = new Set([
 function clean<T>(variable: Variable, value: T): T | number {
   if (NUM_TYPES.has(variable.type)) return Number(value);
   return value;
+}
+
+function MultiSelect<T extends string | number>({
+  id,
+  className,
+  selected = [],
+  options,
+  min,
+  max,
+  onChange,
+}: {
+  id: string;
+  className: string;
+  selected: T[];
+  options: T[];
+  min?: number;
+  max?: number;
+  onChange: (selected: T[]) => void;
+}) {
+  return (
+    <div>
+      <select id={id} className={className} disabled={max ? selected.length === max : false} onChange={evt => {
+        const value = evt.target.value as T;
+        onChange(_.uniq([...selected, value]));
+      }}>
+        <option key="Select options" value={undefined}>Select options</option>
+        {options.filter(o => !selected.includes(o)).map((o) => (<option key={o}>{o}</option>))}
+      </select>
+      <div className="mt-2">
+        {selected.map((v) => (
+          <span
+            key={v}
+            className="inline-block cursor-pointer bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+          >
+            <span>{v.toString()}</span>
+            <span className="ml-4" onClick={() => onChange(selected.filter(o => o !== v))}>
+              &#x2715;
+            </span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
 }

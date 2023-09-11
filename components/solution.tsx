@@ -1,9 +1,8 @@
 const SOLUTIONS = [
   {
     id: 1,
-    title: "Engage",
-    description:
-      "Let avatar.ai have automated, personalized chats with fans. It's as if you have a 24/7 team ensuring constant fan engagement.",
+    title: "Close deals faster",
+    description: "Put the power in your customers hands with our self-serve cost estimator. Calculator is fully customizable and tailored for wedding venues.",
     icon: (
       <g fill="none" fillRule="evenodd">
         <rect
@@ -36,8 +35,8 @@ const SOLUTIONS = [
   },
   {
     id: 2,
-    title: "Retain",
-    description: `No more lost fans. avatar.ai sends tailored messages to re-engage inactive followers, strengthening brand loyalty.`,
+    title: "Boost Productivity",
+    description: `Automate time-consuming tasks like addressing pricing inquiries and updating price estimates. `,
     icon: (
       <g fill="none" fillRule="evenodd">
         <rect
@@ -68,9 +67,104 @@ const SOLUTIONS = [
   },
   {
     id: 3,
-    title: "Monetize",
-    description:
-      "avatar.ai guides fans to make purchases. It experiments with monetization approaches, refining strategies to boost your earnings.",
+    title: "Target Quality Leads",
+    description: "Avoid unnecessary tours by filtering out couples whose budgets don’t align with your venue.",
+    icon: (
+      <g fill="none" fillRule="evenodd">
+        <rect
+          className="fill-current text-blue-600"
+          width="64"
+          height="64"
+          rx="32"
+        />
+        <g strokeWidth="2">
+          <path
+            className="stroke-current text-blue-300"
+            d="M34.743 29.714L36.57 32 27.43 43.429H24M24 20.571h3.429l1.828 2.286"
+          />
+          <path
+            className="stroke-current text-white"
+            strokeLinecap="square"
+            d="M34.743 41.143l1.828 2.286H40M40 20.571h-3.429L27.43 32l1.828 2.286"
+          />
+          <path className="stroke-current text-blue-300" d="M36.571 32H40" />
+          <path
+            className="stroke-current text-white"
+            d="M24 32h3.429"
+            strokeLinecap="square"
+          />
+        </g>
+      </g>
+    ),
+  },
+  {
+    id: 4,
+    title: "Seamless Integration",
+    description: "Embed our calendar directly into your website or provide exclusive access to serious buyers.",
+    icon: (
+      <g fill="none" fillRule="evenodd">
+        <rect
+          className="fill-current text-blue-600"
+          width="64"
+          height="64"
+          rx="32"
+        />
+        <g strokeWidth="2">
+          <path
+            className="stroke-current text-blue-300"
+            d="M34.743 29.714L36.57 32 27.43 43.429H24M24 20.571h3.429l1.828 2.286"
+          />
+          <path
+            className="stroke-current text-white"
+            strokeLinecap="square"
+            d="M34.743 41.143l1.828 2.286H40M40 20.571h-3.429L27.43 32l1.828 2.286"
+          />
+          <path className="stroke-current text-blue-300" d="M36.571 32H40" />
+          <path
+            className="stroke-current text-white"
+            d="M24 32h3.429"
+            strokeLinecap="square"
+          />
+        </g>
+      </g>
+    ),
+  },
+  {
+    id: 5,
+    title: "Self-Serve Pricing Tool",
+    description: "Eliminate lengthy email discussions. Let clients explore various options and their pricing impact with our intuitive tool.",
+    icon: (
+      <g fill="none" fillRule="evenodd">
+        <rect
+          className="fill-current text-blue-600"
+          width="64"
+          height="64"
+          rx="32"
+        />
+        <g strokeWidth="2">
+          <path
+            className="stroke-current text-blue-300"
+            d="M34.743 29.714L36.57 32 27.43 43.429H24M24 20.571h3.429l1.828 2.286"
+          />
+          <path
+            className="stroke-current text-white"
+            strokeLinecap="square"
+            d="M34.743 41.143l1.828 2.286H40M40 20.571h-3.429L27.43 32l1.828 2.286"
+          />
+          <path className="stroke-current text-blue-300" d="M36.571 32H40" />
+          <path
+            className="stroke-current text-white"
+            d="M24 32h3.429"
+            strokeLinecap="square"
+          />
+        </g>
+      </g>
+    ),
+  },
+  {
+    id: 6,
+    title: "Invoice Creation",
+    description: "Effortlessly generate polished invoices.",
     icon: (
       <g fill="none" fillRule="evenodd">
         <rect
@@ -118,11 +212,10 @@ export default function Solution() {
             <div className="uppercase mb-4 text-xl font-bold text-blue-600 tracking-wider">
               Solution
             </div>
-            <h2 className="h2 mb-4">Use AI to scale your business</h2>
+            <h2 className="h2 mb-4">Use software to automate the mundane tasks</h2>
             <p className="text-xl text-gray-600">
-              Refocus on your passion: crafting content your fans love. With
-              avatar.ai as your community manager, monetize effortlessly while
-              keeping fans engaged and loyal.
+              Refocus on your passion: creating new experiences for people and
+              let us handle the parts of your business you would rather not deal with.
             </p>
           </div>
 

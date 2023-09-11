@@ -1,6 +1,5 @@
 import Cta from "@/components/cta";
 import Hero from "@/components/hero";
-import HowItWorks from "@/components/how";
 import Problem from "@/components/problem";
 import Solution from "@/components/solution";
 
@@ -15,8 +14,6 @@ export default function Home() {
       <Hero />
       <Problem />
       <Solution />
-      <Cta />
-      <HowItWorks />
       <Cta />
     </>
   );
