@@ -4,7 +4,7 @@ import Illustration from "@/public/images/auth-illustration.svg";
 import Form from "./form";
 
 export const metadata = {
-  title: "Reset Password - Avatar",
+  title: "Reset Password - Venue",
   description: "Engage your audience intelligently",
 };
 

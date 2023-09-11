@@ -6,7 +6,7 @@ import Auth from "@/components/auth";
 import Form from "./form";
 
 export const metadata = {
-  title: "Log in - Avatar",
+  title: "Log in - Venue",
   description: "Engage your audience intelligently",
 };
 
