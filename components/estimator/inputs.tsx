@@ -1,7 +1,7 @@
 import { useForm, UseFormReturnType } from "@mantine/form";
 import cx from "classnames";
 
-import { VARIABLES } from "@/components/estimator/data";
+import { Customer, getVariables } from "@/components/estimator/data";
 import {
   DefaultVariableType,
   Inputs,
@@ -14,15 +14,19 @@ const SKIP_VARIABLES = new Set<VariableType>(
 );
 
 export default function InputsPage({
+  customer,
   inputs,
   setInputs,
   goNext,
 }: {
+  customer: Customer;
   inputs: Inputs;
   setInputs: (i: Inputs) => void;
   goNext: () => void;
 }) {
-  const variables = VARIABLES.filter((v) => !SKIP_VARIABLES.has(v.type));
+  const variables = getVariables(customer).filter(
+    (v) => !SKIP_VARIABLES.has(v.type)
+  );
   const variablesMap = variables.reduce<Record<string, Variable>>((acc, v) => {
     acc[v.id] = v;
     return acc;

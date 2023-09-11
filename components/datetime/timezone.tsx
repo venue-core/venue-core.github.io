@@ -69,7 +69,7 @@ export default function Timezone() {
   // ------------------------------
   return (
     <>
-      <div className="text-center md:text-left">
+      <div className="text-center">
         <button
           disabled
           onClick={() => setIsOpen(true)}

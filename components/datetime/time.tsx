@@ -25,11 +25,11 @@ export default function Time({
   );
   const hasAvailability = availabilities.length > 0;
   return (
-    <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4 sm:px-8 lg:px-6 xl:px-10">
-      {/* Scroll  mask */}
-      <div className="pointer-events-none absolute inset-x-8 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white md:block lg:inset-x-6 xl:inset-x-10"></div>
+    <div className="relative grid h-full grid-rows-[auto,1fr] overflow-hidden px-4">
+      {/* Scroll mask */}
+      <div className="pointer-events-none absolute inset-x-8 bottom-0 z-10 hidden h-40 bg-gradient-to-t from-white"></div>
 
-      <div className="flex h-12 items-center justify-center md:justify-start">
+      <div className="flex h-12 items-center justify-center">
         <h2 className="text-lg font-semibold">
           {formatter.format(selectedDate.toDate(getLocalTimeZone()))}
         </h2>
@@ -44,10 +44,10 @@ export default function Time({
                 ? "pointer-events-none z-0 opacity-0 duration-300 ease-out"
                 : "z-10 opacity-100 ease-in"
             )}
-          ></div>
+          />
 
           {hasAvailability ? (
-            <ul className="space-y-2 pt-2 sm:pb-8 md:pb-40">
+            <ul className="space-y-2 pt-2 sm:pb-8 md:pb-24">
               {availabilities.map((availability) => (
                 <TimeSlot
                   key={availability.startTime}

@@ -3,7 +3,7 @@ import { AvailabilitiesProvider } from "@/components/datetime/context/availabili
 import { SelectedDateProvider } from "@/components/datetime/context/selected-date";
 import Time from "@/components/datetime/time";
 import Timezone from "@/components/datetime/timezone";
-import { DATE, DAY, MONTH, TIME, YEAR } from "@/components/estimator/data";
+import { DATE, DAY, MONTH, TIME, YEAR } from "@/components/estimator/data/demo";
 import { Inputs } from "@/components/estimator/types";
 
 export default function DatetimeSelector({
@@ -18,9 +18,9 @@ export default function DatetimeSelector({
   return (
     <SelectedDateProvider>
       <AvailabilitiesProvider>
-        <div className="mx-auto grid h-full max-w-lg grid-rows-[auto,1fr] gap-8 md:max-w-none">
+        <div className="mx-auto grid h-full max-w-lg grid-rows-[auto,1fr] gap-8">
           <div className="mt-4 px-4 sm:px-8 xl:px-10">
-            <h1 className="text-center text-2xl font-bold md:text-left">
+            <h1 className="text-center text-2xl font-bold">
               Select a Date & Time
             </h1>
           </div>

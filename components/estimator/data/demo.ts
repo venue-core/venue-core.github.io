@@ -14,7 +14,15 @@ enum Tag {
   Taxable = 'TAXABLE',
 }
 
-export const VENUE: Venue = { id: "1", name: "The 1909", timezone: "America/Los_Angeles", minimum: 14_000 };
+export const VENUE: Venue = {
+  id: "1",
+  name: "ACME Inc",
+  timezone: "America/Los_Angeles",
+  minimum: 14_000,
+  email: 'contact@acme.com',
+  phone: '+1 222 333 4444',
+};
+
 export const VARIABLES: Variable[] = [
   { id: "V1", venueId: VENUE.id, name: "Year", type: VariableType.Year, required: true },
   { id: "V2", venueId: VENUE.id, name: "Month", type: VariableType.Month, required: true },
@@ -456,37 +464,37 @@ const GRATUITY: LineItem = {
   ],
 };
 
-const TAXES: LineItem = {
+const ADMIN_FEE: LineItem = {
   id: "LI-6",
   venueId: VENUE.id,
-  name: "Service & Sales Tax",
+  name: "Admin Fee",
   required: true,
   category: Category.Taxes,
   options: [
     {
-      id: 'TT-1',
+      id: 'TAF-1',
       name: 'Standard (22%)',
       multiple: 0.22,
       targets: [
-        { type: 'TAG', value: Tag.Taxable },
         { type: 'CATEGORY', value: Category.General },
+        { type: 'CATEGORY', value: Category.Menu },
         { type: 'CATEGORY', value: Category.Miscellaneous },
       ],
-      conditions: [[IS_NOT_OUTDOOR_DINING.id]],
+      conditions: [[IS_NOT_OUTDOOR_DINING.id], []],
     },
     {
-      id: 'TT-2',
+      id: 'TAF-2',
       name: 'Outdoor Dining (25%)',
       multiple: 0.25,
       targets: [
-        { type: 'TAG', value: Tag.Taxable },
         { type: 'CATEGORY', value: Category.General },
+        { type: 'CATEGORY', value: Category.Menu },
         { type: 'CATEGORY', value: Category.Miscellaneous },
       ],
       conditions: [[IS_OUTDOOR_DINING.id]],
     },
   ],
-}
+};
 
 const ADDITIONAL_EVENT_TIME: LineItem = {
   id: "LI-7",
@@ -522,6 +530,27 @@ const ADDITIONAL_SETUP_TIME: LineItem = {
   ],
 }
 
+const TAXES: LineItem = {
+  id: "LI-9",
+  venueId: VENUE.id,
+  name: "Sales Tax",
+  required: true,
+  category: Category.Taxes,
+  options: [
+    {
+      id: 'TT-1',
+      name: '9.5%',
+      multiple: 0.095,
+      targets: [
+        { type: 'CATEGORY', value: Category.Menu },
+        { type: 'CATEGORY', value: Category.General },
+        { type: 'CATEGORY', value: Category.Miscellaneous },
+      ],
+      conditions: [[]],
+    },
+  ],
+};
+
 export const LINE_ITEMS: LineItem[] = [
   VENUE_ITEM,
   MENU_SERVICES,
@@ -530,5 +559,6 @@ export const LINE_ITEMS: LineItem[] = [
   CEREMONY_FEE,
   ADDITIONAL_EVENT_TIME,
   ADDITIONAL_SETUP_TIME,
+  ADMIN_FEE,
   TAXES,
 ];

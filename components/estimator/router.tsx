@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Calculator from "public/images/calculator.svg";
 
 import DatetimeSelector from "@/components/datetime/selector";
+import { Customer } from "@/components/estimator/data";
 import InputsPage from "@/components/estimator/inputs";
 import Intro from "@/components/estimator/intro";
 import PriceQuote from "@/components/estimator/price-quote";
@@ -31,13 +32,16 @@ const INVOICE = (
   </span>
 );
 
-export default function Router() {
+export default function Router({ customer }: { customer: Customer }) {
   const [page, setPage] = useState<Page>(Page.Intro);
   const [inputs, setInputs] = useState<Inputs>({});
   return (
     <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-14rem)]">
       <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
-        <Progress page={page} setPage={setPage} />
+        <Progress page={page} setPage={p => {
+          setPage(p);
+          window.scrollTo({ top: 0, left: 0 });
+        }} />
         {/*<!-- SVG Background Element -->*/}
         <figure className="absolute inset-x-0 bottom-0">
           <svg
@@ -67,6 +71,7 @@ export default function Router() {
 
       <div className="h-full pb-4 overflow-y-scroll">
         <PageView
+          customer={customer}
           inputs={inputs}
           setInputs={setInputs}
           page={page}
@@ -78,11 +83,13 @@ export default function Router() {
 }
 
 function PageView({
+  customer,
   inputs,
   setInputs,
   page,
   setPage,
 }: {
+  customer: Customer;
   inputs: Inputs;
   setInputs: (i: Inputs) => void;
   page: Page;
@@ -92,6 +99,7 @@ function PageView({
     case Page.Intro:
       return (
         <Intro
+          customer={customer}
           next={() => {
             window.scrollTo({ top: 0, left: 0 });
             setPage(Page.Calendar);
@@ -115,6 +123,7 @@ function PageView({
       return (
         <div className="p-8">
           <InputsPage
+            customer={customer}
             inputs={inputs}
             setInputs={setInputs}
             goNext={() => {
@@ -127,6 +136,7 @@ function PageView({
     case Page.Quote:
       return (
         <PriceQuote
+          customer={customer}
           inputs={inputs}
           restart={() => {
             window.scrollTo({ top: 0, left: 0 });

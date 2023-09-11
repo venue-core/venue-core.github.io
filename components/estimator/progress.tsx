@@ -34,10 +34,7 @@ export default function Progress({
                         ? "bg-blue-400 text-white"
                         : "bg-slate-100 text-slate-500"
                     }`}
-                    onClick={() => {
-                      window.scrollTo({ top: 0, left: 0 });
-                      setPage(p.page);
-                    }}
+                    onClick={() => setPage(p.page)}
                   >
                     {i + 1}
                   </div>

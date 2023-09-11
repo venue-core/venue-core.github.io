@@ -2,6 +2,8 @@ export interface Venue {
   id: string;
   name: string;
   timezone: string;
+  email: string;
+  phone: string;
   minimum?: number;
 }
 
@@ -41,13 +43,13 @@ export interface Variable {
 }
 
 export enum Category {
-  Bar = 'BAR',
-  Catering = 'CATERING',
-  Fees = 'FEES',
-  General = 'GENERAL',
-  Menu = 'MENU',
-  Miscellaneous = 'MISCELLANEOUS',
-  Taxes = 'TAXES',
+  Bar = 'Bar',
+  Catering = 'Catering',
+  Fees = 'Fees',
+  General = 'General',
+  Menu = 'Menu',
+  Miscellaneous = 'Miscellaneous',
+  Taxes = 'Taxes & Fees',
 }
 
 export interface LineItem {
