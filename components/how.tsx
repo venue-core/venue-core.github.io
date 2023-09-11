@@ -2,52 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-// import FeaturesBg01 from "@/public/images/features-home-bg-01.png";
-// import FeaturesElement01 from "@/public/images/features-home-element-01.png";
-// import FeaturesElement02 from "@/public/images/features-home-element-02.png";
-// import FeaturesElement03 from "@/public/images/features-home-element-03.png";
 import Insights from "@/public/images/how-it-works/insights.png";
 import Launch from "@/public/images/how-it-works/launch.png";
 import Setup from "@/public/images/how-it-works/setup.png";
 import { Transition } from "@headlessui/react";
-
-// const DEFAULT_IMAGES = [
-//   <Image
-//     key="1"
-//     className="md:max-w-none mx-auto rounded"
-//     src={FeaturesBg01}
-//     width={500}
-//     height={375}
-//     alt="Features bg"
-//   />,
-//   <Image
-//     key="2"
-//     className="md:max-w-none absolute w-full left-0 transform animate-float"
-//     src={FeaturesElement01}
-//     width={500}
-//     height={147}
-//     alt="Element 01"
-//     style={{ top: "22%" }}
-//   />,
-//   <Image
-//     key="3"
-//     className="md:max-w-none absolute w-full left-0 transform animate-float animation-delay-500"
-//     src={FeaturesElement02}
-//     width={500}
-//     height={158}
-//     alt="Element 02"
-//     style={{ top: "39%" }}
-//   />,
-//   <Image
-//     key="4"
-//     className="md:max-w-none absolute w-full left-0 bottom-0 transform animate-float animation-delay-1000"
-//     src={FeaturesElement03}
-//     width={500}
-//     height={167}
-//     alt="Element 03"
-//     style={{ top: "77%" }}
-//   />,
-// ] as const;
 
 const SOLUTIONS = [
   {
@@ -152,25 +110,13 @@ export default function How() {
             </p>
           </div>
 
-          {/* Top image */}
-          {/*<div className="pb-12 md:pb-16">*/}
-          {/*  <Image src={TopImage} width={1104} alt="Features top" />*/}
-          {/*</div>*/}
-
           {/* Section content */}
           <div className="md:grid md:grid-cols-12 md:gap-6">
             {/* Content */}
             <div
-              // className="mx-auto md:w-full md:max-w-none max-w-xl col-span-6 col-start-4"
               className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-6 md:mt-6"
               data-aos="fade-right"
             >
-              {/*<div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">*/}
-              {/*  <h3 className="h3 mb-3">Powerful suite of tools</h3>*/}
-              {/*  <p className="text-xl text-gray-600">*/}
-              {/*    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.*/}
-              {/*  </p>*/}
-              {/*</div>*/}
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
                 {SOLUTIONS.map((s) => (

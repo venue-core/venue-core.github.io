@@ -1,8 +1,4 @@
 import Link from "next/link";
-import VideoThumb from "@/public/images/hero-image-01.png";
-
-import ModalVideo from "@/components/modal-video";
-import Platforms from "@/components/platforms";
 
 export default function Hero() {
   return (
@@ -77,7 +73,7 @@ export default function Hero() {
                     className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0 group"
                     href="/waitlist"
                   >
-                    Start 30 day free trial
+                    Start a 30 day free trial
                     <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                       -&gt;
                     </span>
@@ -86,16 +82,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-
-          {/* Hero image */}
-          {/*<ModalVideo*/}
-          {/*  thumb={VideoThumb}*/}
-          {/*  thumbWidth={768}*/}
-          {/*  thumbHeight={432}*/}
-          {/*  thumbAlt="Modal video thumbnail"*/}
-          {/*  video="/videos/video.mp4"*/}
-          {/*  videoWidth={1920}*/}
-          {/*  videoHeight={1080} />*/}
         </div>
       </div>
     </section>
