@@ -10,7 +10,7 @@ import InputsPage from "@/components/estimator/inputs";
 import Intro from "@/components/estimator/intro";
 import PriceQuote from "@/components/estimator/price-quote";
 import Progress from "@/components/estimator/progress";
-import { Inputs, Page } from "@/components/estimator/types";
+import { Inputs, View } from "@/components/estimator/types";
 
 const CALCULATOR = (
   <Image src={Calculator} alt="calculator" className="w-6 h-6" />
@@ -33,15 +33,18 @@ const INVOICE = (
 );
 
 export default function Router({ customer }: { customer: Customer }) {
-  const [page, setPage] = useState<Page>(Page.Intro);
+  const [view, setView] = useState<View>(View.Intro);
   const [inputs, setInputs] = useState<Inputs>({});
   return (
     <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-14rem)]">
       <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
-        <Progress page={page} setPage={p => {
-          setPage(p);
-          window.scrollTo({ top: 0, left: 0 });
-        }} />
+        <Progress
+          view={view}
+          setView={(p) => {
+            setView(p);
+            window.scrollTo({ top: 0, left: 0 });
+          }}
+        />
         {/*<!-- SVG Background Element -->*/}
         <figure className="absolute inset-x-0 bottom-0">
           <svg
@@ -64,7 +67,7 @@ export default function Router({ customer }: { customer: Customer }) {
       <div className="relative z-10 -mt-12">
         {/*<!-- Icon -->*/}
         <span className="mx-auto flex justify-center items-center w-[62px] h-[62px] rounded-full border border-gray-200 bg-white text-slate-700 shadow-sm">
-          {page !== Page.Quote ? CALCULATOR : INVOICE}
+          {view !== View.Quote ? CALCULATOR : INVOICE}
         </span>
         {/*<!-- End Icon -->*/}
       </div>
@@ -74,8 +77,8 @@ export default function Router({ customer }: { customer: Customer }) {
           customer={customer}
           inputs={inputs}
           setInputs={setInputs}
-          page={page}
-          setPage={setPage}
+          page={view}
+          setPage={setView}
         />
       </div>
     </div>
@@ -92,21 +95,21 @@ function PageView({
   customer: Customer;
   inputs: Inputs;
   setInputs: (i: Inputs) => void;
-  page: Page;
-  setPage: (p: Page) => void;
+  page: View;
+  setPage: (p: View) => void;
 }) {
   switch (page) {
-    case Page.Intro:
+    case View.Intro:
       return (
         <Intro
           customer={customer}
           next={() => {
             window.scrollTo({ top: 0, left: 0 });
-            setPage(Page.Calendar);
+            setPage(View.Calendar);
           }}
         />
       );
-    case Page.Calendar:
+    case View.Calendar:
       return (
         <div className="md:px-16">
           <DatetimeSelector
@@ -114,12 +117,12 @@ function PageView({
             setInputs={setInputs}
             goNext={() => {
               window.scrollTo({ top: 0, left: 0 });
-              setPage(Page.Inputs);
+              setPage(View.Inputs);
             }}
           />
         </div>
       );
-    case Page.Inputs:
+    case View.Inputs:
       return (
         <div className="p-8">
           <InputsPage
@@ -128,19 +131,19 @@ function PageView({
             setInputs={setInputs}
             goNext={() => {
               window.scrollTo({ top: 0, left: 0 });
-              setPage(Page.Quote);
+              setPage(View.Quote);
             }}
           />
         </div>
       );
-    case Page.Quote:
+    case View.Quote:
       return (
         <PriceQuote
           customer={customer}
           inputs={inputs}
           restart={() => {
             window.scrollTo({ top: 0, left: 0 });
-            setPage(Page.Intro);
+            setPage(View.Intro);
           }}
         />
       );

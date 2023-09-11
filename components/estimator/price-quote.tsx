@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import _ from "lodash";
 
 import {
@@ -109,9 +110,7 @@ export default function PriceQuote({
         {/*<!-- End Grid -->*/}
         <LineItems venue={venue} costs={costs} />
       </div>
-
-      {/*<!-- End Buttons -->*/}
-      <div className="mt-5">
+      <div className="mt-4 px-4">
         <p className="text-sm text-slate-500">
           If you have any questions, please contact us at{" "}
           <a
@@ -130,13 +129,51 @@ export default function PriceQuote({
         </p>
       </div>
 
+      {venue.notes && (
+        <div className="mt-4 px-4">
+          <div className="text-sm font-semibold">Notes:</div>
+          <ul>
+            {venue.notes.map((note) => (
+              <li key={note} className="text-sm text-slate-800">
+                • {note}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {venue.depositPercentage && (
+        <div className="px-4 mt-4">
+          <div className="text-xs uppercase font-semibold">Due Today:</div>
+          <div className="text-md flex">
+            <span>
+              {CURRENCY_FORMAT.format(
+                calcTotal(costs, venue, true) * venue.depositPercentage
+              )}
+            </span>
+          </div>
+          <div className="text-sm text-slate-500">
+            Reserve your event date today to ensure availability.
+          </div>
+          <button className="btn-sm text-sm mt-2 text-white bg-blue-600 hover:bg-blue-700 group">
+            <span>Reserve</span>
+            <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+              -&gt;
+            </span>
+          </button>
+        </div>
+      )}
+
       {/*<!-- Buttons -->*/}
-      <div className="mt-5 flex justify-end gap-x-2">
+      <div className="mt-8 flex justify-end gap-x-2">
         <button
-          className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
+          className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
           onClick={() => restart()}
         >
-          Restart
+          <span>Restart</span>
+          <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+            -&gt;
+          </span>
         </button>
       </div>
     </div>
@@ -150,11 +187,11 @@ function isTruthy<T>(value: T | null | undefined | false): value is T {
 function LineItems({ venue, costs }: { venue: Venue; costs: Cost[] }) {
   const costsByCategory = _.groupBy(costs, "category");
   return (
-    <div className="mt-5 sm:mt-10">
+    <div className="mt-4 sm:mt-8">
       <h4 className="text-sm font-semibold uppercase text-slate-800">
         Summary
       </h4>
-      <ul className="mt-3 flex flex-col">
+      <ul className="mt-2 flex flex-col">
         {Object.entries(costsByCategory).map(([category, costs]) => (
           <React.Fragment key={category}>
             <li
@@ -205,11 +242,11 @@ function LineItems({ venue, costs }: { venue: Venue; costs: Cost[] }) {
             <span className="text-right">
               {formatTotal(costs, venue)}
               {venue.minimum !== undefined &&
-                venue.minimum > calcTotal(costs) && (
+                venue.minimum > calcTotal(costs, venue) && (
                   <div className="text-xs font-normal text-orange-400">
                     <div>Minimum: {CURRENCY_FORMAT.format(venue.minimum)}</div>
                     <div>
-                      Current: {CURRENCY_FORMAT.format(calcTotal(costs))}
+                      Current: {CURRENCY_FORMAT.format(calcTotal(costs, venue))}
                     </div>
                   </div>
                 )}
@@ -221,17 +258,15 @@ function LineItems({ venue, costs }: { venue: Venue; costs: Cost[] }) {
   );
 }
 
-function calcTotal(costs: Cost[]) {
-  return costs.reduce((acc, c) => acc + c.final, 0);
+function calcTotal(costs: Cost[], venue: Venue, withMinimum = false) {
+  const total = costs.reduce((acc, c) => acc + c.final, 0);
+  const min = venue.minimum || 0;
+  return withMinimum ? Math.max(total, min) : total;
 }
 
 function formatTotal(costs: Cost[], venue: Venue) {
   if (isValid(costs)) {
-    return (
-      <div>
-        {CURRENCY_FORMAT.format(Math.max(calcTotal(costs), venue.minimum || 0))}
-      </div>
-    );
+    return <div>{CURRENCY_FORMAT.format(calcTotal(costs, venue, true))}</div>;
   } else {
     return <div className="text-red-500">Invalid Selections</div>;
   }

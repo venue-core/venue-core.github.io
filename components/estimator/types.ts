@@ -4,7 +4,9 @@ export interface Venue {
   timezone: string;
   email: string;
   phone: string;
+  depositPercentage?: number; // TODO: redo deposit / payment data models
   minimum?: number;
+  notes?: string[];
 }
 
 export enum DefaultVariableType {
@@ -25,6 +27,29 @@ enum PrimitiveVariableType {
 
 export const VariableType = { ...PrimitiveVariableType, ...DefaultVariableType };
 export type VariableType = DefaultVariableType | PrimitiveVariableType;
+
+export enum PageType {
+  Calendar = 'CALENDAR',
+  CalendarTime = 'CALENDAR_AND_TIME',
+  Form = 'FORM',
+}
+
+export interface Page {
+  id: string;
+  type: PageType;
+  rank: number;
+}
+
+export interface Field {
+  id: string;
+  pageId: string;
+  question: string;
+  subtext?: string;
+  description?: string;
+  row: number;
+  col: number;
+  variableId: string;
+}
 
 export interface Variable {
   id: string;
@@ -99,7 +124,7 @@ export type Inputs = {
   [variableId: string]: boolean | number | string | { start: Date; end: Date };
 };
 
-export enum Page {
+export enum View {
   Intro = "INTRO",
   Calendar = "CALENDAR",
   Inputs = "INPUTS",

@@ -1,20 +1,20 @@
 import React from "react";
 
-import { Page } from "@/components/estimator/types";
+import { View } from "@/components/estimator/types";
 
-const PAGES = [
-  { page: Page.Intro, title: "Welcome" },
-  { page: Page.Calendar, title: "Date & Time" },
-  { page: Page.Inputs, title: "Details" },
-  { page: Page.Quote, title: "Price Quote" },
+const VIEWS = [
+  { page: View.Intro, title: "Welcome" },
+  { page: View.Calendar, title: "Date & Time" },
+  { page: View.Inputs, title: "Details" },
+  { page: View.Quote, title: "Price Quote" },
 ] as const;
 
 export default function Progress({
-  page,
-  setPage,
+  view,
+  setView,
 }: {
-  page: Page;
-  setPage: (p: Page) => void;
+  view: View;
+  setView: (p: View) => void;
 }) {
   return (
     <div className="px-4 pt-12 pb-8 -mt-4">
@@ -25,16 +25,16 @@ export default function Progress({
             aria-hidden="true"
           ></div>
           <ul className="relative flex justify-between w-full">
-            {PAGES.map((p, i) => (
+            {VIEWS.map((p, i) => (
               <React.Fragment key={i}>
                 <li>
                   <div
                     className={`flex items-center justify-center cursor-pointer w-8 h-8 rounded-full text-xs font-semibold ${
-                      page === p.page
+                      view === p.page
                         ? "bg-blue-400 text-white"
                         : "bg-slate-100 text-slate-500"
                     }`}
-                    onClick={() => setPage(p.page)}
+                    onClick={() => setView(p.page)}
                   >
                     {i + 1}
                   </div>

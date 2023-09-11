@@ -21,6 +21,10 @@ export const VENUE: Venue = {
   minimum: 14_000,
   email: 'contact@acme.com',
   phone: '+1 222 333 4444',
+  depositPercentage: 0.35,
+  notes: [
+    'Admin Fee does not replace gratuity. Thank you!',
+  ]
 };
 
 export const VARIABLES: Variable[] = [
@@ -69,7 +73,6 @@ export const VARIABLES: Variable[] = [
     type: VariableType.Boolean,
     required: true,
     label: "Would you like to have a parking attendant?",
-    subtext: "A security guard is required for all events."
   },
   {
     id: "V9",
@@ -78,7 +81,7 @@ export const VARIABLES: Variable[] = [
     type: VariableType.Boolean,
     required: true,
     label: "Would you like to Dine Al Fresco in our courtyard area?",
-    subtext: "This increases the Service & Sales Tax charge from 22% to 25%.",
+    subtext: "This increases the Admin Fee from 22% to 25%.",
   },
   {
     id: "V10",
@@ -89,7 +92,7 @@ export const VARIABLES: Variable[] = [
     min: 0,
     max: 12,
     label: "How many additional hours would you like to extend the event?",
-    subtext: "Each additional event hour is $1,250.",
+    subtext: "Each additional hour is $1,250.",
   },
   {
     id: "V11",
@@ -99,8 +102,8 @@ export const VARIABLES: Variable[] = [
     type: VariableType.Integer,
     min: 0,
     max: 6,
-    label: "How many additional hours of setup time before the event would you like?",
-    subtext: "Each additional setup hour is $250.",
+    label: "How many additional hours of setup time before the event do you need?",
+    subtext: "Each additional hour is $250.",
   },
   {
     id: "V12",
