@@ -378,7 +378,7 @@ const CEREMONY_FEE: LineItem = {
   id: "LI-3",
   venueId: VENUE.id,
   name: "Wedding Ceremony Fee",
-  required: true,
+  required: false,
   category: Category.Miscellaneous,
   options: [
     {
@@ -429,7 +429,7 @@ const MENU_SERVICES: LineItem = {
   id: "LI-4",
   venueId: VENUE.id,
   name: "Menu Services",
-  required: true,
+  required: false,
   category: Category.Menu,
   tags: [Tag.Taxable, Tag.Gratuity],
   options: MENU_TERMS,
@@ -440,7 +440,7 @@ const GRATUITY: LineItem = {
   id: "LI-5",
   venueId: VENUE.id,
   name: "Gratuity",
-  required: true,
+  required: false,
   category: Category.Menu,
   options: [
     {

@@ -25,7 +25,7 @@ export default function Cta() {
                   className="btn text-blue-600 bg-gradient-to-r from-blue-100 to-white"
                   href="/waitlist"
                 >
-                  Join Waitlist
+                  Start Free Trial
                 </Link>
               </div>
             </div>

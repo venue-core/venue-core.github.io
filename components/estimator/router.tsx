@@ -100,14 +100,16 @@ function PageView({
       );
     case Page.Calendar:
       return (
-        <DatetimeSelector
-          inputs={inputs}
-          setInputs={setInputs}
-          goNext={() => {
-            window.scrollTo({ top: 0, left: 0 });
-            setPage(Page.Inputs);
-          }}
-        />
+        <div className="md:px-16">
+          <DatetimeSelector
+            inputs={inputs}
+            setInputs={setInputs}
+            goNext={() => {
+              window.scrollTo({ top: 0, left: 0 });
+              setPage(Page.Inputs);
+            }}
+          />
+        </div>
       );
     case Page.Inputs:
       return (

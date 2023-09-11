@@ -1,7 +1,14 @@
 import React from "react";
 import _ from "lodash";
 
-import { CONDITIONS, LINE_ITEMS, VENUE } from "@/components/estimator/data";
+import {
+  CONDITIONS,
+  DATE,
+  LINE_ITEMS,
+  MONTH,
+  VENUE,
+  YEAR,
+} from "@/components/estimator/data";
 import {
   Category,
   Condition,
@@ -72,8 +79,8 @@ export default function PriceQuote({
         {/*<!-- Grid -->*/}
         <div className="mt-5 sm:mt-10 grid grid-cols-2 gap-5">
           <div>
-            <span className="block text-sm uppercase text-slate-500">
-              Estimate:
+            <span className="block text-xs uppercase text-slate-500">
+              Amount Due:
             </span>
             <span className="block text-md font-medium text-slate-800">
               {formatTotal(costs)}
@@ -82,11 +89,11 @@ export default function PriceQuote({
           {/*<!-- End Col -->*/}
 
           <div className="text-right">
-            <span className="block text-sm uppercase text-slate-500">
-              Date:
+            <span className="block text-xs uppercase text-slate-500">
+              Date Due:
             </span>
             <span className="block text-md font-medium text-slate-800">
-              {new Date().toDateString()}
+              {getDateDue(inputs)}
             </span>
           </div>
           {/*<!-- End Col -->*/}
@@ -177,8 +184,10 @@ function LineItems({ costs }: { costs: Cost[] }) {
                       )}
                       {!c.missing && c.minimum > c.price && (
                         <div className="text-xs text-orange-400">
-                          Minimum: {CURRENCY_FORMAT.format(c.minimum)} |
-                          Current: {CURRENCY_FORMAT.format(c.price)}
+                          <div>
+                            Minimum: {CURRENCY_FORMAT.format(c.minimum)}
+                          </div>
+                          <div>Current: {CURRENCY_FORMAT.format(c.price)}</div>
                         </div>
                       )}
                     </span>
@@ -302,23 +311,14 @@ function getLineItemPrice(
     } else if (Array.isArray(targets)) {
       base = LINE_ITEMS.filter((li) => {
         const targets = matched.targets || [];
-        if (
-          targets
-            .filter((t) => t.type === "CATEGORY")
-            .map((t) => t.value)
-            .includes(li.category)
-        ) {
-          return true;
-        }
-        if (
-          targets
-            .filter((t) => t.type === "TAG")
-            .map((t) => t.value)
-            .some((tag) => (li.tags || []).includes(tag))
-        ) {
-          return true;
-        }
-        return false;
+        const categories = targets
+          .filter((t) => t.type === "CATEGORY")
+          .map((t) => t.value);
+        const tags = targets
+          .filter((t) => t.type === "TAG")
+          .map((t) => t.value);
+        if (categories.includes(li.category)) return true;
+        return _.intersection(tags, li.tags|| []).length > 0
       }).reduce(
         (acc, li) => acc + getLineItemPrice(li, inputs, level + 1, true),
         0
@@ -332,4 +332,11 @@ function getLineItemPrice(
   } else {
     return 0;
   }
+}
+
+function getDateDue(inputs: Inputs) {
+  const year = inputs[YEAR.id] as number;
+  const month = (inputs[MONTH.id] as number) - 1;
+  const date = inputs[DATE.id] as number;
+  return new Date(year, month, date).toDateString();
 }

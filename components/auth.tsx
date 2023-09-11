@@ -40,44 +40,34 @@ export default function Auth() {
       </div>
       {/* Headline */}
       <h2 className="h2 mb-8 text-center lg:text-left">
-        Start engaging your audience{" "}
+        Start providing{" "}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-          intelligently
-        </span>
+          accurate
+        </span>{" "}price quotes
       </h2>
       {/* List */}
       <ul className="inline-flex flex-col text-lg text-slate-500 space-y-3">
-        <li className="flex items-center">
-          <svg
-            className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-          </svg>
-          <span>Generates dynamic content</span>
-        </li>
-        <li className="flex items-center">
-          <svg
-            className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-          </svg>
-          <span>Improves audience engagement</span>
-        </li>
-        <li className="flex items-center">
-          <svg
-            className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-          </svg>
-          <span>Optimizes fan monetization</span>
-        </li>
+        {BULLETS.map((value, i) => (
+          <li className="flex items-center" key={i}>
+            <svg
+              className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+            </svg>
+            <span>{value}</span>
+          </li>
+        ))}
       </ul>
     </div>
   );
 }
+
+const BULLETS = [
+  "Close deals faster",
+  "Boost venue manager productivity",
+  "Target quality leads",
+  "Seamless integration",
+  "Self-service pricing tool",
+] as const

@@ -46,7 +46,7 @@ export default function Hero() {
               Event Venue Pricing
             </div>
             <h1
-              className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
+              className="text-4xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
               data-aos="zoom-y-out"
             >
               Accurate price quotes has never been{" "}
@@ -73,7 +73,7 @@ export default function Hero() {
                     className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0 group"
                     href="/waitlist"
                   >
-                    Start a 30 day free trial
+                    Start 30 day free trial
                     <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                       -&gt;
                     </span>

@@ -21,7 +21,6 @@ export default function Form() {
       email: "",
       phone: "",
       source: "Google",
-      platforms: "",
       message: "",
     },
     validate: {
@@ -37,8 +36,7 @@ export default function Form() {
     return (
       <div>
         <div>
-          Thanks! You're all set. You will receive an email when you are off the
-          wait list.
+          Thanks! You're all set. You will receive an email from us within 24 hours.
         </div>
         <Link
           className="mt-4 btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 w-full group"
@@ -183,24 +181,6 @@ export default function Form() {
             <option>Facebook</option>
             <option>Other</option>
           </select>
-        </div>
-        <div>
-          <label
-            className="block text-sm text-slate-600 font-medium mb-1"
-            htmlFor="message"
-          >
-            What creator platforms do you create content for?
-          </label>
-          <div className="text-xs text-slate-500 mb-2">
-            Instagram, YouTube, TikTok, Twitch, OnlyFans, Etsy, etc.
-          </div>
-          <textarea
-            id="platforms"
-            className="form-textarea text-sm py-2 w-full"
-            disabled={loading}
-            rows={2}
-            {...form.getInputProps("platforms")}
-          />
         </div>
         <div>
           <label
