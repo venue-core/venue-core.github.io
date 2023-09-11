@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+
 import { Page } from "@/components/estimator/types";
 
 const PAGES = [
-  { page: Page.Intro, title: 'Welcome' },
-  { page: Page.Calendar, title: 'Date & Time' },
-  { page: Page.Inputs, title: 'Details' },
-  { page: Page.Quote, title: 'Price Quote' },
+  { page: Page.Intro, title: "Welcome" },
+  { page: Page.Calendar, title: "Date & Time" },
+  { page: Page.Inputs, title: "Details" },
+  { page: Page.Quote, title: "Price Quote" },
 ] as const;
 
 export default function Progress({

@@ -11,7 +11,13 @@ import { useAvailabilities } from "@/components/datetime/context/availabilities"
 import { Availability } from "@/components/datetime/context/data";
 import { useSelectedDate } from "@/components/datetime/context/selected-date";
 
-export default function Time({ goNext, setAvailability }: { goNext: () => void; setAvailability: (a: Availability) => void }) {
+export default function Time({
+  goNext,
+  setAvailability,
+}: {
+  goNext: () => void;
+  setAvailability: (a: Availability) => void;
+}) {
   const { selectedDate } = useSelectedDate();
   const { availabilities: allAvailabilities } = useAvailabilities();
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -97,7 +103,7 @@ function TimeSlot({
   setAvailability: (a: Availability) => void;
   selectedTime: string | null;
   setSelectedTime: (time: string | null) => void;
-  goNext: () => void
+  goNext: () => void;
 }) {
   const timeFormatter = useDateFormatter({ timeStyle: "short" });
   const isSelected = selectedTime === availability.startTime;

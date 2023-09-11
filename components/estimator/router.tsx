@@ -91,12 +91,12 @@ function PageView({
   switch (page) {
     case Page.Intro:
       return (
-          <Intro
-            next={() => {
-              window.scrollTo({ top: 0, left: 0 });
-              setPage(Page.Calendar);
-            }}
-          />
+        <Intro
+          next={() => {
+            window.scrollTo({ top: 0, left: 0 });
+            setPage(Page.Calendar);
+          }}
+        />
       );
     case Page.Calendar:
       return (

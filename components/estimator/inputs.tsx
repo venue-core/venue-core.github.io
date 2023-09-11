@@ -1,4 +1,5 @@
 import { useForm, UseFormReturnType } from "@mantine/form";
+import cx from "classnames";
 
 import { VARIABLES } from "@/components/estimator/data";
 import {
@@ -7,7 +8,6 @@ import {
   Variable,
   VariableType,
 } from "@/components/estimator/types";
-import cx from "classnames";
 
 const SKIP_VARIABLES = new Set<VariableType>(
   Object.values(DefaultVariableType)
@@ -180,12 +180,19 @@ function Input({
   return (
     <div className="mb-6">
       <label
-        className={cx(["block text-sm text-slate-600 font-medium", variable.subtext ? "" : "mb-1"])}
+        className={cx([
+          "block text-sm text-slate-600 font-medium",
+          variable.subtext ? "" : "mb-1",
+        ])}
         htmlFor={variable.name}
       >
         {variable.label || variable.name}
       </label>
-      {variable.subtext && <div className="block text-xs text-slate-400 mb-1">{variable.subtext}</div>}
+      {variable.subtext && (
+        <div className="block text-xs text-slate-400 mb-1">
+          {variable.subtext}
+        </div>
+      )}
       {node}
     </div>
   );

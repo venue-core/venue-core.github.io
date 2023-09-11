@@ -12,8 +12,8 @@ export default function Intro({ next }: { next: () => void }) {
         >
           <span>Get Started</span>
           <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-          -&gt;
-        </span>
+            -&gt;
+          </span>
         </button>
       </div>
     </div>
