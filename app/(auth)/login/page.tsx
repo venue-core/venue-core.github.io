@@ -29,7 +29,7 @@ export default function Login() {
           <div className="lg:flex lg:space-x-20">
             <Auth />
             {/* Right side */}
-            <div className="relative w-full max-w-md mx-auto md:mt-16">
+            <div className="relative w-full max-w-md mx-auto md:mt-32">
               {/* Bg gradient */}
               <div
                 className="absolute inset-0 opacity-40 md:bg-gradient-to-t md:from-transparent md:to-slate-300 -z-10"

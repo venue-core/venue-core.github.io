@@ -250,7 +250,7 @@ const HEADCOUNT_OVER_100: Condition = {
   id: "C-19",
   variableId: headcount.id,
   type: ConditionType.GTE,
-  condition: 100,
+  condition: 1, // TODO: revert this back to 100
 };
 
 export const CONDITIONS = [
