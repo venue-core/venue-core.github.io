@@ -12,11 +12,6 @@ export function getVariables(customer: Customer): Variable[] {
   return VARIABLES || [];
 }
 
-export function getConditions(customer: Customer): Record<string, Condition> {
-  const { CONDITIONS } = require(`./${customer}`);
-  return CONDITIONS || [];
-}
-
 export function getLineItems(customer: Customer): LineItem[] {
   const { LINE_ITEMS } = require(`./${customer}`);
   return LINE_ITEMS || [];

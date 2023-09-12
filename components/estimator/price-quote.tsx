@@ -3,7 +3,6 @@ import _ from "lodash";
 
 import {
   Customer,
-  getConditions,
   getLineItems,
   getVenue,
 } from "@/components/estimator/data";
@@ -108,7 +107,10 @@ export default function PriceQuote({
         <LineItems venue={venue} costs={costs} />
       </div>
       <div className="mt-4 px-4">
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-600">
+          Place a deposit down today to reserve your event date to ensure availability.
+        </p>
+        <p className="mt-1 text-sm text-slate-500">
           If you have any questions, please contact us at{" "}
           <a
             className="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline font-medium"
@@ -126,6 +128,29 @@ export default function PriceQuote({
         </p>
       </div>
 
+      {venue.depositPercentage && (
+        <div className="px-4 mt-4 flex justify-between">
+          <div>
+            <div className="text-xs uppercase font-semibold">Due Today:</div>
+            <div className="text-md flex">
+            <span>
+              {CURRENCY_FORMAT.format(
+                calcTotal(costs, venue, true) * venue.depositPercentage
+              )}
+            </span>
+            </div>
+          </div>
+          <div>
+            <button className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group">
+              <span>Reserve</span>
+              <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+              -&gt;
+            </span>
+            </button>
+          </div>
+        </div>
+      )}
+
       {venue.notes && (
         <div className="mt-4 px-4">
           <div className="text-sm font-semibold">Notes:</div>
@@ -139,30 +164,8 @@ export default function PriceQuote({
         </div>
       )}
 
-      {venue.depositPercentage && (
-        <div className="px-4 mt-4">
-          <div className="text-xs uppercase font-semibold">Due Today:</div>
-          <div className="text-md flex">
-            <span>
-              {CURRENCY_FORMAT.format(
-                calcTotal(costs, venue, true) * venue.depositPercentage
-              )}
-            </span>
-          </div>
-          <div className="text-sm text-slate-500">
-            Reserve your event date today to ensure availability.
-          </div>
-          <button className="btn-sm text-sm mt-2 text-white bg-blue-600 hover:bg-blue-700 group">
-            <span>Reserve</span>
-            <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-              -&gt;
-            </span>
-          </button>
-        </div>
-      )}
-
       {/*<!-- Buttons -->*/}
-      <div className="mt-8 flex justify-end gap-x-2">
+      <div className="mt-8 flex justify-start gap-x-2">
         <button
           className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
           onClick={() => restart()}

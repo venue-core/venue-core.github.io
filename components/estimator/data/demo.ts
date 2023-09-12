@@ -44,7 +44,7 @@ const HEADCOUNT_OVER_100: Condition = {
   id: "C-19",
   variableId: HEADCOUNT_VAR.id,
   type: ConditionType.GTE,
-  condition: 100,
+  condition: 1, // TODO: change back to 100 later
 };
 
 export const VARIABLES: Variable[] = [
@@ -121,11 +121,13 @@ export const VARIABLES: Variable[] = [
     type: VariableType.Select,
     required: false,
     options: [
-      "à la carte",
-      "Buffet", // TODO: conditions to display certain options, only can choose this if >=100
+      "Kansas City Barbeque",
+      "Asian"
+      // "à la carte",
+      // "Buffet", // TODO: conditions to display certain options, only can choose this if >=100
     ],
     label: "Which dining option would you like?",
-    subtext: "Buffets can only be served to party sizes greater than 100"
+    // subtext: "Buffets can only be served to party sizes greater than 100"
   },
   {
     id: "V13",
@@ -302,40 +304,16 @@ const DINING_A_LA_CARTE: Condition = {
 };
 const BUFFET_KANSAS_CITY_BARBEQUE: Condition = {
   id: "C-17",
-  variableId: buffet.id,
+  variableId: dining.id, // TODO: change back to buffet
   type: ConditionType.Equal,
   condition: "Kansas City Barbeque"
 };
 const BUFFET_ASIAN: Condition = {
   id: "C-18",
-  variableId: buffet.id,
+  variableId: dining.id, // TODO: change back to buffet
   type: ConditionType.Equal,
   condition: "Asian"
 };
-
-export const CONDITIONS = [
-  PEAK_SEASON,
-  WINTER,
-  WEEKDAYS,
-  FRIDAYS_SUNDAYS,
-  SATURDAYS,
-  HEADCOUNT_UP_TO_90,
-  ...HEADCOUNT_91_TO_150,
-  HEADCOUNT_UP_TO_150,
-  WANT_PARKING_ATTENDANT,
-  WANT_WEDDING_CEREMONY,
-  IS_OUTDOOR_DINING,
-  IS_NOT_OUTDOOR_DINING,
-  HAS_ADDITIONAL_EVENT_TIME,
-  HAS_ADDITIONAL_SETUP_TIME,
-  DINING_A_LA_CARTE,
-  BUFFET_KANSAS_CITY_BARBEQUE,
-  BUFFET_ASIAN,
-  HEADCOUNT_OVER_100,
-].reduce<Record<string, Condition>>((acc, c) => {
-  acc[c.id] = c;
-  return acc;
-}, {})
 
 const VENUE_TERMS: Term[] = [
   {
@@ -453,14 +431,14 @@ const CEREMONY_FEE: LineItem = {
 };
 
 const MENU_TERMS: Term[] = [
-  {
-    id: "TM-1",
-    name: "Dining - à la carte",
-    items: [
-      // TODO: implement line items for a la carte
-    ],
-    conditions: [[DINING_A_LA_CARTE]],
-  },
+  // {
+  //   id: "TM-1",
+  //   name: "Dining - à la carte",
+  //   items: [
+  //     // TODO: implement line items for a la carte
+  //   ],
+  //   conditions: [[DINING_A_LA_CARTE]],
+  // },
   {
     id: "TM-3",
     name: "Theme Buffet - Kansas City Barbeque",
