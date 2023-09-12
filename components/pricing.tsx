@@ -342,7 +342,9 @@ export default function Pricing() {
             </div>
             {/* Payment Processing (3.4%) */}
             <div className="hidden md:flex flex-col justify-center p-4 md:px-6 bg-blue-50 bg-opacity-70 md:col-span-3">
-              <div className="text-slate-800">Payment Processing (3.4%)</div>
+              <div className="text-slate-800">
+                Payment Processing (3.4% Credit Card, 0.5% ACH)
+              </div>
             </div>
             <div className="flex justify-between md:flex-col md:justify-center p-4 md:px-6 bg-blue-50 bg-opacity-70 md:border-l border-slate-300 order-1 md:order-none">
               <div className="md:hidden text-slate-800">
@@ -361,7 +363,7 @@ export default function Pricing() {
             </div>
             <div className="flex justify-between md:flex-col md:justify-center p-4 md:px-6 bg-blue-50 bg-opacity-70 md:border-l border-slate-300 order-2 md:order-none">
               <div className="md:hidden text-slate-800">
-                Payment Processing (3.4%)
+                Payment Processing (3.4% Credit Card, 0.5% ACH)
               </div>
               <div className="text-sm font-medium text-slate-800 text-center">
                 <svg
@@ -380,7 +382,7 @@ export default function Pricing() {
             </div>
             <div className="flex justify-between md:flex-col md:justify-center p-4 md:px-6 bg-blue-50 bg-opacity-70 md:border-l border-slate-300 order-3 md:order-none">
               <div className="md:hidden text-slate-800">
-                Payment Processing (3.4%)
+                Payment Processing (3.4% Credit Card, 0.5% ACH)
               </div>
               <div className="text-sm font-medium text-slate-800 text-center">
                 <svg

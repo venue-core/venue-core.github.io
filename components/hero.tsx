@@ -49,7 +49,7 @@ export default function Hero() {
               className="text-4xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
               data-aos="zoom-y-out"
             >
-              The only pricing and payments collection software built for{" "}
+              Pricing and payments built for{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
                 wedding venues
               </span>
@@ -60,9 +60,7 @@ export default function Hero() {
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
-                Beat competitors by offering customers swift and accurate price
-                estimates. Minimize headaches by automating payment reminders
-                and accurately forecasting future cash flow.
+                Beat competitors with fast, flexible price estimates and a modern payments management system.
               </p>
               <div
                 className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"
