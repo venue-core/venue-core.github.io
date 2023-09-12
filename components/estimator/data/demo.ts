@@ -395,7 +395,7 @@ const VENUE_ITEM: LineItem = {
   required: true,
   options: VENUE_TERMS,
   category: Category.General,
-  minimum: 10000,
+  // minimum: 10000,
   description: `Venue Package inclusions
 • Use of Entire outdoor & indoor area from 11 am to 11 pm
 • all amnesties permanently attached to the venue
