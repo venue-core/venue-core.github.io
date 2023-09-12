@@ -2,7 +2,8 @@ const SOLUTIONS = [
   {
     id: 1,
     title: "Close deals faster",
-    description: "Put the power in your customers hands with our self-serve cost estimator. Calculator is fully customizable and tailored for wedding venues.",
+    description:
+      "Put the power in your customers hands with our self-serve cost estimator. Calculator is fully customizable and tailored for wedding venues.",
     icon: (
       <g fill="none" fillRule="evenodd">
         <rect
@@ -68,7 +69,8 @@ const SOLUTIONS = [
   {
     id: 3,
     title: "Target Quality Leads",
-    description: "Avoid unnecessary tours by filtering out couples whose budgets don’t align with your venue.",
+    description:
+      "Avoid unnecessary tours by filtering out couples whose budgets don’t align with your venue.",
     icon: (
       <g fill="none" fillRule="evenodd">
         <rect
@@ -100,7 +102,8 @@ const SOLUTIONS = [
   {
     id: 4,
     title: "Seamless Integration",
-    description: "Embed our calendar directly into your website or provide exclusive access to serious buyers.",
+    description:
+      "Embed our calendar directly into your website or provide exclusive access to serious buyers.",
     icon: (
       <g fill="none" fillRule="evenodd">
         <rect
@@ -132,7 +135,8 @@ const SOLUTIONS = [
   {
     id: 5,
     title: "Self-Serve Pricing Tool",
-    description: "Eliminate lengthy email discussions. Let clients explore various options and their pricing impact with our intuitive tool.",
+    description:
+      "Eliminate lengthy email discussions. Let clients explore various options and their pricing impact with our intuitive tool.",
     icon: (
       <g fill="none" fillRule="evenodd">
         <rect
@@ -212,10 +216,13 @@ export default function Solution() {
             <div className="uppercase mb-4 text-xl font-bold text-blue-600 tracking-wider">
               Solution
             </div>
-            <h2 className="h2 mb-4">Use software to automate the mundane tasks</h2>
+            <h2 className="h2 mb-4">
+              Use software to automate the mundane tasks
+            </h2>
             <p className="text-xl text-gray-600">
               Refocus on your passion: creating new experiences for people and
-              let us handle the parts of your business you would rather not deal with.
+              let us handle the parts of your business you would rather not deal
+              with.
             </p>
           </div>
 

@@ -1,7 +1,8 @@
 import Cta from "@/components/cta";
+import Faq from "@/components/faq";
+import Features from "@/components/features";
 import Hero from "@/components/hero";
-import Problem from "@/components/problem";
-import Solution from "@/components/solution";
+import Pricing from "@/components/pricing";
 
 export const metadata = {
   title: "Home - Venue",
@@ -12,9 +13,10 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Problem />
-      <Solution />
+      <Features />
+      <Pricing />
       <Cta />
+      <Faq />
     </>
   );
 }

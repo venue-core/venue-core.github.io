@@ -1,3 +1,4 @@
+import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useForm, UseFormReturnType } from "@mantine/form";
 import cx from "classnames";
 import _ from "lodash";
@@ -10,7 +11,6 @@ import {
   Variable,
   VariableType,
 } from "@/components/estimator/types";
-import {XMarkIcon} from "@heroicons/react/20/solid";
 
 const SKIP_VARIABLES = new Set<VariableType>(
   Object.values(DefaultVariableType)
@@ -177,14 +177,16 @@ function Input({
         );
         return null;
       }
-      node = <MultiSelect
-        {...base}
-        selected={base.value}
-        options={variable.options}
-        min={variable.min}
-        max={variable.max}
-        onChange={selected => form.setFieldValue(base.id, selected)}
-      />
+      node = (
+        <MultiSelect
+          {...base}
+          selected={base.value}
+          options={variable.options}
+          min={variable.min}
+          max={variable.max}
+          onChange={(selected) => form.setFieldValue(base.id, selected)}
+        />
+      );
       break;
     case VariableType.Select:
       if (!variable.options) {
@@ -262,12 +264,23 @@ function MultiSelect<T extends string | number>({
 }) {
   return (
     <div>
-      <select id={id} className={className} disabled={max ? selected.length === max : false} onChange={evt => {
-        const value = evt.target.value as T;
-        onChange(_.uniq([...selected, value]));
-      }}>
-        <option key="Select options" value={undefined}>Select options</option>
-        {options.filter(o => !selected.includes(o)).map((o) => (<option key={o}>{o}</option>))}
+      <select
+        id={id}
+        className={className}
+        disabled={max ? selected.length === max : false}
+        onChange={(evt) => {
+          const value = evt.target.value as T;
+          onChange(_.uniq([...selected, value]));
+        }}
+      >
+        <option key="Select options" value={undefined}>
+          Select options
+        </option>
+        {options
+          .filter((o) => !selected.includes(o))
+          .map((o) => (
+            <option key={o}>{o}</option>
+          ))}
       </select>
       <div className="mt-2">
         {selected.map((v) => (
@@ -276,7 +289,10 @@ function MultiSelect<T extends string | number>({
             className="inline-block cursor-pointer bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
           >
             <span>{v.toString()}</span>
-            <span className="ml-4" onClick={() => onChange(selected.filter(o => o !== v))}>
+            <span
+              className="ml-4"
+              onClick={() => onChange(selected.filter((o) => o !== v))}
+            >
               &#x2715;
             </span>
           </span>

@@ -49,9 +49,9 @@ export default function Hero() {
               className="text-4xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
               data-aos="zoom-y-out"
             >
-              Accurate price quotes has never been{" "}
+              The only pricing and payments collection software built for{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-                easier
+                wedding venues
               </span>
             </h1>
             <div className="max-w-3xl mx-auto">
@@ -60,8 +60,9 @@ export default function Hero() {
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
-                Boost your sales by offering customers swift and accurate price
-                estimates.
+                Beat competitors by offering customers swift and accurate price
+                estimates. Minimize headaches by automating payment reminders
+                and accurately forecasting future cash flow.
               </p>
               <div
                 className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"

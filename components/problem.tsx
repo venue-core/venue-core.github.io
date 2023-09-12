@@ -22,8 +22,9 @@ export default function Problem() {
               Stop losing time and customers with poor communication
             </h2>
             <p className="text-xl text-gray-600">
-              You started to create amazing experiences for customer, but now you spend your time
-              emailing customers back and forth answering questions about mundane logistics like venue price changes.
+              You started to create amazing experiences for customer, but now
+              you spend your time emailing customers back and forth answering
+              questions about mundane logistics like venue price changes.
             </p>
           </div>
         </div>
