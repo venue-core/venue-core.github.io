@@ -108,7 +108,7 @@ export default function PriceQuote({
       </div>
       <div className="mt-4 px-4">
         <p className="text-sm text-slate-600">
-          Place a deposit down today to reserve your event date to ensure availability.
+          Place a deposit today to reserve your event date's availability.
         </p>
         <p className="mt-1 text-sm text-slate-500">
           If you have any questions, please contact us at{" "}
