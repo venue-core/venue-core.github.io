@@ -3,37 +3,42 @@ const QUESTIONS = [
     {
       question: "How does the free trial work?",
       answer: [
-        "No credit card required. Simply try for 30 days for free. We will only ask for payment once the 30 days after over.",
+        "You can try our software free for 30 days without entering a credit card. Billing will only start after your trial ends.",
       ],
     },
     {
       question: "What kind of payments do you support?",
       answer: [
-        "We support all major credit cards and ACH direct deposit. We also support fully customizable payment schedules to match your business needs.",
+        "We support all major credit cards and ACH direct deposit. We also support payment schedules tailored to match your business needs.",
       ],
     },
     {
       question: "Do you support payment plans or custom billing schedules?",
       answer: [
-        "Yes! You can fully customize billing schedules to match your business needs. We often see vendors require a % deposit up front, and then payments 6 months, 3 months, and 2 weeks before the final wedding date.",
-        "Business and Enterprise plans include automated email and text message reminders so that you don’t have to remember to chase down payments.",
+        "Yes! Customize your billing plans based on your business requirements. Many of our vendors opt for an initial deposit followed by payments at set intervals leading up to the wedding.",
+      ],
+    },
+    {
+      question: "Does the software send reminders for pending payments?",
+      answer: [
+        "Yes, with our Business and Enterprise plans, automated reminders via email and text are included, eliminating the need to manually chase payments.",
       ],
     },
   ],
   [
     {
-      question:
-        "Will I be able to adjust numbers in the invoice before finalizing?",
+      question: "Can I modify the invoices before sending them out?",
       answer: [
-        "Yes. Our invoices are automatically generated, but admin users will be able to make adjustments as part of the review and finalization process.",
+        "Yes, while the software generates invoices automatically, admin users have the flexibility to review and adjust before finalizing."
       ],
     },
     {
-      question:
-        "Do you support integrations with tax / bookkeeping software, such as Quickbooks?",
-      answer: [
-        "Coming soon! Our engineers are hard at work. If there is a specific integration that you’re looking for or have questions about, let us know at [contact email].",
-      ],
+      question: "Is there integration with tax or accounting software like Quickbooks?",
+      answer: ["Integration capabilities are in development. Please reach out to [contact email] for specific integration inquiries or other questions."],
+    },
+    {
+      question: "How secure is your payment processing?",
+      answer: ["We utilize Stripe, the number one globally trusted payment platform known for its advanced security measures. All transactions and financial data are fully encrypted."]
     },
   ],
 ] as const;

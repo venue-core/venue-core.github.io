@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-// import Features from '@/public/images/features-03.png'
+import Analytics from '@/public/images/features/analytics.png'
+import Invoices from '@/public/images/features/invoices.png'
 
 export default function Features() {
   return (
@@ -263,15 +264,15 @@ function Section3() {
               {/* Image */}
               <div className="w-full max-w-sm md:max-w-none md:mr-8 mt-8 md:mt-0">
                 <div className="relative -mx-8 md:mx-0">
-                  {/*<Image*/}
-                  {/*  src={Features}*/}
-                  {/*  className="md:max-w-none"*/}
-                  {/*  width={496}*/}
-                  {/*  height={496}*/}
-                  {/*  alt="Features 03"*/}
-                  {/*  data-aos="fade-up"*/}
-                  {/*  data-aos-anchor="[data-aos-id-3]"*/}
-                  {/*/>*/}
+                  <Image
+                    src={Invoices}
+                    className="md:max-w-none"
+                    width={496}
+                    height={496}
+                    alt="Invoices"
+                    data-aos="fade-up"
+                    data-aos-anchor="[data-aos-id-3]"
+                  />
                 </div>
               </div>
             </div>
@@ -294,7 +295,7 @@ function Section4() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="py-12 md:py-20">
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left">
-              <div className="md:max-w-3xl mb-12 md:mb-20" data-aos="fade-up">
+              <div className="md:max-w-3xl" data-aos="fade-up">
                 <h2
                   className="h2 text-white mb-4"
                   data-aos="fade-up"
@@ -322,6 +323,23 @@ function Section4() {
                   Stay updated with the latest customer preferences.
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Image */}
+          <div
+            className="flex justify-center mb-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div className="relative">
+              {/*<Image*/}
+              {/*  className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 pointer-events-none -z-10 max-w-none mix-blend-lighten"*/}
+              {/*  src={Analytics}*/}
+              {/*  alt="Analytics"*/}
+              {/*  aria-hidden="true"*/}
+              {/*/>*/}
+              <Image src={Analytics} width={720} height={283} alt="Analytics" />
             </div>
           </div>
         </div>

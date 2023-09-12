@@ -22,7 +22,7 @@ export default function Pricing() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pt-10 pb-12 md:pt-20 md:pb-20">
+        <div className="pt-10 pb-12 md:pt-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 mb-4">Pricing</h2>
