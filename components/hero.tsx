@@ -43,7 +43,7 @@ export default function Hero() {
               className="uppercase mb-4 text-xl font-bold text-blue-600 tracking-wider"
               data-aos="zoom-y-out"
             >
-              Venue Management
+              One Venue
             </div>
             <h1
               className="text-4xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"

@@ -22,7 +22,7 @@ export default function Auth() {
       </div>
       {/* Headline */}
       <h2 className="h2 mb-8 text-center lg:text-left">
-        Pricing and payments collection software built for{" "}
+        Pricing and payments built for{" "}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
           wedding venues
         </span>
@@ -49,9 +49,8 @@ export default function Auth() {
 const AVATARS = [Avatar01, Avatar02, Avatar03, Avatar04] as const;
 
 const BULLETS = [
-  "Close deals faster",
-  "Boost venue manager productivity",
-  "Target quality leads",
-  // "Seamless integration into website",
-  // "Self-service pricing tool",
+  "Automated scheduling and intake",
+  "Configurable cost calculator",
+  "Invoice and payment management",
+  "Cash flow and service analytics",
 ] as const;
