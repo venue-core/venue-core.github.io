@@ -27,7 +27,7 @@ function Section1() {
         />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="py-12 md:py-20">
+          <div className="py-20">
             {/* Section content */}
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-between">
               {/* Section header */}
@@ -92,7 +92,7 @@ function Section2() {
         />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="pb-6 pt-12 md:pt-20">
+          <div className="pt-20">
             {/* Section content */}
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-end">
               {/* Content */}
@@ -154,7 +154,7 @@ function Section2() {
 
               {/* Image */}
               <div className="w-full max-w-sm md:max-w-none md:mr-8 mt-8 md:mt-0">
-                <div className="relative mx-auto">
+                <div className="relative mx-auto mb-12">
                   <Image
                     src={Calculator}
                     className="md:max-w-none"
@@ -183,7 +183,7 @@ function Section3() {
         />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="py-12 md:py-20">
+          <div className="py-20">
             {/* Section content */}
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-between">
               {/* Section header */}
@@ -255,7 +255,7 @@ function Section4() {
         />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="pb-6 pt-12 md:pt-20">
+          <div className="pt-20">
             {/* Section content */}
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-end">
               {/* Content */}
@@ -291,7 +291,7 @@ function Section4() {
 
               {/* Image */}
               <div className="w-full max-w-sm md:max-w-none md:mr-8 mt-8 md:mt-0">
-                <div className="relative -mx-8 md:mx-0">
+                <div className="relative -mx-8 md:mx-0 pb-8">
                   <Image
                     src={Analytics}
                     className="md:max-w-none"
