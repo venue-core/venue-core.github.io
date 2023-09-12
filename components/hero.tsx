@@ -60,7 +60,8 @@ export default function Hero() {
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
-                Beat competitors with fast, flexible price estimates and a modern payments management system.
+                Beat competitors with fast, flexible price estimates and a
+                modern payments management system.
               </p>
               <div
                 className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"
