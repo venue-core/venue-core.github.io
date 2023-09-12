@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Illustration from "@/public/images/pricing-illustration.svg";
 import Link from "next/link";
+import Illustration from "@/public/images/pricing-illustration.svg";
 
 export default function Pricing() {
   const [annual, setAnnual] = useState<boolean>(true);

@@ -29,16 +29,21 @@ const QUESTIONS = [
     {
       question: "Can I modify the invoices before sending them out?",
       answer: [
-        "Yes, while the software generates invoices automatically, admin users have the flexibility to review and adjust before finalizing."
+        "Yes, while the software generates invoices automatically, admin users have the flexibility to review and adjust before finalizing.",
       ],
     },
     {
-      question: "Is there integration with tax or accounting software like Quickbooks?",
-      answer: ["Integration capabilities are in development. Please reach out to [contact email] for specific integration inquiries or other questions."],
+      question:
+        "Is there integration with tax or accounting software like Quickbooks?",
+      answer: [
+        "Integration capabilities are in development. Please reach out to [contact email] for specific integration inquiries or other questions.",
+      ],
     },
     {
       question: "How secure is your payment processing?",
-      answer: ["We utilize Stripe, the number one globally trusted payment platform known for its advanced security measures. All transactions and financial data are fully encrypted."]
+      answer: [
+        "We utilize Stripe, the number one globally trusted payment platform known for its advanced security measures. All transactions and financial data are fully encrypted.",
+      ],
     },
   ],
 ] as const;

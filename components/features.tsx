@@ -1,8 +1,8 @@
 import Image from "next/image";
-
-import Analytics from '@/public/images/features/analytics.png'
-import Calculator from '@/public/images/features/calculator.png'
-import Invoices from '@/public/images/features/invoices.png'
+import Analytics from "@/public/images/features/analytics.png";
+import Calculator from "@/public/images/features/calculator.png";
+import Invoices from "@/public/images/features/invoices.png";
+import Scheduling from "@/public/images/features/scheduling.png";
 
 export default function Features() {
   return (
@@ -72,7 +72,7 @@ function Section1() {
                   {/*  alt="Logos illustration"*/}
                   {/*  aria-hidden="true"*/}
                   {/*/>*/}
-                  {/*<Image src={Logos} width={720} height={283} alt="Logos" />*/}
+                  <Image src={Scheduling} width={400} alt="Scheduling" />
                 </div>
               </div>
 
