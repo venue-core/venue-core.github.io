@@ -22,9 +22,9 @@ export default function Auth() {
       </div>
       {/* Headline */}
       <h2 className="h2 mb-8 text-center lg:text-left">
-        Accurate price quotes has never been{" "}
+        Pricing and payments collection software built for{" "}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-          easier
+          wedding venues
         </span>
       </h2>
       {/* List */}

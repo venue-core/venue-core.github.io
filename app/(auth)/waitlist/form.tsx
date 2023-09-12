@@ -7,7 +7,7 @@ import { useForm } from "@mantine/form";
 import { IMaskInput } from "react-imask";
 
 const EMAILJS_SERVICE_ID = "service_t2oc63w" as const;
-const EMAILJS_TEMPLATE_ID = "template_tj4jqtb" as const;
+const EMAILJS_TEMPLATE_ID = "template_o00uvd5" as const;
 const EMAILJS_PUBLIC_API_KEY = "cAm4_BslKf4HuNSII" as const;
 
 export default function Form() {

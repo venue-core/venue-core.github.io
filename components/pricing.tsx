@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Illustration from "@/public/images/pricing-illustration.svg";
+import Link from "next/link";
 
 export default function Pricing() {
   const [annual, setAnnual] = useState<boolean>(true);
@@ -558,37 +559,37 @@ export default function Pricing() {
             {/* CTA row */}
             <div className="hidden md:flex flex-col justify-center px-4 md:px-6 py-2 bg-blue-500 bg-opacity-25 md:col-span-3" />
             <div className="flex flex-col justify-center p-4 bg-blue-500 bg-opacity-25 md:border-l border-slate-300 order-1 md:order-none">
-              <a
+              <Link
                 className="btn-sm text-white bg-blue-600 hover:bg-blue-500 w-full shadow-sm group whitespace-nowrap"
-                href="#0"
+                href="/waitlist"
               >
                 Free Trial{" "}
                 <span className="hidden lg:block tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                   -&gt;
                 </span>
-              </a>
+              </Link>
             </div>
             <div className="flex flex-col justify-center p-4 bg-blue-500 bg-opacity-25 md:border-l border-slate-300 order-2 md:order-none">
-              <a
+              <Link
                 className="btn-sm text-white bg-blue-600 hover:bg-blue-500 w-full shadow-sm group whitespace-nowrap"
-                href="#0"
+                href="/waitlist"
               >
                 Free Trial{" "}
                 <span className="hidden lg:block tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                   -&gt;
                 </span>
-              </a>
+              </Link>
             </div>
             <div className="flex flex-col justify-center p-4 bg-blue-500 bg-opacity-25 md:border-l border-slate-300 order-3 md:order-none">
-              <a
+              <Link
                 className="btn-sm text-white bg-blue-600 hover:bg-blue-500 w-full shadow-sm group whitespace-nowrap"
-                href="#0"
+                href="/waitlist"
               >
                 Free Trial{" "}
                 <span className="hidden lg:block tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                   -&gt;
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
