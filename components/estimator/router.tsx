@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Calculator from "public/images/calculator.svg";
 
@@ -98,54 +98,64 @@ function PageView({
   page: View;
   setPage: (p: View) => void;
 }) {
+  const ref = useRef(null);
+  let node: React.ReactNode;
   switch (page) {
     case View.Intro:
-      return (
+      node = (
         <Intro
           customer={customer}
           next={() => {
-            window.scrollTo({ top: 0, left: 0 });
+            (ref.current as any).scrollIntoView({ behavior: 'smooth' })
             setPage(View.Calendar);
           }}
         />
       );
+      break;
     case View.Calendar:
-      return (
+      node = (
         <div className="md:px-16">
           <DatetimeSelector
             inputs={inputs}
             setInputs={setInputs}
             goNext={() => {
-              window.scrollTo({ top: 0, left: 0 });
+              (ref.current as any).scrollIntoView({ behavior: 'smooth' })
               setPage(View.Inputs);
             }}
           />
         </div>
       );
+      break;
     case View.Inputs:
-      return (
+      node = (
         <div className="p-8">
           <InputsPage
             customer={customer}
             inputs={inputs}
             setInputs={setInputs}
             goNext={() => {
-              window.scrollTo({ top: 0, left: 0 });
+              (ref.current as any).scrollIntoView({ behavior: 'smooth' })
               setPage(View.Quote);
             }}
           />
         </div>
       );
+      break;
     case View.Quote:
-      return (
+      node = (
         <PriceQuote
           customer={customer}
           inputs={inputs}
           restart={() => {
-            window.scrollTo({ top: 0, left: 0 });
+            (ref.current as any).scrollIntoView({ behavior: 'smooth' })
             setPage(View.Intro);
           }}
         />
       );
+      break;
   }
+  return <>
+    <div ref={ref} />
+    {node}
+  </>
 }
