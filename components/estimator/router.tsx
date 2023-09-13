@@ -106,7 +106,7 @@ function PageView({
         <Intro
           customer={customer}
           next={() => {
-            (ref.current as any).scrollIntoView({ behavior: 'smooth' })
+            (ref.current as any).scrollIntoView({ behavior: "smooth" });
             setPage(View.Calendar);
           }}
         />
@@ -119,7 +119,7 @@ function PageView({
             inputs={inputs}
             setInputs={setInputs}
             goNext={() => {
-              (ref.current as any).scrollIntoView({ behavior: 'smooth' })
+              (ref.current as any).scrollIntoView({ behavior: "smooth" });
               setPage(View.Inputs);
             }}
           />
@@ -134,7 +134,7 @@ function PageView({
             inputs={inputs}
             setInputs={setInputs}
             goNext={() => {
-              (ref.current as any).scrollIntoView({ behavior: 'smooth' })
+              (ref.current as any).scrollIntoView({ behavior: "smooth" });
               setPage(View.Quote);
             }}
           />
@@ -147,15 +147,17 @@ function PageView({
           customer={customer}
           inputs={inputs}
           restart={() => {
-            (ref.current as any).scrollIntoView({ behavior: 'smooth' })
+            (ref.current as any).scrollIntoView({ behavior: "smooth" });
             setPage(View.Intro);
           }}
         />
       );
       break;
   }
-  return <>
-    <div ref={ref} />
-    {node}
-  </>
+  return (
+    <>
+      <div ref={ref} />
+      {node}
+    </>
+  );
 }
