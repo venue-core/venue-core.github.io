@@ -34,8 +34,6 @@ export const VARIABLES: Variable[] = [
     required: true,
     min: 1,
     max: 150,
-    label: "How many guests will be at the event?",
-    subtext: "Include the number of people within your own personal party.",
     default: 75,
   },
 ];

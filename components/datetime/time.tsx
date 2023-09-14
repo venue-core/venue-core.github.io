@@ -8,8 +8,8 @@ import cx from "classnames";
 import { useDateFormatter } from "react-aria";
 
 import { useAvailabilities } from "@/components/datetime/context/availabilities";
-import { Availability } from "@/components/datetime/context/data";
 import { useSelectedDate } from "@/components/datetime/context/selected-date";
+import {Availability} from "@/components/estimator/types";
 
 export default function Time({
   setAvailability,
