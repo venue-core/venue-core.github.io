@@ -136,7 +136,7 @@ function Section2() {
                       className="btn-sm inline-flex items-center text-blue-50 bg-blue-600 hover:bg-blue-500 group shadow-sm"
                       href="/demo"
                     >
-                      Try Demo
+                      Demo calculator
                       <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2">
                         <svg
                           className="fill-current"

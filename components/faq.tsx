@@ -36,7 +36,7 @@ const QUESTIONS = [
       question:
         "Is there integration with tax or accounting software like Quickbooks?",
       answer: [
-        "Integration capabilities are in development. Please reach out to [contact email] for specific integration inquiries or other questions.",
+        "Integration capabilities are in development. Please reach out to katherinewang2012@gmail.com for specific integration inquiries or other questions.",
       ],
     },
     {

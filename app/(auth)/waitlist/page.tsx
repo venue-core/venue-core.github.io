@@ -37,7 +37,7 @@ export default function Waitlist() {
                 aria-hidden="true"
               />
               <div className="p-6 md:p-8">
-                <div className="text-xl font-bold mb-6">Join Waitlist</div>
+                <div className="text-xl font-bold mb-6">Request a demo</div>
                 <Form />
               </div>
             </div>

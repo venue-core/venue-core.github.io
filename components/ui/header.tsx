@@ -81,7 +81,7 @@ export default function Header() {
                   href="/waitlist"
                   className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 ml-3 group"
                 >
-                  <span>Sign up</span>
+                  <span>Request a demo</span>
                   <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                     -&gt;
                   </span>

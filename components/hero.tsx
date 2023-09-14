@@ -73,7 +73,7 @@ export default function Hero() {
                     className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0 group"
                     href="/waitlist"
                   >
-                    Start 30 day free trial
+                    Request a demo
                     <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                       -&gt;
                     </span>
