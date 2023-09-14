@@ -59,7 +59,7 @@ export default function PriceQuote({
         <div className="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
           <div>
             <span className="block text-xs uppercase text-slate-500">
-              Amount Due:
+              Estimate:
             </span>
             <span className="block text-md font-medium text-slate-800">
               {formatTotal(prices, venue)}
@@ -69,7 +69,7 @@ export default function PriceQuote({
 
           <div className="sm:text-center">
             <span className="block text-xs uppercase text-slate-500">
-              Wedding Due:
+              Wedding Date:
             </span>
             <span className="block text-md font-medium text-slate-800">
               {getDateDue(inputs)}
