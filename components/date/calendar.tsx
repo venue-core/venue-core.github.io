@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import {
   CalendarDate,
@@ -10,6 +8,7 @@ import {
   today,
 } from "@internationalized/date";
 import cx from "classnames";
+import { DateValue } from "react-aria";
 import {
   Calendar as AriaCalendar,
   Button,
@@ -21,18 +20,21 @@ import {
   Heading,
 } from "react-aria-components";
 
-import { useAvailabilities } from "@/components/datetime/context/availabilities";
-import { useSelectedDate } from "@/components/datetime/context/selected-date";
+import { Customer, getAvailabilities } from "@/components/estimator/data";
 import { Availability } from "@/components/estimator/types";
 
-export default function Calendar() {
-  const { availabilities } = useAvailabilities();
-  const { setSelectedDate } = useSelectedDate();
-
+export default function Calendar({
+  customer,
+  selectDate,
+}: {
+  customer: Customer;
+  selectDate: (date: DateValue) => void;
+}) {
+  const availabilities = getAvailabilities(customer);
   return (
     <AriaCalendar
-      aria-label="Booking availabilities"
-      onChange={setSelectedDate}
+      aria-label="Calendar"
+      onChange={(date) => selectDate(date)}
       minValue={today(getLocalTimeZone())}
       maxValue={today(getLocalTimeZone()).add({ months: 24 })}
     >
@@ -76,7 +78,7 @@ export default function Calendar() {
                     date,
                     isSelected,
                     isDisabled,
-                    availabilities: availabilities,
+                    availabilities,
                   })
                 }
               >
@@ -166,9 +168,9 @@ function getCalendarCellClasses({
     SELECTED: "bg-blue-600 font-bold text-white bg-stripes",
     DISABLED: "pointer-events-none text-slate-300",
     VACANCY: "bg-blue-100 font-bold text-blue-700 hover:bg-blue-200",
-    NO_VACANCY: "text-slate-800 hover:bg-slate-100",
+    NO_VACANCY: "pointer-events-none text-slate-800 hover:bg-slate-100",
     TODAY_NO_VACANCY:
-      "font-bold text-blue-700 hover:bg-slate-100 hover:text-slate-800",
+      "pointer-events-none font-bold text-blue-700 hover:bg-slate-100 hover:text-slate-800",
   };
 
   // Mix all classes in a blender, serve with ice 🍹

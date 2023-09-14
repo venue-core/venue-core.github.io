@@ -2,10 +2,8 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-import {
-  Availability,
-  generateAvailabilities,
-} from "@/components/datetime/context/data";
+import { generateAvailabilities } from "@/components/estimator/data/demo";
+import { Availability } from "@/components/estimator/types";
 
 const AvailabilitiesContext = createContext<{
   availabilities: Availability[];

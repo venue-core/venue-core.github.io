@@ -7,7 +7,7 @@ import {
   GlobeAsiaAustraliaIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
-import { DateFormatter, getLocalTimeZone, now } from "@internationalized/date";
+import { DateFormatter, now } from "@internationalized/date";
 import cx from "classnames";
 import { useLocale } from "react-aria";
 
@@ -24,7 +24,7 @@ export default function Timezone({ venue }: { venue: Venue }) {
   const { locale } = useLocale();
   const [query, setQuery] = useState("");
   const [timezones, setTimezones] = useState<string[]>([]);
-  const [selected, setSelected] = useState(venue.timezone);
+  const [selected, setSelected] = useState(venue.timezone); // getLocalTimezone();
   const filtered =
     query === ""
       ? timezones

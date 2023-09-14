@@ -1,11 +1,7 @@
 import React from "react";
 import _ from "lodash";
 
-import {
-  Customer,
-  getLineItems,
-  getVenue,
-} from "@/components/estimator/data";
+import { Customer, getLineItems, getVenue } from "@/components/estimator/data";
 import { DATE, MONTH, YEAR } from "@/components/estimator/data/demo";
 import {
   Category,
@@ -13,7 +9,6 @@ import {
   ConditionType,
   Inputs,
   LineItem,
-  Term,
   Venue,
 } from "@/components/estimator/types";
 
@@ -22,9 +17,10 @@ const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-interface Cost {
+interface ItemPrice {
   title: string;
   subtitle?: string;
+  items?: ItemPrice[];
   price: number;
   minimum: number;
   final: number;
@@ -42,36 +38,12 @@ export default function PriceQuote({
   restart: () => void;
 }) {
   const lineItems = getLineItems(customer);
-  const costs = lineItems
-    .map((li) => {
-      const matched = li.options.find((term) => meetsConditions(term, inputs));
-      const minimum = Math.max(matched?.minimum || 0, li.minimum || 0);
-      if (matched) {
-        const price = getLineItemPrice(customer, li, inputs);
-        return {
-          title: li.name,
-          subtitle: matched.name !== li.name ? matched.name : undefined,
-          price,
-          minimum,
-          final: Math.max(price, minimum),
-          category: li.category,
-          missing: false,
-        };
-      } else if (li.required) {
-        return {
-          title: li.name,
-          price: 0,
-          minimum,
-          final: minimum,
-          category: li.category,
-          missing: true,
-        };
-      }
-    })
+  const prices = lineItems
+    .map((li) => lineItemToPrice(li, inputs, customer))
     .filter(isTruthy);
   const venue = getVenue(customer);
   return (
-    <div className="py-4 px-8 sm:py-8 sm:p-12">
+    <div>
       {/*<!-- Col -->*/}
       <div className="overflow-y-auto">
         <div className="text-center">
@@ -88,7 +60,7 @@ export default function PriceQuote({
               Amount Due:
             </span>
             <span className="block text-md font-medium text-slate-800">
-              {formatTotal(costs, venue)}
+              {formatTotal(prices, venue)}
             </span>
           </div>
           {/*<!-- End Col -->*/}
@@ -104,8 +76,9 @@ export default function PriceQuote({
           {/*<!-- End Col -->*/}
         </div>
         {/*<!-- End Grid -->*/}
-        <LineItems venue={venue} costs={costs} />
+        <LineItems venue={venue} prices={prices} />
       </div>
+
       <div className="mt-4 px-4">
         <p className="text-sm text-slate-600">
           Place a deposit today to reserve your event date's availability.
@@ -133,19 +106,19 @@ export default function PriceQuote({
           <div>
             <div className="text-xs uppercase font-semibold">Due Today:</div>
             <div className="text-md flex">
-            <span>
-              {CURRENCY_FORMAT.format(
-                calcTotal(costs, venue, true) * venue.depositPercentage
-              )}
-            </span>
+              <span>
+                {CURRENCY_FORMAT.format(
+                  calcTotal(prices, venue, true) * venue.depositPercentage
+                )}
+              </span>
             </div>
           </div>
           <div>
             <button className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group">
               <span>Reserve</span>
               <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-              -&gt;
-            </span>
+                -&gt;
+              </span>
             </button>
           </div>
         </div>
@@ -165,9 +138,9 @@ export default function PriceQuote({
       )}
 
       {/*<!-- Buttons -->*/}
-      <div className="mt-8 flex justify-start gap-x-2">
+      <div className="mt-8 px-4 flex justify-start gap-x-2">
         <button
-          className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
+          className="block w-full btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
           onClick={() => restart()}
         >
           <span>Restart</span>
@@ -184,104 +157,170 @@ function isTruthy<T>(value: T | null | undefined | false): value is T {
   return Boolean(value);
 }
 
-function LineItems({ venue, costs }: { venue: Venue; costs: Cost[] }) {
-  const costsByCategory = _.groupBy(costs, "category");
+const POST_SUBTOTAL_CATEGORIES = new Set<string>([
+  Category.Fees,
+  Category.Taxes,
+]);
+
+function LineItems({ venue, prices }: { venue: Venue; prices: ItemPrice[] }) {
+  const pricesByCategory = _.groupBy(prices, "category");
   return (
     <div className="mt-4 sm:mt-8">
       <h4 className="text-sm font-semibold uppercase text-slate-800">
         Summary
       </h4>
       <ul className="mt-2 flex flex-col">
-        {Object.entries(costsByCategory).map(([category, costs]) => (
-          <React.Fragment key={category}>
-            <li
-              key={category}
-              className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
-            >
-              {category}
-            </li>
-            {costs.map((c) => (
-              <li
-                key={c.title}
-                className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <span>
-                    <div>{c.title}</div>
-                    {c.subtitle && (
-                      <div className="text-xs text-slate-400">{c.subtitle}</div>
-                    )}
-                  </span>
-                  <span className="text-right">
-                    {c.missing ? (
-                      <div className="text-sm text-red-500 font-semibold">
-                        Required
-                      </div>
-                    ) : (
-                      <div>
-                        {CURRENCY_FORMAT.format(
-                          Math.max(c.price, c.minimum || 0)
-                        )}
-                      </div>
-                    )}
-                    {!c.missing && c.minimum > c.price && (
-                      <div className="text-xs text-orange-400">
-                        <div>Minimum: {CURRENCY_FORMAT.format(c.minimum)}</div>
-                        <div>Current: {CURRENCY_FORMAT.format(c.price)}</div>
-                      </div>
-                    )}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </React.Fragment>
-        ))}
-        <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
-          <div className="flex items-center justify-between w-full">
-            <span>Total</span>
-            <span className="text-right">
-              {formatTotal(costs, venue)}
-              {venue.minimum !== undefined &&
-                venue.minimum > calcTotal(costs, venue) && (
-                  <div className="text-xs font-normal text-orange-400">
-                    <div>Minimum: {CURRENCY_FORMAT.format(venue.minimum)}</div>
-                    <div>
-                      Current: {CURRENCY_FORMAT.format(calcTotal(costs, venue))}
-                    </div>
-                  </div>
-                )}
-            </span>
-          </div>
-        </li>
+        {Object.entries(pricesByCategory)
+          .filter(([category]) => !POST_SUBTOTAL_CATEGORIES.has(category))
+          .map(([category, prices]) => (
+            <CategoryGroup key={category} category={category} prices={prices} />
+          ))}
+        <Subtotal venue={venue} prices={prices} />
+        {Object.entries(pricesByCategory)
+          .filter(([category]) => POST_SUBTOTAL_CATEGORIES.has(category))
+          .map(([category, prices]) => (
+            <CategoryGroup key={category} category={category} prices={prices} />
+          ))}
+        <Total venue={venue} prices={prices} />
       </ul>
     </div>
   );
 }
 
-function calcTotal(costs: Cost[], venue: Venue, withMinimum = false) {
-  const total = costs.reduce((acc, c) => acc + c.final, 0);
+function CategoryGroup({
+  category,
+  prices,
+}: {
+  category: string;
+  prices: ItemPrice[];
+}) {
+  return (
+    <React.Fragment key={category}>
+      <li
+        key={category}
+        className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+      >
+        {category}
+      </li>
+      {prices.map((item) => (
+        <li
+          key={item.title}
+          className="py-3 px-4 text-sm border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+        >
+          <div className="flex items-center justify-between w-full">
+            <Item item={item} />
+            <Price item={item} />
+          </div>
+          {item.items &&
+            item.items.map((item) => (
+              <div
+                key={item.title}
+                className="mt-1 ml-4 text-xs text-slate-400 flex justify-between"
+              >
+                <span>{item.title}</span>
+                <span>{CURRENCY_FORMAT.format(item.final)}</span>
+              </div>
+            ))}
+        </li>
+      ))}
+    </React.Fragment>
+  );
+}
+
+function Subtotal({ venue, prices }: { venue: Venue; prices: ItemPrice[] }) {
+  const filtered = prices.filter(
+    (p) => !POST_SUBTOTAL_CATEGORIES.has(p.category)
+  );
+  return (
+    <li
+      key="subtotal-title"
+      className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+    >
+      <div className="flex items-center justify-between w-full">
+        <span>Subtotal</span>
+        <span className="text-right">
+          {CURRENCY_FORMAT.format(calcTotal(filtered, venue, true))}
+        </span>
+      </div>
+    </li>
+  );
+}
+
+function Total({ venue, prices }: { venue: Venue; prices: ItemPrice[] }) {
+  return (
+    <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
+      <div className="flex items-center justify-between w-full">
+        <span>Total</span>
+        <span className="text-right">
+          {formatTotal(prices, venue)}
+          {venue.minimum !== undefined &&
+            venue.minimum > calcTotal(prices, venue) && (
+              <div className="text-xs font-normal text-orange-400">
+                <div>Minimum: {CURRENCY_FORMAT.format(venue.minimum)}</div>
+                <div>
+                  Current: {CURRENCY_FORMAT.format(calcTotal(prices, venue))}
+                </div>
+              </div>
+            )}
+        </span>
+      </div>
+    </li>
+  );
+}
+
+function Item({ item }: { item: ItemPrice }) {
+  return (
+    <span>
+      <div>{item.title}</div>
+      {item.subtitle && (
+        <div className="text-xs text-slate-400">{item.subtitle}</div>
+      )}
+    </span>
+  );
+}
+
+function Price({ item }: { item: ItemPrice }) {
+  return (
+    <span className="text-right">
+      {item.missing ? (
+        <div className="text-sm text-red-500 font-semibold">Required</div>
+      ) : (
+        <div>{CURRENCY_FORMAT.format(item.final)}</div>
+      )}
+      {!item.missing && item.minimum > item.price && (
+        <div className="text-xs text-orange-400">
+          <div>Minimum: {CURRENCY_FORMAT.format(item.minimum)}</div>
+          <div>Current: {CURRENCY_FORMAT.format(item.price)}</div>
+        </div>
+      )}
+    </span>
+  );
+}
+
+function calcTotal(prices: ItemPrice[], venue: Venue, withMinimum = false) {
+  const total = prices.reduce((acc, c) => acc + c.final, 0);
   const min = venue.minimum || 0;
   return withMinimum ? Math.max(total, min) : total;
 }
 
-function formatTotal(costs: Cost[], venue: Venue) {
-  if (isValid(costs)) {
-    return <div>{CURRENCY_FORMAT.format(calcTotal(costs, venue, true))}</div>;
+function formatTotal(prices: ItemPrice[], venue: Venue) {
+  if (isValid(prices)) {
+    return <div>{CURRENCY_FORMAT.format(calcTotal(prices, venue, true))}</div>;
   } else {
     return <div className="text-red-500">Invalid Selections</div>;
   }
 }
 
-function isValid(costs: Cost[]) {
-  return costs.every((c) => !c.missing);
+function isValid(prices: ItemPrice[]) {
+  return prices.every((c) => !c.missing);
 }
 
-function meetsConditions(option: Term, inputs: Inputs): boolean {
+function meetsConditions(item: LineItem, inputs: Inputs): boolean {
   const debug = false;
-  return option.conditions.some((group) => {
-    if (debug) console.log(group);
-    return group.every((c) => evaluateCondition(c, inputs, debug));
-  });
+  if (!item.conditions) return true;
+  return item.conditions.some((group) =>
+    group.every((c) => evaluateCondition(c, inputs, debug))
+  );
 }
 
 export function evaluateCondition(
@@ -291,7 +330,6 @@ export function evaluateCondition(
 ) {
   const { variableId } = c;
   const value = inputs[variableId];
-  if (debug) console.log(value);
   switch (c.type) {
     case ConditionType.Inclusive:
       if (Array.isArray(c.condition)) {
@@ -317,8 +355,78 @@ export function evaluateCondition(
   }
 }
 
+function lineItemToPrice(
+  li: LineItem,
+  inputs: Inputs,
+  customer: Customer
+): ItemPrice | undefined {
+  if (!meetsConditions(li, inputs) && !li.required) return;
+  // sum of sub line items
+  if (li.items) {
+    const minimum = li.minimum || 0;
+    const price = li.items.reduce(
+      (acc, item) => acc + getItemPrice(customer, item, inputs, 0, true),
+      0
+    );
+    const final = Math.max(price, minimum);
+    if (!li.required && final === 0) return;
+    return {
+      title: li.name,
+      subtitle: li.subtext,
+      items: li.items
+        .map((item) => lineItemToPrice(item, inputs, customer))
+        .filter(isTruthy),
+      price,
+      minimum,
+      final,
+      category: li.category,
+      missing: false,
+    };
+  }
+  if (li.options) {
+    // selection of a single item
+    const option = li.options.find((o) => meetsConditions(o, inputs));
+    const minimum = Math.max(option?.minimum || 0, li.minimum || 0);
+    if (option) {
+      const price = getItemPrice(customer, li, inputs);
+      return {
+        title: li.name,
+        subtitle: option.name !== li.name ? option.name : li.subtext,
+        price,
+        minimum,
+        final: Math.max(price, minimum),
+        category: li.category,
+        missing: false,
+      };
+    } else if (li.required) {
+      return {
+        title: li.name,
+        subtitle: li.subtext,
+        price: 0,
+        minimum,
+        final: minimum,
+        category: li.category,
+        missing: true,
+      };
+    }
+  }
+  const minimum = li.minimum || 0;
+  const price = getItemPrice(customer, li, inputs);
+  const final = Math.max(price, minimum);
+  if (final === 0 && !li.required) return;
+  return {
+    title: li.name,
+    subtitle: li.subtext,
+    price,
+    minimum,
+    final,
+    category: li.category,
+    missing: li.required && final === 0,
+  };
+}
+
 const MAX_LEVEL = 5;
-function getLineItemPrice(
+function getItemPrice(
   customer: Customer,
   li: LineItem,
   inputs: Inputs,
@@ -326,56 +434,53 @@ function getLineItemPrice(
   final = false
 ) {
   if (level >= MAX_LEVEL) {
-    console.error("RECURSIVE STACK OVERFLOW calculating list item price");
+    console.error(
+      `RECURSIVE STACK OVERFLOW calculating list item price: ${li.name}`
+    );
     return 0;
   }
-  const matched = li.options.find((term) => meetsConditions(term, inputs));
-  const minimum = Math.max(matched?.minimum || 0, li.minimum || 0);
+  const debug = false;
+  if (!meetsConditions(li, inputs)) return 0;
+  let sum = 0;
+  if (li.items) {
+    sum += li.items.reduce(
+      (acc, item) =>
+        acc + getItemPrice(customer, item, inputs, level + 1, true),
+      0
+    );
+  }
+  if (li.options) {
+    const option = li.options.find((item) => meetsConditions(item, inputs));
+    if (option) {
+      sum += getItemPrice(customer, option, inputs, level + 1, true);
+    }
+  }
   let multiple: number;
-  if (matched) {
-    if (matched.multiple !== undefined) {
-      multiple = matched.multiple;
-    } else if (matched.multipleVariableId !== undefined) {
-      const value = inputs[matched.multipleVariableId];
-      multiple = isNaN(Number(value)) ? 1 : Number(value);
-    } else {
-      multiple = 1;
-    }
+  if (li.multiple !== undefined) {
+    multiple = li.multiple;
+  } else if (li.multipleVariableId !== undefined) {
+    const value = inputs[li.multipleVariableId];
+    multiple = isNaN(Number(value)) ? 0 : Number(value);
   } else {
-    multiple = 0;
+    multiple = 1;
   }
-  if (matched) {
-    const { basePrice, targets } = matched;
-    let base: number;
-    if (basePrice !== undefined) {
-      base = basePrice;
-    } else if (Array.isArray(targets)) {
-      base = getLineItems(customer)
-        .filter((li) => {
-          const targets = matched.targets || [];
-          const categories = targets
-            .filter((t) => t.type === "CATEGORY")
-            .map((t) => t.value);
-          const tags = targets
-            .filter((t) => t.type === "TAG")
-            .map((t) => t.value);
-          if (categories.includes(li.category)) return true;
-          return _.intersection(tags, li.tags || []).length > 0;
-        })
-        .reduce(
-          (acc, li) =>
-            acc + getLineItemPrice(customer, li, inputs, level + 1, true),
-          0
-        );
-    } else {
-      console.error(`No base price for line-item: ${li.name}`);
-      base = 0;
-    }
-    const price = multiple * base;
-    return final ? Math.max(price, minimum) : price;
+  const { basePrice, targets } = li;
+  let base: number;
+  if (basePrice !== undefined) {
+    base = basePrice;
+  } else if (Array.isArray(targets)) {
+    base = getLineItems(customer)
+      .filter((item) => (li.targets || []).includes(item.category))
+      .reduce(
+        (acc, item) =>
+          acc + getItemPrice(customer, item, inputs, level + 1, true),
+        0
+      );
   } else {
-    return 0;
+    base = 0;
   }
+  sum += multiple * base;
+  return final ? Math.max(sum, li.minimum || 0) : sum;
 }
 
 function getDateDue(inputs: Inputs) {

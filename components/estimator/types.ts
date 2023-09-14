@@ -9,15 +9,13 @@ export interface Venue {
   notes?: string[];
 }
 
-export enum DefaultVariableType {
+export enum VariableType {
   Date = "DATE",
   DayOfWeek = "DAY_OF_WEEK",
   Month = "MONTH",
   TimeRange = "TIME_RANGE",
   Year = "YEAR",
-}
-
-enum PrimitiveVariableType {
+  // PRIMITIVE
   Boolean = "BOOLEAN",
   Float = "FLOAT",
   Integer = "INTEGER",
@@ -26,33 +24,31 @@ enum PrimitiveVariableType {
   Text = "TEXT",
 }
 
-export const VariableType = { ...PrimitiveVariableType, ...DefaultVariableType };
-export type VariableType = DefaultVariableType | PrimitiveVariableType;
-
 export enum PageType {
   Calendar = 'CALENDAR',
   CalendarTime = 'CALENDAR_AND_TIME',
   Form = 'FORM',
   Intro = 'INTRO',
+  PriceQuote = 'PRICE_QUOTE',
   Time = 'TIME',
 }
 
 export interface Page {
   id: string;
-  title: string;
+  title?: string;
   type: PageType;
   rank: number;
+  fields: Field[];
 }
 
 export interface Field {
   id: string;
-  pageId: string;
   label: string;
   subtext?: string;
   description?: string;
   row: number;
-  col: number;
-  variableId: string;
+  variable: Variable;
+  conditions?: Condition[];
 }
 
 export interface Variable {
@@ -65,49 +61,46 @@ export interface Variable {
   min?: number;
   max?: number;
   interval?: number;
-  label?: string;
-  subtext?: string;
-  description?: string;
-  default?: string | number;
-  conditions?: Condition[];
+  default?: string | number | boolean;
 }
 
 export enum Category {
   Bar = 'Bar',
   Catering = 'Catering',
+  Drinks = 'Drinks',
   Fees = 'Fees',
   General = 'General',
   Menu = 'Menu',
   Miscellaneous = 'Miscellaneous',
-  Taxes = 'Taxes & Fees',
+  Rentals = 'Rentals',
+  Taxes = 'Taxes',
 }
 
-export interface LineItem {
+// TYPES:
+//   - CONSTANT (just basePrice)
+//   - VARIABLE (basePrice + multipleVariableId)
+//   - PERCENTAGE (multiple + targets, taxes, admin fees, etc.)
+type Price = Partial<{
+  basePrice: number;
+  targets: string[];
+  multiple: number;
+  multipleVariableId: string;
+  minimum: number;
+}>
+
+export interface LineItem extends Price {
   id: string;
   venueId: string;
   name: string;
   required: boolean;
+  type: 'LINE_ITEM' | 'ADMIN_FEE' | 'TAX' | 'GRATUITY';
   category: Category;
-  options: Term[];
-  tags?: string[];
-  minimum?: number;
+  subtext?: string;
   description?: string;
   instructions?: string;
-}
-
-export interface Term {
-  id: string;
-  name: string;
-  // TODO: maybe add a type for more explicit price calculation
-  conditions: Condition[][];
-  items?: LineItem[];
-  basePrice?: number;
-  targets?: { type: 'TAG' | 'CATEGORY', value: string }[];
-  multiple?: number;
-  multipleVariableId?: string;
-  minimum?: number;
-  description?: string;
-  instructions?: string;
+  options?: LineItem[]; // Select a single option from this list
+  items?: LineItem[]; // Sum up the total of the line item based on these items
+  conditions?: Condition[][];
 }
 
 export enum ConditionType {
@@ -129,10 +122,7 @@ export type Inputs = {
   [variableId: string]: boolean | number | string | { start: Date; end: Date } | (string | number)[];
 };
 
-export enum View {
-  Intro = "INTRO",
-  Calendar = "CALENDAR",
-  Inputs = "INPUTS",
-  Quote = "QUOTE",
+export type Availability = {
+  startTime: string
+  endTime: string
 }
-

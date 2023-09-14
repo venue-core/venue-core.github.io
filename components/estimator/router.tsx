@@ -1,22 +1,22 @@
-"use client";
-
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import Calculator from "public/images/calculator.svg";
 
+import DateSelector from "@/components/date/selector";
 import DatetimeSelector from "@/components/datetime/selector";
-import { Customer } from "@/components/estimator/data";
-import InputsPage from "@/components/estimator/inputs";
+import { Customer, getPages } from "@/components/estimator/data";
+import Form from "@/components/estimator/form";
 import Intro from "@/components/estimator/intro";
 import PriceQuote from "@/components/estimator/price-quote";
-import Progress from "@/components/estimator/progress";
-import { Inputs, View } from "@/components/estimator/types";
+import { Inputs, Page, PageType } from "@/components/estimator/types";
+import TimeSelector from "@/components/time/selector";
 
 const CALCULATOR = (
   <Image src={Calculator} alt="calculator" className="w-6 h-6" />
 );
 
-const INVOICE = (
+const PRICE_QUOTE = (
   <span className="mx-auto flex justify-center items-center w-[62px] h-[62px] rounded-full border border-gray-200 bg-white text-slate-700 shadow-sm">
     <svg
       className="w-6 h-6"
@@ -33,18 +33,29 @@ const INVOICE = (
 );
 
 export default function Router({ customer }: { customer: Customer }) {
-  const [view, setView] = useState<View>(View.Intro);
+  const pages = getPages(customer);
+  const router = useRouter();
+  const search = useSearchParams();
+  const ref = useRef(null);
+  const initial = search.get("page");
+  const [pageIndex, setPageIndex] = useState<number>(initial && !isNaN(Number(initial)) ? Number(initial) - 1 : 0);
   const [inputs, setInputs] = useState<Inputs>({});
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", (pageIndex + 1).toString());
+    router.push(url.toString());
+  }, [pageIndex]);
+
+  useEffect(() => {
+    const p = search.get("page");
+    setPageIndex(p ? Number(p) - 1 : 0);
+  }, [search.get("page")]);
+
   return (
-    <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-14rem)]">
+    <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-8rem)]">
       <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
-        <Progress
-          view={view}
-          setView={(p) => {
-            setView(p);
-            window.scrollTo({ top: 0, left: 0 });
-          }}
-        />
+        {/*<Progress view={page} />*/}
         {/*<!-- SVG Background Element -->*/}
         <figure className="absolute inset-x-0 bottom-0">
           <svg
@@ -67,90 +78,127 @@ export default function Router({ customer }: { customer: Customer }) {
       <div className="relative z-10 -mt-12">
         {/*<!-- Icon -->*/}
         <span className="mx-auto flex justify-center items-center w-[62px] h-[62px] rounded-full border border-gray-200 bg-white text-slate-700 shadow-sm">
-          {view !== View.Quote ? CALCULATOR : INVOICE}
+          {pages[pageIndex]?.type === PageType.PriceQuote
+            ? PRICE_QUOTE
+            : CALCULATOR}
         </span>
         {/*<!-- End Icon -->*/}
       </div>
 
       <div className="h-full pb-4 overflow-y-scroll">
-        <PageView
+        <div ref={ref} />
+        {pages.map((page, i) => <Page
+          key={page.id}
+          active={pageIndex === i}
           customer={customer}
           inputs={inputs}
           setInputs={setInputs}
-          page={view}
-          setPage={setView}
-        />
+          page={page}
+          reset={() => {
+            setInputs({});
+            setPageIndex(0);
+            (ref.current as any).scrollIntoView({ behavior: "smooth" });
+          }}
+          nextPage={() => {
+            setPageIndex((prev) =>
+              prev === pages.length - 1 ? prev : prev + 1
+            );
+            (ref.current as any).scrollIntoView({ behavior: "smooth" });
+          }}
+          prevPage={() => {
+            setPageIndex((prev) => (prev === 0 ? prev : prev - 1));
+            (ref.current as any).scrollIntoView({ behavior: "smooth" });
+          }}
+        />)}
       </div>
     </div>
   );
 }
 
-function PageView({
+function Page({
+  active,
   customer,
   inputs,
   setInputs,
   page,
-  setPage,
+  reset,
+  nextPage,
+  prevPage,
 }: {
+  active: boolean;
   customer: Customer;
   inputs: Inputs;
   setInputs: (i: Inputs) => void;
-  page: View;
-  setPage: (p: View) => void;
+  page: Page;
+  reset: () => void;
+  nextPage: () => void;
+  prevPage: () => void;
 }) {
   const ref = useRef(null);
+  if (!active) return null;
   let node: React.ReactNode;
-  switch (page) {
-    case View.Intro:
+  switch (page.type) {
+    case PageType.Form:
       node = (
-        <Intro
-          customer={customer}
-          next={() => {
-            (ref.current as any).scrollIntoView({ behavior: "smooth" });
-            setPage(View.Calendar);
-          }}
-        />
-      );
-      break;
-    case View.Calendar:
-      node = (
-        <div className="md:px-16">
-          <DatetimeSelector
+        <div className="mt-4 px-8">
+          <Form
+            page={page}
             inputs={inputs}
             setInputs={setInputs}
-            goNext={() => {
-              (ref.current as any).scrollIntoView({ behavior: "smooth" });
-              setPage(View.Inputs);
-            }}
+            fields={page.fields}
+            nextPage={nextPage}
           />
         </div>
       );
       break;
-    case View.Inputs:
+    case PageType.Intro:
+      node = <Intro customer={customer} nextPage={nextPage} />;
+      break;
+    case PageType.Calendar:
       node = (
-        <div className="p-8">
-          <InputsPage
+        <div className="mt-4 px-4 sm:px-8 xl:px-10 md:px-24">
+          <DateSelector
             customer={customer}
             inputs={inputs}
             setInputs={setInputs}
-            goNext={() => {
-              (ref.current as any).scrollIntoView({ behavior: "smooth" });
-              setPage(View.Quote);
-            }}
+            nextPage={nextPage}
           />
         </div>
       );
       break;
-    case View.Quote:
+    case PageType.CalendarTime:
       node = (
-        <PriceQuote
-          customer={customer}
-          inputs={inputs}
-          restart={() => {
-            (ref.current as any).scrollIntoView({ behavior: "smooth" });
-            setPage(View.Intro);
-          }}
-        />
+        <div className="mt-4 px-4 sm:px-8 xl:px-10 md:px-24">
+          <DatetimeSelector
+            customer={customer}
+            inputs={inputs}
+            setInputs={setInputs}
+            nextPage={nextPage}
+          />
+        </div>
+      );
+      break;
+    case PageType.PriceQuote:
+      node = (
+        <div className="p-4 sm:py-8 sm:p-12">
+          <PriceQuote
+            customer={customer}
+            inputs={inputs}
+            restart={reset}
+          />
+        </div>
+      );
+      break;
+    case PageType.Time:
+      node = (
+        <div className="mt-4 px-4 sm:px-8 xl:px-10 md:px-24">
+          <TimeSelector
+            customer={customer}
+            inputs={inputs}
+            setInputs={setInputs}
+            nextPage={nextPage}
+          />
+        </div>
       );
       break;
   }

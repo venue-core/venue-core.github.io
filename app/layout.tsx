@@ -39,8 +39,7 @@ export default function RootLayout({
       >
         <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
           <Header />
-          <main className="grow">{children}</main>
-          <Footer />
+          {children}
         </div>
       </body>
     </html>

@@ -3,18 +3,22 @@ import { AvailabilitiesProvider } from "@/components/datetime/context/availabili
 import { SelectedDateProvider } from "@/components/datetime/context/selected-date";
 import Time from "@/components/datetime/time";
 import Timezone from "@/components/datetime/timezone";
+import { Customer, getVenue } from "@/components/estimator/data";
 import { DATE, DAY, MONTH, TIME, YEAR } from "@/components/estimator/data/demo";
 import { Inputs } from "@/components/estimator/types";
 
 export default function DatetimeSelector({
+  customer,
   inputs,
   setInputs,
-  goNext,
+  nextPage,
 }: {
+  customer: Customer;
   inputs: Inputs;
   setInputs: (i: Inputs) => void;
-  goNext: () => void;
+  nextPage: () => void;
 }) {
+  const venue = getVenue(customer);
   return (
     <SelectedDateProvider>
       <AvailabilitiesProvider>
@@ -30,7 +34,7 @@ export default function DatetimeSelector({
                 <Calendar />
               </div>
               <div className="p-4 sm:p-8 xl:p-10">
-                <Timezone />
+                <Timezone venue={venue} />
               </div>
             </div>
             <div>
@@ -50,7 +54,7 @@ export default function DatetimeSelector({
                     [DAY.id]: day,
                     [TIME.id]: { start, end },
                   });
-                  goNext();
+                  nextPage();
                 }}
               />
             </div>

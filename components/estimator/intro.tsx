@@ -2,10 +2,10 @@ import { Customer, getVenue } from "@/components/estimator/data";
 
 export default function Intro({
   customer,
-  next,
+  nextPage,
 }: {
   customer: Customer;
-  next: () => void;
+  nextPage: () => void;
 }) {
   return (
     <div className="p-8 h-full text-center flex items-center justify-center">
@@ -18,7 +18,7 @@ export default function Intro({
         </div>
         <button
           className="mt-8 btn-sm flex items-center text-white mx-auto text-sm font-medium py-2 px-4 m-2 bg-blue-600 group transition duration-500"
-          onClick={() => next()}
+          onClick={() => nextPage()}
         >
           <span>Start</span>
           <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
