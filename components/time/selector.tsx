@@ -1,5 +1,5 @@
 import { Customer, getVenue } from "@/components/estimator/data";
-import { TIME } from "@/components/estimator/data/demo";
+import { VAR_TIME } from "@/components/estimator/data/demo";
 import { Inputs } from "@/components/estimator/types";
 import Time from "@/components/time/time";
 
@@ -25,7 +25,7 @@ export default function TimeSelector({
           setAvailability={(a) => {
             const start = new Date(a.startTime);
             const end = new Date(a.endTime);
-            setInputs({ ...inputs, [TIME.id]: { start, end } });
+            setInputs({ ...inputs, [VAR_TIME.id]: { start, end } });
             nextPage();
           }}
         />

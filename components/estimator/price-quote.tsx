@@ -1,9 +1,14 @@
 import React from "react";
-import _ from "lodash";
 import { format, isValid } from "date-fns";
+import _ from "lodash";
 
 import { Customer, getLineItems, getVenue } from "@/components/estimator/data";
-import { DATE, MONTH, YEAR } from "@/components/estimator/data/demo";
+import {
+  VAR_DATE,
+  VAR_MONTH,
+  VAR_YEAR,
+} from "@/components/estimator/data/demo";
+import { VAR_HEADCOUNT } from "@/components/estimator/data/plantenders";
 import {
   Category,
   Condition,
@@ -12,7 +17,6 @@ import {
   LineItem,
   Venue,
 } from "@/components/estimator/types";
-import {VAR_HEADCOUNT} from "@/components/estimator/data/plantenders";
 
 const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -91,9 +95,12 @@ export default function PriceQuote({
       </div>
 
       <div className="mt-4 px-4">
-        {venue.depositPercentage && <p className="text-sm text-slate-600">
-          Place a {venue.depositPercentage * 100}% deposit today to reserve your date.
-        </p>}
+        {venue.depositPercentage && (
+          <p className="text-sm text-slate-600">
+            Place a {venue.depositPercentage * 100}% deposit today to reserve
+            your date.
+          </p>
+        )}
         <p className="mt-2 text-sm text-slate-500">
           If you have any questions, please contact us at{" "}
           <a
@@ -495,18 +502,18 @@ function getItemPrice(
 }
 
 function getEventDate(inputs: Inputs) {
-  const year = inputs[YEAR.id] as number;
-  const month = (inputs[MONTH.id] as number) - 1;
-  const date = inputs[DATE.id] as number;
+  const year = inputs[VAR_YEAR.id] as number;
+  const month = (inputs[VAR_MONTH.id] as number) - 1;
+  const date = inputs[VAR_DATE.id] as number;
   return new Date(year, month, date);
 }
 
 function getDateDue(inputs: Inputs) {
-  const date = getEventDate(inputs)
-  if (!isValid(date)) return 'Unknown';
-  return format(date, 'E LLL d, yyy');
+  const date = getEventDate(inputs);
+  if (!isValid(date)) return "Unknown";
+  return format(date, "E LLL d, yyy");
 }
 
 function getGuests(inputs: Inputs) {
-  return inputs[VAR_HEADCOUNT.id] as number || 'Unknown';
+  return (inputs[VAR_HEADCOUNT.id] as number) || "Unknown";
 }

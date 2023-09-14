@@ -19,18 +19,18 @@ export enum VariableType {
   Boolean = "BOOLEAN",
   Float = "FLOAT",
   Integer = "INTEGER",
-  MultiSelect = 'MULTI_SELECT',
+  MultiSelect = "MULTI_SELECT",
   Select = "SELECT",
   Text = "TEXT",
 }
 
 export enum PageType {
-  Calendar = 'CALENDAR',
-  CalendarTime = 'CALENDAR_AND_TIME',
-  Form = 'FORM',
-  Intro = 'INTRO',
-  PriceQuote = 'PRICE_QUOTE',
-  Time = 'TIME',
+  Calendar = "CALENDAR",
+  CalendarTime = "CALENDAR_AND_TIME",
+  Form = "FORM",
+  Intro = "INTRO",
+  PriceQuote = "PRICE_QUOTE",
+  Time = "TIME",
 }
 
 export interface Page {
@@ -66,15 +66,15 @@ export interface Variable {
 }
 
 export enum Category {
-  Bar = 'Bar',
-  Catering = 'Catering',
-  Drinks = 'Drinks',
-  Fees = 'Fees',
-  General = 'General',
-  Menu = 'Menu',
-  Miscellaneous = 'Miscellaneous',
-  Rentals = 'Rentals',
-  Taxes = 'Taxes',
+  Bar = "Bar",
+  Catering = "Catering",
+  Drinks = "Drinks",
+  Fees = "Fees",
+  General = "General",
+  Menu = "Menu",
+  Miscellaneous = "Miscellaneous",
+  Rentals = "Rentals",
+  Taxes = "Taxes",
 }
 
 // TYPES:
@@ -87,14 +87,14 @@ type Price = Partial<{
   multiple: number;
   multipleVariableId: string;
   minimum: number;
-}>
+}>;
 
 export interface LineItem extends Price {
   id: string;
   venueId: string;
   name: string;
   required: boolean;
-  type: 'LINE_ITEM' | 'ADMIN_FEE' | 'TAX' | 'GRATUITY';
+  type: "LINE_ITEM" | "ADMIN_FEE" | "TAX" | "GRATUITY";
   category: Category;
   subtext?: string;
   description?: string;
@@ -120,10 +120,15 @@ export interface Condition {
 }
 
 export type Inputs = {
-  [variableId: string]: boolean | number | string | { start: Date; end: Date } | (string | number)[];
+  [variableId: string]:
+    | boolean
+    | number
+    | string
+    | { start: Date; end: Date }
+    | (string | number)[];
 };
 
 export type Availability = {
-  startTime: string
-  endTime: string
-}
+  startTime: string;
+  endTime: string;
+};

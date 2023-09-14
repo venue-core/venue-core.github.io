@@ -8,7 +8,7 @@ import {
   PageType,
   Variable,
   VariableType,
-  Venue
+  Venue,
 } from "@/components/estimator/types";
 
 // SECTION: venue
@@ -16,12 +16,12 @@ export const VENUE: Venue = {
   id: "1",
   name: "Plantenders",
   timezone: "America/Los_Angeles",
-  email: 'sales@plantenders.com',
-  phone: '+1 949 589 3000',
+  email: "sales@plantenders.com",
+  phone: "+1 949 589 3000",
   depositPercentage: 0.3,
   notes: [
-    'Admin Fee does not replace gratuity. A 15% gratuity is recommended. Thank you!',
-  ]
+    "Admin Fee does not replace gratuity. A 15% gratuity is recommended. Thank you!",
+  ],
 };
 
 // SECTION: variables
@@ -105,7 +105,7 @@ const VAR_CATERING: Variable = {
   type: VariableType.Select,
   required: false,
   options: ["Maria's Catering"],
-  default: "Maria's Catering"
+  default: "Maria's Catering",
 };
 const VAR_CATERING_WITH_INNOUT: Variable = {
   id: "V10-1",
@@ -279,7 +279,7 @@ const CONDITION_UNDER_150: Condition = {
   id: "C3",
   variableId: VAR_HEADCOUNT.id,
   type: ConditionType.LTE,
-  condition: 150
+  condition: 150,
 };
 const CONDITION_UNDER_30: Condition = {
   id: "C4",
@@ -419,7 +419,7 @@ export const PAGES: Page[] = [
     <span>Saturday:</span> 
     <span>$5,500</span>
   </div>
-</div>`
+</div>`,
   },
   {
     id: "P-2",
@@ -428,9 +428,10 @@ export const PAGES: Page[] = [
     rank: 2,
     fields: [
       {
-        id: 'P2-Q1',
+        id: "P2-Q1",
         label: "How many guests will be at the event?",
-        subtext: "Max 150. Include the number of people within your own personal party.",
+        subtext:
+          "Max 150. Include the number of people within your own personal party.",
         row: 1,
         variable: VAR_HEADCOUNT,
       },
@@ -443,21 +444,21 @@ export const PAGES: Page[] = [
     rank: 3,
     fields: [
       {
-        id: 'P3-Q1-1',
+        id: "P3-Q1-1",
         label: "Which catering service would you like?",
         row: 1,
         variable: VAR_CATERING,
         conditions: [CONDITION_HEADCOUNT_OVER_81],
       },
       {
-        id: 'P3-Q1-2',
+        id: "P3-Q1-2",
         label: "Which catering service would you like?",
         row: 1,
         variable: VAR_CATERING_WITH_INNOUT,
         conditions: [CONDITION_HEADCOUNT_UNDER_80],
       },
       {
-        id: 'P3-Q2',
+        id: "P3-Q2",
         label: "How many double doubles should be ordered?",
         subtext: "$6.90 + tax",
         row: 2,
@@ -465,7 +466,7 @@ export const PAGES: Page[] = [
         conditions: [CONDITION_CATERING_INNOUT],
       },
       {
-        id: 'P3-Q3',
+        id: "P3-Q3",
         label: "How many cheeseburgers should be ordered?",
         subtext: "$5.30 + tax",
         row: 3,
@@ -473,7 +474,7 @@ export const PAGES: Page[] = [
         conditions: [CONDITION_CATERING_INNOUT],
       },
       {
-        id: 'P3-Q4',
+        id: "P3-Q4",
         label: "How many hamburgers should be ordered?",
         subtext: "$4.80 + tax",
         row: 4,
@@ -481,7 +482,7 @@ export const PAGES: Page[] = [
         conditions: [CONDITION_CATERING_INNOUT],
       },
       {
-        id: 'P3-Q5',
+        id: "P3-Q5",
         label: "How many grilled cheeses should be ordered?",
         subtext: "$4.70 + tax",
         row: 5,
@@ -489,7 +490,7 @@ export const PAGES: Page[] = [
         conditions: [CONDITION_CATERING_INNOUT],
       },
       {
-        id: 'P3-Q6',
+        id: "P3-Q6",
         label: "How many fountain drinks should be ordered?",
         subtext: "2.35 + tax",
         row: 6,
@@ -497,7 +498,7 @@ export const PAGES: Page[] = [
         conditions: [CONDITION_CATERING_INNOUT],
       },
       {
-        id: 'P3-Q7',
+        id: "P3-Q7",
         label: "How many chips should be ordered?",
         subtext: "$1.25 + tax",
         row: 7,
@@ -505,21 +506,21 @@ export const PAGES: Page[] = [
         conditions: [CONDITION_CATERING_INNOUT],
       },
       {
-        id: 'P3-Q11',
+        id: "P3-Q11",
         label: "Would you like a coffee station?",
         subtext: "$275 - Coffee, Decaf, Tea, sugar, creamer, and cups included",
         row: 1,
         variable: VAR_COFFEE_STATION,
       },
       {
-        id: 'P3-Q12',
+        id: "P3-Q12",
         label: "Would you like a hydration station?",
         subtext: "$275 - Water, lemonade, ice tea, and cups included",
         row: 1,
         variable: VAR_HYDRATION_STATION,
       },
       {
-        id: 'P3-Q13',
+        id: "P3-Q13",
         label: "How many jugs of agua fresca would you like?",
         subtext: "$65 per jug - 40-50 servings - Ice and cups included",
         row: 1,
@@ -534,14 +535,14 @@ export const PAGES: Page[] = [
     rank: 4,
     fields: [
       {
-        id: 'P4-Q1',
+        id: "P4-Q1",
         label: "Would you like bartending services?",
         subtext: "4 hours | 2 Bartenders provided",
         row: 1,
         variable: VAR_BAR,
       },
       {
-        id: 'P4-Q2',
+        id: "P4-Q2",
         label: "How many additional hours of bar services would you like?",
         row: 2,
         variable: VAR_BAR_ADDITIONAL,
@@ -556,50 +557,51 @@ export const PAGES: Page[] = [
     rank: 5,
     fields: [
       {
-        id: 'P5-Q1',
+        id: "P5-Q1",
         label: "How many 8-ft farmhouse tables would you like?",
         subtext: "$48 per",
         row: 1,
         variable: VAR_FARMHOUSE_TABLE,
       },
       {
-        id: 'P5-Q2',
+        id: "P5-Q2",
         label: "How many Estelita sweetheart tables would you like?",
         subtext: "$45 per",
         row: 2,
         variable: VAR_SWEETHEART_TABLE,
       },
       {
-        id: 'P5-Q3',
+        id: "P5-Q3",
         label: "How many Austino coffee tables would you like?",
         subtext: "$45 per",
         row: 3,
         variable: VAR_COFFEE_TABLE,
       },
       {
-        id: 'P5-Q4',
+        id: "P5-Q4",
         label: "How many Viktorina display tables would you like?",
         subtext: "$45 per",
         row: 4,
         variable: VAR_DISPLAY_TABLE,
       },
       {
-        id: 'P5-Q5',
+        id: "P5-Q5",
         label: "How many 32-in Katerina cocktail tables would you like?",
         subtext: "$40 per",
         row: 5,
         variable: VAR_COCKTAIL_TABLE,
       },
       {
-        id: 'P5-Q6',
+        id: "P5-Q6",
         label: "How many benches would you like?",
         subtext: "$15 per",
         row: 6,
         variable: VAR_BENCH,
       },
       {
-        id: 'P5-Q7',
-        label: "How many Fruitwood folding chairs w/ white cushions would you like?",
+        id: "P5-Q7",
+        label:
+          "How many Fruitwood folding chairs w/ white cushions would you like?",
         subtext: "$3.25 per",
         row: 7,
         variable: VAR_FOLDING_CHAIR,
@@ -613,20 +615,20 @@ export const PAGES: Page[] = [
     rank: 6,
     fields: [
       {
-        id: 'P6-Q1',
+        id: "P6-Q1",
         label: "Which bathroom rental would you like to use?",
         row: 1,
         variable: VAR_BATHROOM_RENTAL,
       },
       {
-        id: 'P6-Q2',
+        id: "P6-Q2",
         label: "How many additional power generators would you like?",
         subtext: "$150 per generator",
         row: 2,
         variable: VAR_BATHROOM_GENERATORS,
       },
       {
-        id: 'P6-Q3',
+        id: "P6-Q3",
         label: "How many additional bathroom attendants would you like?",
         subtext: "$40 per hour per attendant (6 hours)",
         row: 3,
@@ -641,7 +643,7 @@ export const PAGES: Page[] = [
     rank: 7,
     fields: [],
   },
-]
+];
 
 // SECTION: line items
 const ITEM_VENUE: LineItem = {
@@ -682,7 +684,7 @@ const ITEM_VENUE: LineItem = {
       basePrice: 5500,
       conditions: [[CONDITION_SATURDAY, CONDITION_UNDER_150]],
     },
-  ]
+  ],
 };
 
 const ITEM_PLANNER: LineItem = {
@@ -743,25 +745,25 @@ const ITEM_CATERER_INNOUT: LineItem = {
     {
       id: "LICI-1",
       name: "Double Double",
-      basePrice: 6.90 * 1.095,
+      basePrice: 6.9 * 1.095,
       multipleVariableId: VAR_DOUBLE_DOUBLE.id,
     },
     {
       id: "LICI-2",
       name: "Cheeseburher",
-      basePrice: 5.30 * 1.095,
+      basePrice: 5.3 * 1.095,
       multipleVariableId: VAR_CHEESEBURGER.id,
     },
     {
       id: "LICI-3",
       name: "Hamburger",
-      basePrice: 4.80 * 1.095,
+      basePrice: 4.8 * 1.095,
       multipleVariableId: VAR_HAMBURGER.id,
     },
     {
       id: "LICI-4",
       name: "Grilled Cheese",
-      basePrice: 4.70 * 1.095,
+      basePrice: 4.7 * 1.095,
       multipleVariableId: VAR_GRILLED_CHEESE.id,
     },
     {
@@ -776,7 +778,13 @@ const ITEM_CATERER_INNOUT: LineItem = {
       basePrice: 1.25 * 1.095,
       multipleVariableId: VAR_CHIPS.id,
     },
-  ].map(o => ({ ...o, venueId: VENUE.id, required: false, type: "LINE_ITEM", category: Category.Catering })),
+  ].map((o) => ({
+    ...o,
+    venueId: VENUE.id,
+    required: false,
+    type: "LINE_ITEM",
+    category: Category.Catering,
+  })),
 };
 
 const ITEM_CATERING_STAFF: LineItem = {
@@ -935,7 +943,7 @@ const ITEM_COCKTAIL_TABLE: LineItem = {
   category: Category.Rentals,
   basePrice: 40,
   multipleVariableId: VAR_COCKTAIL_TABLE.id,
-}
+};
 const ITEM_BENCH: LineItem = {
   id: "LI-BT",
   venueId: VENUE.id,
@@ -946,7 +954,7 @@ const ITEM_BENCH: LineItem = {
   category: Category.Rentals,
   basePrice: 15,
   multipleVariableId: VAR_BENCH.id,
-}
+};
 const ITEM_FOLDING_CHAIR: LineItem = {
   id: "LI-FC",
   venueId: VENUE.id,
@@ -1008,7 +1016,7 @@ const ITEM_VALET: LineItem = {
       basePrice: 1950,
       conditions: [[CONDITION_HEADCOUNT_UNDER_150]],
     },
-  ]
+  ],
 };
 
 const ITEM_BATHROOM: LineItem = {
@@ -1059,7 +1067,7 @@ const ITEM_BATHROOM: LineItem = {
       basePrice: 1100,
       conditions: [[CONDITION_BATHROOM_AJ]],
     },
-  ]
+  ],
 };
 
 const ITEM_BATHROOM_GENERATORS: LineItem = {
@@ -1079,7 +1087,8 @@ const ITEM_BATHROOM_ATTENDANTS: LineItem = {
   venueId: VENUE.id,
   name: "Bathroom Attendants",
   subtext: "$40 per hour per attendant (6 hours)",
-  description: "The attendant ensures the unit remains stocked and cleaned during the event and troubleshoots any issues, should they arise",
+  description:
+    "The attendant ensures the unit remains stocked and cleaned during the event and troubleshoots any issues, should they arise",
   required: false,
   type: "LINE_ITEM",
   category: Category.Miscellaneous,
@@ -1107,7 +1116,7 @@ const ITEM_WEDDING_INSURANCE: LineItem = {
   type: "LINE_ITEM",
   category: Category.Miscellaneous,
   basePrice: 275,
-}
+};
 
 const ITEM_ADMIN_FEE: LineItem = {
   id: "LI-AF",
@@ -1116,7 +1125,7 @@ const ITEM_ADMIN_FEE: LineItem = {
   subtext: "20%",
   required: true,
   category: Category.Fees,
-  type: 'ADMIN_FEE',
+  type: "ADMIN_FEE",
   multiple: 0.2,
   targets: [
     Category.General,
@@ -1134,7 +1143,7 @@ const ITEM_TAXES: LineItem = {
   subtext: "9.5%",
   required: true,
   category: Category.Taxes,
-  type: 'TAX',
+  type: "TAX",
   multiple: 0.095,
   targets: [
     Category.General,
@@ -1183,31 +1192,31 @@ export const LINE_ITEMS: LineItem[] = [
 
 export function generateAvailabilities(): Availability[] {
   // Bookable time range
-  const START_TIME = 10
+  const START_TIME = 10;
 
-  const startDate = new Date()
-  const endDate = new Date(startDate)
-  endDate.setMonth(endDate.getMonth() + 24)
+  const startDate = new Date();
+  const endDate = new Date(startDate);
+  endDate.setMonth(endDate.getMonth() + 24);
 
-  const timeSlots: Availability[] = []
+  const timeSlots: Availability[] = [];
   while (startDate < endDate) {
-    if ([5,6].includes(startDate.getDay())) {
-      const datePart = startDate.toISOString().split("T")[0]
+    if ([5, 6].includes(startDate.getDay())) {
+      const datePart = startDate.toISOString().split("T")[0];
       const startTimeStr = `${datePart}T${String(START_TIME).padStart(
         2,
-        "0",
-      )}:00`
+        "0"
+      )}:00`;
       const endTimeStr = `${datePart}T${String(START_TIME + 8).padStart(
         2,
-        "0",
-      )}:00`
+        "0"
+      )}:00`;
       timeSlots.push({
         startTime: startTimeStr,
         endTime: endTimeStr,
       });
     }
     // Move on to next day
-    startDate.setDate(startDate.getDate() + 1)
+    startDate.setDate(startDate.getDate() + 1);
   }
-  return timeSlots
+  return timeSlots;
 }

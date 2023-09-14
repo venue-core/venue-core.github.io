@@ -3,7 +3,12 @@ import parse from "html-react-parser";
 import Calendar from "@/components/date/calendar";
 import Timezone from "@/components/date/timezone";
 import { Customer, getVenue } from "@/components/estimator/data";
-import { DATE, DAY, MONTH, YEAR } from "@/components/estimator/data/demo";
+import {
+  VAR_DATE,
+  VAR_DAY,
+  VAR_MONTH,
+  VAR_YEAR,
+} from "@/components/estimator/data/demo";
 import { Inputs, Page } from "@/components/estimator/types";
 
 export default function DateSelector({
@@ -41,10 +46,10 @@ export default function DateSelector({
             const day = s.getDay();
             setInputs({
               ...inputs,
-              [YEAR.id]: year,
-              [MONTH.id]: month,
-              [DATE.id]: date,
-              [DAY.id]: day,
+              [VAR_YEAR.id]: year,
+              [VAR_MONTH.id]: month,
+              [VAR_DATE.id]: date,
+              [VAR_DAY.id]: day,
             });
             nextPage();
           }}

@@ -4,7 +4,13 @@ import { SelectedDateProvider } from "@/components/datetime/context/selected-dat
 import Time from "@/components/datetime/time";
 import Timezone from "@/components/datetime/timezone";
 import { Customer, getVenue } from "@/components/estimator/data";
-import { DATE, DAY, MONTH, TIME, YEAR } from "@/components/estimator/data/demo";
+import {
+  VAR_DATE,
+  VAR_DAY,
+  VAR_MONTH,
+  VAR_TIME,
+  VAR_YEAR,
+} from "@/components/estimator/data/demo";
 import { Inputs } from "@/components/estimator/types";
 
 export default function DatetimeSelector({
@@ -48,11 +54,11 @@ export default function DatetimeSelector({
                   const day = start.getDay();
                   setInputs({
                     ...inputs,
-                    [YEAR.id]: year,
-                    [MONTH.id]: month,
-                    [DATE.id]: date,
-                    [DAY.id]: day,
-                    [TIME.id]: { start, end },
+                    [VAR_YEAR.id]: year,
+                    [VAR_MONTH.id]: month,
+                    [VAR_DATE.id]: date,
+                    [VAR_DAY.id]: day,
+                    [VAR_TIME.id]: { start, end },
                   });
                   nextPage();
                 }}
