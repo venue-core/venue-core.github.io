@@ -36,6 +36,7 @@ export enum PageType {
 export interface Page {
   id: string;
   title?: string;
+  description?: string;
   type: PageType;
   rank: number;
   fields: Field[];

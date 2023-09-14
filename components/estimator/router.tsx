@@ -159,6 +159,7 @@ function Page({
         <div className="mt-4 px-4 sm:px-8 xl:px-10 md:px-24">
           <DateSelector
             customer={customer}
+            page={page}
             inputs={inputs}
             setInputs={setInputs}
             nextPage={nextPage}

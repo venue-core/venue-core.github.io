@@ -384,6 +384,21 @@ export const PAGES: Page[] = [
     type: PageType.Calendar,
     rank: 1,
     fields: [],
+    description: `
+<div>
+  <div className="flex justify-between">
+    <span className="font-semibold">Friday (≤ 30 guests):</span>
+    <span>$3,000</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="font-semibold">Friday (31-150 guests):</span>
+    <span>$5,000</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="font-semibold">Saturday:</span> 
+    <span>$5,500</span>
+  </div>
+</div>`
   },
   {
     id: "P-2",
@@ -900,7 +915,7 @@ const ITEM_BENCH: LineItem = {
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
-  basePrice: 40,
+  basePrice: 15,
   multipleVariableId: VAR_BENCH.id,
 }
 const ITEM_FOLDING_CHAIR: LineItem = {
@@ -911,7 +926,7 @@ const ITEM_FOLDING_CHAIR: LineItem = {
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
-  basePrice: 40,
+  basePrice: 3.25,
   multipleVariableId: VAR_FOLDING_CHAIR.id,
 };
 
