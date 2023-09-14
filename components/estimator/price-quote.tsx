@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import { format, isValid } from "date-fns";
 
 import { Customer, getLineItems, getVenue } from "@/components/estimator/data";
 import { DATE, MONTH, YEAR } from "@/components/estimator/data/demo";
@@ -11,6 +12,7 @@ import {
   LineItem,
   Venue,
 } from "@/components/estimator/types";
+import {VAR_HEADCOUNT} from "@/components/estimator/data/plantenders";
 
 const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -48,13 +50,13 @@ export default function PriceQuote({
       <div className="overflow-y-auto">
         <div className="text-center">
           <h3 className="text-2xl font-semibold text-slate-800">
-            {venue.name}
+            Your wedding at {venue.name}
           </h3>
-          <p className="text-sm text-slate-500">Price Quote #3682303</p>
+          <p className="text-sm text-slate-500">Price Estimate #3682303</p>
         </div>
 
         {/*<!-- Grid -->*/}
-        <div className="mt-5 sm:mt-10 grid grid-cols-2 gap-5">
+        <div className="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
           <div>
             <span className="block text-xs uppercase text-slate-500">
               Amount Due:
@@ -65,12 +67,21 @@ export default function PriceQuote({
           </div>
           {/*<!-- End Col -->*/}
 
-          <div className="text-right">
+          <div>
             <span className="block text-xs uppercase text-slate-500">
-              Date Due:
+              Wedding Due:
             </span>
             <span className="block text-md font-medium text-slate-800">
               {getDateDue(inputs)}
+            </span>
+          </div>
+
+          <div className="sm:text-right">
+            <span className="block text-xs uppercase text-slate-500">
+              Guests:
+            </span>
+            <span className="block text-md font-medium text-slate-800">
+              {getGuests(inputs)}
             </span>
           </div>
           {/*<!-- End Col -->*/}
@@ -80,10 +91,10 @@ export default function PriceQuote({
       </div>
 
       <div className="mt-4 px-4">
-        <p className="text-sm text-slate-600">
-          Place a deposit today to reserve your event date's availability.
-        </p>
-        <p className="mt-1 text-sm text-slate-500">
+        {venue.depositPercentage && <p className="text-sm text-slate-600">
+          Place a {venue.depositPercentage * 100}% deposit today to reserve your date.
+        </p>}
+        <p className="mt-2 text-sm text-slate-500">
           If you have any questions, please contact us at{" "}
           <a
             className="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline font-medium"
@@ -304,14 +315,14 @@ function calcTotal(prices: ItemPrice[], venue: Venue, withMinimum = false) {
 }
 
 function formatTotal(prices: ItemPrice[], venue: Venue) {
-  if (isValid(prices)) {
+  if (isPriceValid(prices)) {
     return <div>{CURRENCY_FORMAT.format(calcTotal(prices, venue, true))}</div>;
   } else {
     return <div className="text-red-500">Invalid Selections</div>;
   }
 }
 
-function isValid(prices: ItemPrice[]) {
+function isPriceValid(prices: ItemPrice[]) {
   return prices.every((c) => !c.missing);
 }
 
@@ -483,9 +494,19 @@ function getItemPrice(
   return final ? Math.max(sum, li.minimum || 0) : sum;
 }
 
-function getDateDue(inputs: Inputs) {
+function getEventDate(inputs: Inputs) {
   const year = inputs[YEAR.id] as number;
   const month = (inputs[MONTH.id] as number) - 1;
   const date = inputs[DATE.id] as number;
-  return new Date(year, month, date).toDateString();
+  return new Date(year, month, date);
+}
+
+function getDateDue(inputs: Inputs) {
+  const date = getEventDate(inputs)
+  if (!isValid(date)) return 'Unknown';
+  return format(date, 'E LLL d, yyy');
+}
+
+function getGuests(inputs: Inputs) {
+  return inputs[VAR_HEADCOUNT.id] as number || 'Unknown';
 }

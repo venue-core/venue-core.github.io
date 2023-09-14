@@ -61,7 +61,7 @@ export default function Form({
           form={form}
         />))}
       <div className="block">
-        <button type="submit" className="block btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group w-full max-w-[300px] mx-auto">
+        <button type="submit" className="block btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group w-full mx-auto">
           <span>Continue</span>
           <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
         -&gt;
@@ -106,9 +106,7 @@ function cleanFieldValue<T>(field: Field, value: T): T | number {
 }
 
 function getFieldDefault(field: Field) {
-  const debug = field.id === "V17";
   if (field.variable.default !== undefined) {
-    if (debug) console.log(field.variable.default);
     return field.variable.default;
   }
   switch (field.variable.type) {
@@ -117,12 +115,11 @@ function getFieldDefault(field: Field) {
     case VariableType.Float:
       return field.variable.min || 0;
     case VariableType.Integer:
-      if (debug) console.log('int min', field.variable.min);
       return field.variable.min || 0;
     case VariableType.MultiSelect:
       return [];
     case VariableType.Select:
-      return field.variable.options?.[0] || "";
+      return field.variable.required ? field.variable.options?.[0] || "" : "";
     case VariableType.Text:
       return "";
     default:

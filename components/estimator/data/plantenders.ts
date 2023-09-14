@@ -16,8 +16,8 @@ export const VENUE: Venue = {
   id: "1",
   name: "Plantenders",
   timezone: "America/Los_Angeles",
-  email: 'events@cassandraleeco.com',
-  phone: '+1 661 802 9572',
+  email: 'sales@plantenders.com',
+  phone: '+1 949 589 3000',
   depositPercentage: 0.3,
   notes: [
     'Admin Fee does not replace gratuity. A 15% gratuity is recommended. Thank you!',
@@ -60,7 +60,7 @@ const VAR_TIME: Variable = {
   type: VariableType.TimeRange,
   required: true,
 };
-const VAR_HEADCOUNT: Variable = {
+export const VAR_HEADCOUNT: Variable = {
   id: "V6",
   venueId: VENUE.id,
   name: "Headcount",
@@ -103,7 +103,16 @@ const VAR_CATERING: Variable = {
   venueId: VENUE.id,
   name: "Caterer",
   type: VariableType.Select,
-  required: true,
+  required: false,
+  options: ["Maria's Catering"],
+  default: "Maria's Catering"
+};
+const VAR_CATERING_WITH_INNOUT: Variable = {
+  id: "V10-1",
+  venueId: VENUE.id,
+  name: "Caterer",
+  type: VariableType.Select,
+  required: false,
   options: ["Maria's Catering", "In-N-Out"],
 };
 const VAR_DOUBLE_DOUBLE: Variable = {
@@ -302,6 +311,12 @@ const CONDITION_HEADCOUNT_UNDER_80: Condition = {
   type: ConditionType.LTE,
   condition: 80,
 };
+const CONDITION_HEADCOUNT_OVER_81: Condition = {
+  id: "C8.1",
+  variableId: VAR_HEADCOUNT.id,
+  type: ConditionType.GTE,
+  condition: 81,
+};
 const CONDITION_HEADCOUNT_UNDER_100: Condition = {
   id: "C9",
   variableId: VAR_HEADCOUNT.id,
@@ -344,9 +359,15 @@ const CONDITION_CATERING_MARIA: Condition = {
   type: ConditionType.Equal,
   condition: "Maria's Catering",
 };
+const CONDITION_CATERING_MARIA_W_INNOUT: Condition = {
+  id: "C15-1",
+  variableId: VAR_CATERING_WITH_INNOUT.id,
+  type: ConditionType.Equal,
+  condition: "Maria's Catering",
+};
 const CONDITION_CATERING_INNOUT: Condition = {
   id: "C16",
-  variableId: VAR_CATERING.id,
+  variableId: VAR_CATERING_WITH_INNOUT.id,
   type: ConditionType.Equal,
   condition: "In-N-Out",
 };
@@ -387,15 +408,15 @@ export const PAGES: Page[] = [
     description: `
 <div>
   <div className="flex justify-between">
-    <span className="font-semibold">Friday (≤ 30 guests):</span>
+    <span>Friday (≤ 30 guests):</span>
     <span>$3,000</span>
   </div>
   <div className="flex justify-between">
-    <span className="font-semibold">Friday (31-150 guests):</span>
+    <span>Friday (31-150 guests):</span>
     <span>$5,000</span>
   </div>
   <div className="flex justify-between">
-    <span className="font-semibold">Saturday:</span> 
+    <span>Saturday:</span> 
     <span>$5,500</span>
   </div>
 </div>`
@@ -422,10 +443,18 @@ export const PAGES: Page[] = [
     rank: 3,
     fields: [
       {
-        id: 'P3-Q1',
+        id: 'P3-Q1-1',
         label: "Which catering service would you like?",
         row: 1,
         variable: VAR_CATERING,
+        conditions: [CONDITION_HEADCOUNT_OVER_81],
+      },
+      {
+        id: 'P3-Q1-2',
+        label: "Which catering service would you like?",
+        row: 1,
+        variable: VAR_CATERING_WITH_INNOUT,
+        conditions: [CONDITION_HEADCOUNT_UNDER_80],
       },
       {
         id: 'P3-Q2',
@@ -698,7 +727,7 @@ const ITEM_CATERING_MARIA: LineItem = {
   category: Category.Catering,
   basePrice: 17 * 1.0775, // 7.75% sales tax
   multipleVariableId: VAR_HEADCOUNT.id,
-  conditions: [[CONDITION_CATERING_MARIA]],
+  conditions: [[CONDITION_CATERING_MARIA], [CONDITION_CATERING_MARIA_W_INNOUT]],
 };
 
 const ITEM_CATERER_INNOUT: LineItem = {
@@ -709,7 +738,7 @@ const ITEM_CATERER_INNOUT: LineItem = {
   required: false,
   type: "LINE_ITEM",
   category: Category.Catering,
-  conditions: [[CONDITION_CATERING_INNOUT]],
+  conditions: [[CONDITION_CATERING_INNOUT, CONDITION_HEADCOUNT_UNDER_80]],
   items: [
     {
       id: "LICI-1",
@@ -818,7 +847,7 @@ const ITEM_AGUA_FRESCAS: LineItem = {
   id: "LI-AF",
   venueId: VENUE.id,
   name: "Agua Frescas",
-  subtext: "40-50 servings",
+  subtext: "40-50 servings per order",
   required: false,
   type: "LINE_ITEM",
   category: Category.Catering,
@@ -856,7 +885,7 @@ const ITEM_FARMHOUSE_TABLE: LineItem = {
   id: "LI-FT",
   venueId: VENUE.id,
   name: "8-ft Farmhouse Table",
-  subtext: "$48",
+  subtext: "$48 per",
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
@@ -867,7 +896,7 @@ const ITEM_SWEETHEART_TABLE: LineItem = {
   id: "LI-ST",
   venueId: VENUE.id,
   name: "Estelita Sweetheart Table",
-  subtext: "$45",
+  subtext: "$45 per",
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
@@ -878,7 +907,7 @@ const ITEM_COFFEE_TABLE: LineItem = {
   id: "LI-CT",
   venueId: VENUE.id,
   name: "Austino Coffee Table",
-  subtext: "$45",
+  subtext: "$45 per",
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
@@ -889,7 +918,7 @@ const ITEM_DISPLAY_TABLE: LineItem = {
   id: "LI-VT",
   venueId: VENUE.id,
   name: "Viktorina Display Table",
-  subtext: "$45",
+  subtext: "$45 per",
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
@@ -900,7 +929,7 @@ const ITEM_COCKTAIL_TABLE: LineItem = {
   id: "LI-CT",
   venueId: VENUE.id,
   name: "32-in Katerina Cocktail Table",
-  subtext: "$40",
+  subtext: "$40 per",
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
@@ -911,7 +940,7 @@ const ITEM_BENCH: LineItem = {
   id: "LI-BT",
   venueId: VENUE.id,
   name: "Bench",
-  subtext: "$15",
+  subtext: "$15 per",
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
@@ -922,7 +951,7 @@ const ITEM_FOLDING_CHAIR: LineItem = {
   id: "LI-FC",
   venueId: VENUE.id,
   name: "Fruitwood Folding Chair, White Cushion",
-  subtext: "$3.25",
+  subtext: "$3.25 per",
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,

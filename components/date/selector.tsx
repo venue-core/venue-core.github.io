@@ -1,9 +1,10 @@
+import parse from "html-react-parser";
+
 import Calendar from "@/components/date/calendar";
 import Timezone from "@/components/date/timezone";
 import { Customer, getVenue } from "@/components/estimator/data";
 import { DATE, DAY, MONTH, YEAR } from "@/components/estimator/data/demo";
 import { Inputs, Page } from "@/components/estimator/types";
-import parse from 'html-react-parser';
 
 export default function DateSelector({
   customer,
@@ -27,7 +28,9 @@ export default function DateSelector({
         className="px-6 sm:px-8 xl:px-10"
         onClick={(evt) => evt.stopPropagation()}
       >
-        {page.description && <div className="text-sm mb-4">{parse(page.description)}</div>}
+        {page.description && (
+          <div className="text-sm mb-4">{parse(page.description)}</div>
+        )}
         <Calendar
           customer={customer}
           selectDate={(selected) => {

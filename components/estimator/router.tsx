@@ -11,6 +11,7 @@ import Intro from "@/components/estimator/intro";
 import PriceQuote from "@/components/estimator/price-quote";
 import { Inputs, Page, PageType } from "@/components/estimator/types";
 import TimeSelector from "@/components/time/selector";
+import {ChevronLeftIcon} from "@heroicons/react/24/solid";
 
 const CALCULATOR = (
   <Image src={Calculator} alt="calculator" className="w-6 h-6" />
@@ -55,6 +56,13 @@ export default function Router({ customer }: { customer: Customer }) {
   return (
     <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-8rem)]">
       <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
+        {pageIndex > 0 && <ChevronLeftIcon
+          className="text-white h-8 w-8 mt-4 ml-2 cursor-pointer"
+          onClick={() => {
+            setPageIndex((prev) => (prev === 0 ? prev : prev - 1));
+            (ref.current as any).scrollIntoView({ behavior: "smooth" });
+          }}
+        />}
         {/*<Progress view={page} />*/}
         {/*<!-- SVG Background Element -->*/}
         <figure className="absolute inset-x-0 bottom-0">
@@ -140,7 +148,7 @@ function Page({
   switch (page.type) {
     case PageType.Form:
       node = (
-        <div className="mt-4 px-8">
+        <div className="mt-4 px-8 md:px-24">
           <Form
             page={page}
             inputs={inputs}
