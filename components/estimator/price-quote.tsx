@@ -67,7 +67,7 @@ export default function PriceQuote({
           </div>
           {/*<!-- End Col -->*/}
 
-          <div>
+          <div className="sm:text-center">
             <span className="block text-xs uppercase text-slate-500">
               Wedding Due:
             </span>
