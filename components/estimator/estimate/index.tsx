@@ -25,6 +25,8 @@ const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
+const RANDOM_NUM = randomNum();
+
 export default function Estimate({
   customer,
   inputs,
@@ -52,7 +54,7 @@ export default function Estimate({
             Your wedding at {venue.name}
           </h3>
           <p className="text-sm text-slate-500">
-            Price Estimate #{randomNum()}
+            Price Estimate #{RANDOM_NUM}
           </p>
         </div>
 
@@ -88,7 +90,7 @@ export default function Estimate({
           {/*<!-- End Col -->*/}
         </div>
         {/*<!-- End Grid -->*/}
-        <LineItems venue={venue} prices={prices} setItem={setItem} />
+        <Summary venue={venue} prices={prices} setItem={setItem} />
       </div>
 
       <div className="mt-4 px-4">
@@ -177,7 +179,7 @@ const POST_SUBTOTAL_CATEGORIES = new Set<string>([
   Category.Taxes,
 ]);
 
-function LineItems({
+function Summary({
   venue,
   prices,
   setItem,
@@ -244,8 +246,8 @@ function CategoryGroup({
           onClick={() => setItem(item)}
         >
           <div className="flex items-center justify-between w-full">
-            <Item item={item} />
-            <Price item={item} />
+            <ItemName item={item} />
+            <ItemPrice item={item} />
           </div>
           {item.items &&
             item.items.map((item) => (
@@ -304,7 +306,7 @@ function Total({ venue, prices }: { venue: Venue; prices: ItemPrice[] }) {
   );
 }
 
-function Item({ item }: { item: ItemPrice }) {
+function ItemName({ item }: { item: ItemPrice }) {
   return (
     <span>
       <div>{item.title}</div>
@@ -315,7 +317,7 @@ function Item({ item }: { item: ItemPrice }) {
   );
 }
 
-function Price({ item }: { item: ItemPrice }) {
+function ItemPrice({ item }: { item: ItemPrice }) {
   return (
     <span className="text-right">
       {item.missing ? (
@@ -455,7 +457,6 @@ function lineItemToPrice(
   }
   const minimum = li.minimum || 0;
   const price = getItemPrice(customer, li, inputs);
-  if (debug) console.log({ price });
   const final = Math.max(price, minimum);
   if (final === 0 && !li.required) return;
   return {
@@ -535,7 +536,6 @@ function getItemPrice(
   } else {
     base = 0;
   }
-  if (debug) console.log({ multiple, base });
   sum += multiple * base;
   return final ? Math.max(sum, li.minimum || 0) : sum;
 }
