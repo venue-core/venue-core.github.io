@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import Calculator from "public/images/calculator.svg";
 
 import DateSelector from "@/components/date/selector";
@@ -11,7 +12,6 @@ import Intro from "@/components/estimator/intro";
 import PriceQuote from "@/components/estimator/price-quote";
 import { Inputs, Page, PageType } from "@/components/estimator/types";
 import TimeSelector from "@/components/time/selector";
-import {ChevronLeftIcon} from "@heroicons/react/24/solid";
 
 const CALCULATOR = (
   <Image src={Calculator} alt="calculator" className="w-6 h-6" />
@@ -39,7 +39,9 @@ export default function Router({ customer }: { customer: Customer }) {
   const search = useSearchParams();
   const ref = useRef(null);
   const initial = search.get("page");
-  const [pageIndex, setPageIndex] = useState<number>(initial && !isNaN(Number(initial)) ? Number(initial) - 1 : 0);
+  const [pageIndex, setPageIndex] = useState<number>(
+    initial && !isNaN(Number(initial)) ? Number(initial) - 1 : 0
+  );
   const [inputs, setInputs] = useState<Inputs>({});
 
   useEffect(() => {
@@ -56,13 +58,15 @@ export default function Router({ customer }: { customer: Customer }) {
   return (
     <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-8rem)]">
       <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
-        {pageIndex > 0 && <ChevronLeftIcon
-          className="text-white h-8 w-8 mt-4 ml-2 cursor-pointer"
-          onClick={() => {
-            setPageIndex((prev) => (prev === 0 ? prev : prev - 1));
-            (ref.current as any).scrollIntoView({ behavior: "smooth" });
-          }}
-        />}
+        {pageIndex > 0 && (
+          <ChevronLeftIcon
+            className="text-white h-8 w-8 mt-4 ml-2 cursor-pointer"
+            onClick={() => {
+              setPageIndex((prev) => (prev === 0 ? prev : prev - 1));
+              (ref.current as any).scrollIntoView({ behavior: "smooth" });
+            }}
+          />
+        )}
         {/*<Progress view={page} />*/}
         {/*<!-- SVG Background Element -->*/}
         <figure className="absolute inset-x-0 bottom-0">
@@ -95,35 +99,33 @@ export default function Router({ customer }: { customer: Customer }) {
 
       <div className="h-full pb-4 overflow-y-scroll">
         <div ref={ref} />
-        {pages.map((page, i) => <Page
-          key={page.id}
-          active={pageIndex === i}
-          customer={customer}
-          inputs={inputs}
-          setInputs={setInputs}
-          page={page}
-          reset={() => {
-            setInputs({});
-            setPageIndex(0);
-            (ref.current as any).scrollIntoView({ behavior: "smooth" });
-          }}
-          nextPage={() => {
-            setPageIndex((prev) =>
-              prev === pages.length - 1 ? prev : prev + 1
-            );
-            (ref.current as any).scrollIntoView({ behavior: "smooth" });
-          }}
-          prevPage={() => {
-            setPageIndex((prev) => (prev === 0 ? prev : prev - 1));
-            (ref.current as any).scrollIntoView({ behavior: "smooth" });
-          }}
-        />)}
+        {pages.map((page, i) => (
+          <FormPage
+            key={page.id}
+            active={pageIndex === i}
+            customer={customer}
+            inputs={inputs}
+            setInputs={setInputs}
+            page={page}
+            reset={() => {
+              setInputs({});
+              setPageIndex(0);
+              (ref.current as any).scrollIntoView({ behavior: "smooth" });
+            }}
+            nextPage={() => {
+              setPageIndex((prev) =>
+                prev === pages.length - 1 ? prev : prev + 1
+              );
+              (ref.current as any).scrollIntoView({ behavior: "smooth" });
+            }}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-function Page({
+function FormPage({
   active,
   customer,
   inputs,
@@ -131,7 +133,6 @@ function Page({
   page,
   reset,
   nextPage,
-  prevPage,
 }: {
   active: boolean;
   customer: Customer;
@@ -140,14 +141,11 @@ function Page({
   page: Page;
   reset: () => void;
   nextPage: () => void;
-  prevPage: () => void;
 }) {
-  const ref = useRef(null);
   if (!active) return null;
-  let node: React.ReactNode;
   switch (page.type) {
     case PageType.Form:
-      node = (
+      return (
         <div className="mt-4 px-8 md:px-24">
           <Form
             page={page}
@@ -158,12 +156,10 @@ function Page({
           />
         </div>
       );
-      break;
     case PageType.Intro:
-      node = <Intro customer={customer} nextPage={nextPage} />;
-      break;
+      return <Intro customer={customer} nextPage={nextPage} />;
     case PageType.Calendar:
-      node = (
+      return (
         <div className="mt-4 px-4 sm:px-8 xl:px-10 md:px-24">
           <DateSelector
             customer={customer}
@@ -174,9 +170,8 @@ function Page({
           />
         </div>
       );
-      break;
     case PageType.CalendarTime:
-      node = (
+      return (
         <div className="mt-4 px-4 sm:px-8 xl:px-10 md:px-24">
           <DatetimeSelector
             customer={customer}
@@ -186,20 +181,14 @@ function Page({
           />
         </div>
       );
-      break;
     case PageType.PriceQuote:
-      node = (
+      return (
         <div className="p-4 sm:py-8 sm:p-12">
-          <PriceQuote
-            customer={customer}
-            inputs={inputs}
-            restart={reset}
-          />
+          <PriceQuote customer={customer} inputs={inputs} restart={reset} />
         </div>
       );
-      break;
     case PageType.Time:
-      node = (
+      return (
         <div className="mt-4 px-4 sm:px-8 xl:px-10 md:px-24">
           <TimeSelector
             customer={customer}
@@ -209,12 +198,7 @@ function Page({
           />
         </div>
       );
-      break;
+    default:
+      return null;
   }
-  return (
-    <>
-      <div ref={ref} />
-      {node}
-    </>
-  );
 }

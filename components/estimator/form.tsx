@@ -6,7 +6,8 @@ import _ from "lodash";
 import { evaluateCondition } from "@/components/estimator/price-quote";
 import {
   Field,
-  Inputs, Page,
+  Inputs,
+  Page,
   VariableType,
 } from "@/components/estimator/types";
 
@@ -53,40 +54,45 @@ export default function Form({
       })}
     >
       <div className="text-center font-bold text-2xl mb-2">{page.title}</div>
-      {fields
-        .map((field) => (<Field
+      {fields.map((field) => (
+        <FormField
           key={field.id}
           inputs={form.values}
           field={field}
           form={form}
-        />))}
+        />
+      ))}
       <div className="block">
-        <button type="submit" className="block btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group w-full mx-auto">
+        <button
+          type="submit"
+          className="block btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group w-full mx-auto"
+        >
           <span>Continue</span>
           <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-        -&gt;
-      </span>
+            -&gt;
+          </span>
         </button>
       </div>
     </form>
   );
 }
 
-function updatedInputs(oldValues: Inputs, newValues: Inputs, varToField: Record<string, Field>) {
-  return Object.entries(newValues).reduce<Inputs>(
-    (acc, [id, value]) => {
-      const field = varToField[id];
-      if (field) {
-        if (meetsConditions(field, newValues)) {
-          acc[id] = cleanFieldValue(field, value);
-        } else {
-          acc[id] = getFieldDefault(field);
-        }
+function updatedInputs(
+  oldValues: Inputs,
+  newValues: Inputs,
+  varToField: Record<string, Field>
+) {
+  return Object.entries(newValues).reduce<Inputs>((acc, [id, value]) => {
+    const field = varToField[id];
+    if (field) {
+      if (meetsConditions(field, newValues)) {
+        acc[id] = cleanFieldValue(field, value);
+      } else {
+        acc[id] = getFieldDefault(field);
       }
-      return acc;
-    },
-    oldValues
-  );
+    }
+    return acc;
+  }, oldValues);
 }
 
 function meetsConditions(field: Field, inputs: Inputs) {
@@ -127,7 +133,11 @@ function getFieldDefault(field: Field) {
   }
 }
 
-function Field({ inputs, field, form }: {
+function FormField({
+  inputs,
+  field,
+  form,
+}: {
   inputs: Inputs;
   field: Field;
   form: UseFormReturnType<{}>;
@@ -243,9 +253,7 @@ function Field({ inputs, field, form }: {
         {field.label}
       </label>
       {field.subtext && (
-        <div className="block text-xs text-slate-400 mb-1">
-          {field.subtext}
-        </div>
+        <div className="block text-xs text-slate-400 mb-1">{field.subtext}</div>
       )}
       {node}
     </div>
