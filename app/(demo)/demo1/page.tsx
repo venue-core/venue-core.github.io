@@ -1,4 +1,4 @@
-import Demo from "@/components/estimator/demo";
+import Estimator from "@/components/estimator";
 
 export const metadata = {
   title: "Demo (Perfect Venue 1) - Venue",
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function DemoPage() {
-  return <Demo customer="perfect-venue-1" />;
+  return <Estimator customer="perfect-venue-1" />;
 }

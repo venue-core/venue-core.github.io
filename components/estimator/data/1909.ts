@@ -581,7 +581,7 @@ export const PAGES: Page[] = [
   {
     id: "P-6",
     title: "Price Quote",
-    type: PageType.PriceQuote,
+    type: PageType.Estimate,
     fields: [],
   },
 ];

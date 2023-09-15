@@ -3,7 +3,7 @@ import { useForm, UseFormReturnType } from "@mantine/form";
 import cx from "classnames";
 import _ from "lodash";
 
-import { evaluateCondition } from "@/components/estimator/price-quote";
+import { evaluateCondition } from "@/components/estimator/estimate";
 import {
   Field,
   Inputs,
@@ -224,7 +224,7 @@ function FormField({
       }
       node = (
         <select {...base}>
-          {!field.variable.required && (
+          {!(field.required ?? field.variable.required) && (
             <option key="none" value={undefined}>
               None
             </option>

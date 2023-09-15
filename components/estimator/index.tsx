@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -7,9 +9,9 @@ import Calculator from "public/images/calculator.svg";
 import DateSelector from "@/components/date/selector";
 import DatetimeSelector from "@/components/datetime/selector";
 import { Customer, getPages } from "@/components/estimator/data";
+import Estimate from "@/components/estimator/estimate";
 import Form from "@/components/estimator/form";
 import Intro from "@/components/estimator/intro";
-import PriceQuote from "@/components/estimator/price-quote";
 import { Inputs, Page, PageType } from "@/components/estimator/types";
 import TimeSelector from "@/components/time/selector";
 
@@ -33,7 +35,7 @@ const PRICE_QUOTE = (
   </span>
 );
 
-export default function Router({ customer }: { customer: Customer }) {
+export default function Router({ customer = 'demo' }: { customer?: Customer }) {
   const pages = getPages(customer);
   const router = useRouter();
   const search = useSearchParams();
@@ -56,6 +58,8 @@ export default function Router({ customer }: { customer: Customer }) {
   }, [search.get("page")]);
 
   return (
+    <section className="grow bg-gradient-to-b from-white to-gray-100">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-20 pb-12">
     <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-8rem)]">
       <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
         {pageIndex > 0 && (
@@ -90,7 +94,7 @@ export default function Router({ customer }: { customer: Customer }) {
       <div className="relative z-10 -mt-12">
         {/*<!-- Icon -->*/}
         <span className="mx-auto flex justify-center items-center w-[62px] h-[62px] rounded-full border border-gray-200 bg-white text-slate-700 shadow-sm">
-          {pages[pageIndex]?.type === PageType.PriceQuote
+          {pages[pageIndex]?.type === PageType.Estimate
             ? PRICE_QUOTE
             : CALCULATOR}
         </span>
@@ -122,6 +126,8 @@ export default function Router({ customer }: { customer: Customer }) {
         ))}
       </div>
     </div>
+      </div>
+    </section>
   );
 }
 
@@ -181,10 +187,15 @@ function FormPage({
           />
         </div>
       );
-    case PageType.PriceQuote:
+    case PageType.Estimate:
       return (
         <div className="p-4 sm:py-8 sm:p-12">
-          <PriceQuote customer={customer} inputs={inputs} restart={reset} />
+          <Estimate
+            customer={customer}
+            inputs={inputs}
+            setInputs={setInputs}
+            restart={reset}
+          />
         </div>
       );
     case PageType.Time:

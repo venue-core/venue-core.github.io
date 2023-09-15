@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { format, isValid } from "date-fns";
 import _ from "lodash";
 
@@ -9,11 +9,13 @@ import {
   VAR_MONTH,
   VAR_YEAR,
 } from "@/components/estimator/data/demo";
+import ItemDetail from "@/components/estimator/estimate/item-detail";
 import {
   Category,
   Condition,
   ConditionType,
   Inputs,
+  ItemPrice,
   LineItem,
   Venue,
 } from "@/components/estimator/types";
@@ -23,33 +25,26 @@ const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-interface ItemPrice {
-  title: string;
-  subtitle?: string;
-  items?: ItemPrice[];
-  price: number;
-  minimum: number;
-  final: number;
-  category: Category;
-  missing: boolean;
-}
-
-export default function PriceQuote({
+export default function Estimate({
   customer,
   inputs,
+  setInputs,
   restart,
 }: {
   customer: Customer;
   inputs: Inputs;
+  setInputs: (i: Inputs) => void;
   restart: () => void;
 }) {
+  const venue = getVenue(customer);
   const lineItems = getLineItems(customer);
+  const [item, setItem] = useState<ItemPrice | null>(null);
   const prices = lineItems
     .map((li) => lineItemToPrice(li, inputs, customer))
     .filter(isTruthy);
-  const venue = getVenue(customer);
   return (
     <div>
+      {/*<ItemDetail item={item} setItem={setItem} setInputs={setInputs} />*/}
       {/*<!-- Col -->*/}
       <div className="overflow-y-auto">
         <div className="text-center">
@@ -93,7 +88,7 @@ export default function PriceQuote({
           {/*<!-- End Col -->*/}
         </div>
         {/*<!-- End Grid -->*/}
-        <LineItems venue={venue} prices={prices} />
+        <LineItems venue={venue} prices={prices} setItem={setItem} />
       </div>
 
       <div className="mt-4 px-4">
@@ -182,7 +177,15 @@ const POST_SUBTOTAL_CATEGORIES = new Set<string>([
   Category.Taxes,
 ]);
 
-function LineItems({ venue, prices }: { venue: Venue; prices: ItemPrice[] }) {
+function LineItems({
+  venue,
+  prices,
+  setItem,
+}: {
+  venue: Venue;
+  prices: ItemPrice[];
+  setItem: (item: ItemPrice) => void;
+}) {
   const pricesByCategory = _.groupBy(prices, "category");
   return (
     <div className="mt-4 sm:mt-8">
@@ -193,13 +196,23 @@ function LineItems({ venue, prices }: { venue: Venue; prices: ItemPrice[] }) {
         {Object.entries(pricesByCategory)
           .filter(([category]) => !POST_SUBTOTAL_CATEGORIES.has(category))
           .map(([category, prices]) => (
-            <CategoryGroup key={category} category={category} prices={prices} />
+            <CategoryGroup
+              key={category}
+              category={category}
+              prices={prices}
+              setItem={setItem}
+            />
           ))}
         <Subtotal venue={venue} prices={prices} />
         {Object.entries(pricesByCategory)
           .filter(([category]) => POST_SUBTOTAL_CATEGORIES.has(category))
           .map(([category, prices]) => (
-            <CategoryGroup key={category} category={category} prices={prices} />
+            <CategoryGroup
+              key={category}
+              category={category}
+              prices={prices}
+              setItem={setItem}
+            />
           ))}
         <Total venue={venue} prices={prices} />
       </ul>
@@ -210,9 +223,11 @@ function LineItems({ venue, prices }: { venue: Venue; prices: ItemPrice[] }) {
 function CategoryGroup({
   category,
   prices,
+  setItem,
 }: {
   category: string;
   prices: ItemPrice[];
+  setItem: (item: ItemPrice) => void;
 }) {
   return (
     <React.Fragment key={category}>
@@ -226,6 +241,7 @@ function CategoryGroup({
         <li
           key={item.title}
           className="py-3 px-4 text-sm border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+          onClick={() => setItem(item)}
         >
           <div className="flex items-center justify-between w-full">
             <Item item={item} />

@@ -1,4 +1,4 @@
-import Demo from "@/components/estimator/demo";
+import Estimator from "@/components/estimator";
 
 export const metadata = {
   title: "Demo (Padua Hills) - Venue",
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function DemoPage() {
-  return <Demo customer="padua-hills" />;
+  return <Estimator customer="padua-hills" />;
 }

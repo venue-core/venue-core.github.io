@@ -442,12 +442,14 @@ export const PAGES: Page[] = [
         id: "P3-Q1-1",
         label: "Which catering service would you like?",
         variable: VAR_CATERING,
+        required: true,
         conditions: [CONDITION_HEADCOUNT_OVER_81],
       },
       {
         id: "P3-Q1-2",
         label: "Which catering service would you like?",
         variable: VAR_CATERING_WITH_INNOUT,
+        required: true,
         conditions: [CONDITION_HEADCOUNT_UNDER_80],
       },
       {
@@ -608,7 +610,7 @@ export const PAGES: Page[] = [
   {
     id: "P-7",
     title: "Price Quote",
-    type: PageType.PriceQuote,
+    type: PageType.Estimate,
     fields: [],
   },
 ];

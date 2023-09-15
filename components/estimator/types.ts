@@ -27,9 +27,9 @@ export enum VariableType {
 export enum PageType {
   Calendar = "CALENDAR",
   CalendarTime = "CALENDAR_AND_TIME",
+  Estimate = "ESTIMATE",
   Form = "FORM",
   Intro = "INTRO",
-  PriceQuote = "PRICE_QUOTE",
   Time = "TIME",
 }
 
@@ -135,3 +135,14 @@ export type Availability = {
   startTime: string;
   endTime: string;
 };
+
+export interface ItemPrice {
+  title: string;
+  subtitle?: string;
+  items?: ItemPrice[];
+  price: number;
+  minimum: number;
+  final: number;
+  category: Category;
+  missing: boolean;
+}
