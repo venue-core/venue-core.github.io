@@ -5,10 +5,10 @@ import _ from "lodash";
 import { Customer, getLineItems, getVenue } from "@/components/estimator/data";
 import {
   VAR_DATE,
+  VAR_HEADCOUNT,
   VAR_MONTH,
   VAR_YEAR,
 } from "@/components/estimator/data/demo";
-import { VAR_HEADCOUNT } from "@/components/estimator/data/plantenders";
 import {
   Category,
   Condition,
@@ -367,6 +367,12 @@ export function evaluateCondition(
       return value >= c.condition;
     case ConditionType.LTE:
       return value <= c.condition;
+    case ConditionType.AtLeastN:
+      if (Array.isArray(value) && typeof c.condition === "number") {
+        return value.length >= c.condition;
+      } else {
+        return false;
+      }
     default:
       console.error(`Unknown condition type: ${c.type}`);
       return false;
@@ -378,6 +384,7 @@ function lineItemToPrice(
   inputs: Inputs,
   customer: Customer
 ): ItemPrice | undefined {
+  const debug = li.name === "Light Passed Appetizers";
   if (!meetsConditions(li, inputs) && !li.required) return;
   // sum of sub line items
   if (li.items) {
@@ -430,6 +437,7 @@ function lineItemToPrice(
   }
   const minimum = li.minimum || 0;
   const price = getItemPrice(customer, li, inputs);
+  if (debug) console.log({ price });
   const final = Math.max(price, minimum);
   if (final === 0 && !li.required) return;
   return {
@@ -457,7 +465,7 @@ function getItemPrice(
     );
     return 0;
   }
-  const debug = false;
+  const debug = li.name === "Light Passed Appetizers";
   if (!meetsConditions(li, inputs)) return 0;
   let sum = 0;
   if (li.items) {
@@ -476,9 +484,21 @@ function getItemPrice(
   let multiple: number;
   if (li.multiple !== undefined) {
     multiple = li.multiple;
-  } else if (li.multipleVariableId !== undefined) {
-    const value = inputs[li.multipleVariableId];
-    multiple = isNaN(Number(value)) ? 0 : Number(value);
+  } else if (li.multipleVariableIds !== undefined) {
+    multiple = li.multipleVariableIds.reduce((acc, varId) => {
+      const value = inputs[varId];
+      let multiplier: number;
+      if (typeof value === "number") {
+        multiplier = value;
+      } else if (Array.isArray(value)) {
+        multiplier = value.length;
+      } else if (typeof value === "string" && !isNaN(Number(value))) {
+        multiplier = Number(value);
+      } else {
+        multiplier = 0;
+      }
+      return acc * multiplier;
+    }, 1);
   } else {
     multiple = 1;
   }
@@ -497,6 +517,7 @@ function getItemPrice(
   } else {
     base = 0;
   }
+  if (debug) console.log({ multiple, base });
   sum += multiple * base;
   return final ? Math.max(sum, li.minimum || 0) : sum;
 }

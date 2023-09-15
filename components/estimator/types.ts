@@ -38,31 +38,33 @@ export interface Page {
   title?: string;
   description?: string;
   type: PageType;
-  rank: number;
   fields: Field[];
 }
 
-export interface Field {
+type InputProps = Partial<{
+  options: (string | number)[];
+  min?: number;
+  max?: number;
+  interval?: number;
+  default?: string | number | boolean;
+}>;
+
+export interface Field extends InputProps {
   id: string;
   label: string;
   subtext?: string;
   description?: string;
-  row: number;
   variable: Variable;
   conditions?: Condition[];
+  required?: boolean;
 }
 
-export interface Variable {
+export interface Variable extends InputProps {
   id: string;
   venueId: string;
   name: string;
   type: VariableType;
   required: boolean;
-  options?: (string | number)[];
-  min?: number;
-  max?: number;
-  interval?: number;
-  default?: string | number | boolean;
 }
 
 export enum Category {
@@ -85,7 +87,7 @@ type Price = Partial<{
   basePrice: number;
   targets: string[];
   multiple: number;
-  multipleVariableId: string;
+  multipleVariableIds: string[];
   minimum: number;
 }>;
 
@@ -105,6 +107,7 @@ export interface LineItem extends Price {
 }
 
 export enum ConditionType {
+  AtLeastN = "AT_LEAST_N",
   Equal = "EQUAL",
   Exclusive = "EXCLUSIVE",
   Inclusive = "INCLUSIVE",

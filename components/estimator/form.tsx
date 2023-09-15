@@ -201,7 +201,7 @@ function Field({ inputs, field, form }: {
           options={field.variable.options}
           min={field.variable.min}
           max={field.variable.max}
-          onChange={(selected) => form.setFieldValue(base.id, selected)}
+          onChange={(selected) => form.setFieldValue(varId, selected)}
         />
       );
       break;
@@ -275,6 +275,7 @@ function MultiSelect<T extends string | number>({
         id={id}
         className={className}
         disabled={max ? selected.length === max : false}
+        value={undefined}
         onChange={(evt) => {
           const value = evt.target.value as T;
           const updated = _.uniq([...selected, value]);
@@ -294,7 +295,7 @@ function MultiSelect<T extends string | number>({
         {selected.map((v) => (
           <span
             key={v}
-            className="inline-block cursor-pointer bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+            className="inline-block cursor-pointer bg-blue-50 text-blue-800 text-xs font-medium mr-2 px-2 py-0.5 rounded"
           >
             <span>{v.toString()}</span>
             <span

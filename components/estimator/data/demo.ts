@@ -394,14 +394,12 @@ export const PAGES: Page[] = [
     id: "P-0",
     title: "Intro",
     type: PageType.Intro,
-    rank: 0,
     fields: [],
   },
   {
     id: "P-1",
     title: "Date",
     type: PageType.Calendar,
-    rank: 1,
     fields: [],
     description: `
 <div>
@@ -423,14 +421,12 @@ export const PAGES: Page[] = [
     id: "P-2",
     title: "General",
     type: PageType.Form,
-    rank: 2,
     fields: [
       {
         id: "P2-Q1",
         label: "How many guests will be at the event?",
         subtext:
           "Max 150. Include the number of people within your own personal party.",
-        row: 1,
         variable: VAR_HEADCOUNT,
       },
     ],
@@ -439,19 +435,16 @@ export const PAGES: Page[] = [
     id: "P-3",
     title: "Catering",
     type: PageType.Form,
-    rank: 3,
     fields: [
       {
         id: "P3-Q1-1",
         label: "Which catering service would you like?",
-        row: 1,
         variable: VAR_CATERING,
         conditions: [CONDITION_HEADCOUNT_OVER_81],
       },
       {
         id: "P3-Q1-2",
         label: "Which catering service would you like?",
-        row: 1,
         variable: VAR_CATERING_WITH_INNOUT,
         conditions: [CONDITION_HEADCOUNT_UNDER_80],
       },
@@ -459,7 +452,6 @@ export const PAGES: Page[] = [
         id: "P3-Q2",
         label: "How many double doubles should be ordered?",
         subtext: "$6.90 + tax",
-        row: 2,
         variable: VAR_DOUBLE_DOUBLE,
         conditions: [CONDITION_CATERING_INNOUT],
       },
@@ -467,7 +459,6 @@ export const PAGES: Page[] = [
         id: "P3-Q3",
         label: "How many cheeseburgers should be ordered?",
         subtext: "$5.30 + tax",
-        row: 3,
         variable: VAR_CHEESEBURGER,
         conditions: [CONDITION_CATERING_INNOUT],
       },
@@ -475,7 +466,6 @@ export const PAGES: Page[] = [
         id: "P3-Q4",
         label: "How many hamburgers should be ordered?",
         subtext: "$4.80 + tax",
-        row: 4,
         variable: VAR_HAMBURGER,
         conditions: [CONDITION_CATERING_INNOUT],
       },
@@ -483,7 +473,6 @@ export const PAGES: Page[] = [
         id: "P3-Q5",
         label: "How many grilled cheeses should be ordered?",
         subtext: "$4.70 + tax",
-        row: 5,
         variable: VAR_GRILLED_CHEESE,
         conditions: [CONDITION_CATERING_INNOUT],
       },
@@ -491,7 +480,6 @@ export const PAGES: Page[] = [
         id: "P3-Q6",
         label: "How many fountain drinks should be ordered?",
         subtext: "2.35 + tax",
-        row: 6,
         variable: VAR_FOUNTAIN_DRINKS,
         conditions: [CONDITION_CATERING_INNOUT],
       },
@@ -499,7 +487,6 @@ export const PAGES: Page[] = [
         id: "P3-Q7",
         label: "How many chips should be ordered?",
         subtext: "$1.25 + tax",
-        row: 7,
         variable: VAR_CHIPS,
         conditions: [CONDITION_CATERING_INNOUT],
       },
@@ -507,21 +494,18 @@ export const PAGES: Page[] = [
         id: "P3-Q11",
         label: "Would you like a coffee station?",
         subtext: "$275 - Coffee, Decaf, Tea, sugar, creamer, and cups included",
-        row: 1,
         variable: VAR_COFFEE_STATION,
       },
       {
         id: "P3-Q12",
         label: "Would you like a hydration station?",
         subtext: "$275 - Water, lemonade, ice tea, and cups included",
-        row: 1,
         variable: VAR_HYDRATION_STATION,
       },
       {
         id: "P3-Q13",
         label: "How many jugs of agua fresca would you like?",
         subtext: "$65 per jug - 40-50 servings - Ice and cups included",
-        row: 1,
         variable: VAR_AGUA_FRESCAS,
       },
     ],
@@ -530,19 +514,16 @@ export const PAGES: Page[] = [
     id: "P-4",
     title: "Bar Services",
     type: PageType.Form,
-    rank: 4,
     fields: [
       {
         id: "P4-Q1",
         label: "Would you like bartending services?",
         subtext: "4 hours | 2 Bartenders provided",
-        row: 1,
         variable: VAR_BAR,
       },
       {
         id: "P4-Q2",
         label: "How many additional hours of bar services would you like?",
-        row: 2,
         variable: VAR_BAR_ADDITIONAL,
         conditions: [CONDITION_BAR],
       },
@@ -552,48 +533,41 @@ export const PAGES: Page[] = [
     id: "P-5",
     title: "Seating Rentals",
     type: PageType.Form,
-    rank: 5,
     fields: [
       {
         id: "P5-Q1",
         label: "How many 8-ft farmhouse tables would you like?",
         subtext: "$48 per",
-        row: 1,
         variable: VAR_FARMHOUSE_TABLE,
       },
       {
         id: "P5-Q2",
         label: "How many Estelita sweetheart tables would you like?",
         subtext: "$45 per",
-        row: 2,
         variable: VAR_SWEETHEART_TABLE,
       },
       {
         id: "P5-Q3",
         label: "How many Austino coffee tables would you like?",
         subtext: "$45 per",
-        row: 3,
         variable: VAR_COFFEE_TABLE,
       },
       {
         id: "P5-Q4",
         label: "How many Viktorina display tables would you like?",
         subtext: "$45 per",
-        row: 4,
         variable: VAR_DISPLAY_TABLE,
       },
       {
         id: "P5-Q5",
         label: "How many 32-in Katerina cocktail tables would you like?",
         subtext: "$40 per",
-        row: 5,
         variable: VAR_COCKTAIL_TABLE,
       },
       {
         id: "P5-Q6",
         label: "How many benches would you like?",
         subtext: "$15 per",
-        row: 6,
         variable: VAR_BENCH,
       },
       {
@@ -601,7 +575,6 @@ export const PAGES: Page[] = [
         label:
           "How many Fruitwood folding chairs w/ white cushions would you like?",
         subtext: "$3.25 per",
-        row: 7,
         variable: VAR_FOLDING_CHAIR,
       },
     ],
@@ -610,26 +583,22 @@ export const PAGES: Page[] = [
     id: "P-6",
     title: "Bathroom Rentals",
     type: PageType.Form,
-    rank: 6,
     fields: [
       {
         id: "P6-Q1",
         label: "Which bathroom rental would you like to use?",
-        row: 1,
         variable: VAR_BATHROOM_RENTAL,
       },
       {
         id: "P6-Q2",
         label: "How many additional power generators would you like?",
         subtext: "$150 per generator",
-        row: 2,
         variable: VAR_BATHROOM_GENERATORS,
       },
       {
         id: "P6-Q3",
         label: "How many additional bathroom attendants would you like?",
         subtext: "$40 per hour per attendant (6 hours)",
-        row: 3,
         variable: VAR_BATHROOM_ATTENDANTS,
       },
     ],
@@ -638,7 +607,6 @@ export const PAGES: Page[] = [
     id: "P-7",
     title: "Price Quote",
     type: PageType.PriceQuote,
-    rank: 7,
     fields: [],
   },
 ];
@@ -726,7 +694,7 @@ const ITEM_CATERING_MARIA: LineItem = {
   type: "LINE_ITEM",
   category: Category.Catering,
   basePrice: 17 * 1.0775, // 7.75% sales tax
-  multipleVariableId: VAR_HEADCOUNT.id,
+  multipleVariableIds: [VAR_HEADCOUNT.id],
   conditions: [[CONDITION_CATERING_MARIA], [CONDITION_CATERING_MARIA_W_INNOUT]],
 };
 
@@ -858,7 +826,7 @@ const ITEM_AGUA_FRESCAS: LineItem = {
   type: "LINE_ITEM",
   category: Category.Catering,
   basePrice: 65,
-  multipleVariableId: VAR_AGUA_FRESCAS.id,
+  multipleVariableIds: [VAR_AGUA_FRESCAS.id],
 };
 
 // SECTION: bar
@@ -883,7 +851,7 @@ const ITEM_BAR_ADDITIONAL: LineItem = {
   type: "LINE_ITEM",
   category: Category.Bar,
   basePrice: 75,
-  multipleVariableId: VAR_BAR_ADDITIONAL.id,
+  multipleVariableIds: [VAR_BAR_ADDITIONAL.id],
 };
 
 // SECTION: rentals
@@ -896,7 +864,7 @@ const ITEM_FARMHOUSE_TABLE: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 48,
-  multipleVariableId: VAR_FARMHOUSE_TABLE.id,
+  multipleVariableIds: [VAR_FARMHOUSE_TABLE.id],
 };
 const ITEM_SWEETHEART_TABLE: LineItem = {
   id: "LI-ST",
@@ -907,7 +875,7 @@ const ITEM_SWEETHEART_TABLE: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 45,
-  multipleVariableId: VAR_SWEETHEART_TABLE.id,
+  multipleVariableIds: [VAR_SWEETHEART_TABLE.id],
 };
 const ITEM_COFFEE_TABLE: LineItem = {
   id: "LI-CT",
@@ -918,7 +886,7 @@ const ITEM_COFFEE_TABLE: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 45,
-  multipleVariableId: VAR_COFFEE_TABLE.id,
+  multipleVariableIds: [VAR_COFFEE_TABLE.id],
 };
 const ITEM_DISPLAY_TABLE: LineItem = {
   id: "LI-VT",
@@ -929,7 +897,7 @@ const ITEM_DISPLAY_TABLE: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 45,
-  multipleVariableId: VAR_DISPLAY_TABLE.id,
+  multipleVariableIds: [VAR_DISPLAY_TABLE.id],
 };
 const ITEM_COCKTAIL_TABLE: LineItem = {
   id: "LI-CT",
@@ -940,7 +908,7 @@ const ITEM_COCKTAIL_TABLE: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 40,
-  multipleVariableId: VAR_COCKTAIL_TABLE.id,
+  multipleVariableIds: [VAR_COCKTAIL_TABLE.id],
 };
 const ITEM_BENCH: LineItem = {
   id: "LI-BT",
@@ -951,7 +919,7 @@ const ITEM_BENCH: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 15,
-  multipleVariableId: VAR_BENCH.id,
+  multipleVariableIds: [VAR_BENCH.id],
 };
 const ITEM_FOLDING_CHAIR: LineItem = {
   id: "LI-FC",
@@ -962,7 +930,7 @@ const ITEM_FOLDING_CHAIR: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 3.25,
-  multipleVariableId: VAR_FOLDING_CHAIR.id,
+  multipleVariableIds: [VAR_FOLDING_CHAIR.id],
 };
 
 // SECTION: misc
@@ -1077,7 +1045,7 @@ const ITEM_BATHROOM_GENERATORS: LineItem = {
   type: "LINE_ITEM",
   category: Category.Miscellaneous,
   basePrice: 150,
-  multipleVariableId: VAR_BATHROOM_GENERATORS.id,
+  multipleVariableIds: [VAR_BATHROOM_GENERATORS.id],
 };
 
 const ITEM_BATHROOM_ATTENDANTS: LineItem = {
@@ -1090,8 +1058,8 @@ const ITEM_BATHROOM_ATTENDANTS: LineItem = {
   required: false,
   type: "LINE_ITEM",
   category: Category.Miscellaneous,
-  basePrice: 40 * 6,
-  multipleVariableId: VAR_BATHROOM_ATTENDANTS.id,
+  basePrice: 40 * 6, // TODO: 6 hours to variable
+  multipleVariableIds: [VAR_BATHROOM_ATTENDANTS.id],
 };
 
 const ITEM_MUSIC: LineItem = {
