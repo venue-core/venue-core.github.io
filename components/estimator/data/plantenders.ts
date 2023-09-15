@@ -25,42 +25,42 @@ export const VENUE: Venue = {
 };
 
 // SECTION: variables
-const VAR_YEAR: Variable = {
+export const VAR_YEAR: Variable = {
   id: "V1",
   venueId: VENUE.id,
   name: "Year",
   type: VariableType.Year,
   required: true,
 };
-const VAR_MONTH: Variable = {
+export const VAR_MONTH: Variable = {
   id: "V2",
   venueId: VENUE.id,
   name: "Month",
   type: VariableType.Month,
   required: true,
 };
-const VAR_DATE: Variable = {
+export const VAR_DATE: Variable = {
   id: "V3",
   venueId: VENUE.id,
   name: "Day",
   type: VariableType.Date,
   required: true,
 };
-const VAR_DAY: Variable = {
+export const VAR_DAY: Variable = {
   id: "V4",
   venueId: VENUE.id,
   name: "Day of Week",
   type: VariableType.DayOfWeek,
   required: true,
 };
-const VAR_TIME: Variable = {
+export const VAR_TIME: Variable = {
   id: "V5",
   venueId: VENUE.id,
   name: "Time Range",
   type: VariableType.TimeRange,
   required: true,
 };
-const VAR_HEADCOUNT: Variable = {
+export const VAR_HEADCOUNT: Variable = {
   id: "V6",
   venueId: VENUE.id,
   name: "Headcount",

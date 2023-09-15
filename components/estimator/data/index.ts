@@ -4,6 +4,8 @@ export type Customer =
   | "1909"
   | "demo"
   | "padua-hills"
+  | "perfect-venue-1"
+  | "perfect-venue-2"
   | "plantenders"
   | "sherman-gardens";
 

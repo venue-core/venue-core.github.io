@@ -875,7 +875,7 @@ const ITEM_PHOTO_BOOTH: LineItem = {
   required: false,
   type: "LINE_ITEM",
   category: Category.Rentals,
-  basePrice: 750, // TODO: remove this potentially
+  basePrice: 750,
   options: [
     {
       id: "LIPB-1",

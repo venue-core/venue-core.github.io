@@ -56,7 +56,9 @@ export default function PriceQuote({
           <h3 className="text-2xl font-semibold text-slate-800">
             Your wedding at {venue.name}
           </h3>
-          <p className="text-sm text-slate-500">Price Estimate #3682303</p>
+          <p className="text-sm text-slate-500">
+            Price Estimate #{randomNum()}
+          </p>
         </div>
 
         {/*<!-- Grid -->*/}
@@ -537,4 +539,8 @@ function getDateDue(inputs: Inputs) {
 
 function getGuests(inputs: Inputs) {
   return (inputs[VAR_HEADCOUNT.id] as number) || "Unknown";
+}
+
+function randomNum() {
+  return Math.floor(1000000 + Math.random() * 9000000);
 }
