@@ -1,17 +1,20 @@
 import { useEffect } from "react";
 import { useForm } from "@mantine/form";
 
-import { Field, Inputs, Page } from "@/components/estimator/types";
 import FormField from "@/components/estimator/form/field";
-import {getFieldDefault, updatedInputs} from "@/components/estimator/form/utils";
+import {
+  getFieldDefault,
+  updatedInputs,
+} from "@/components/estimator/form/utils";
+import { Field, Inputs, Page } from "@/components/estimator/types";
 
 export default function Form({
-                               page,
-                               fields,
-                               inputs,
-                               setInputs,
-                               nextPage,
-                             }: {
+  page,
+  fields,
+  inputs,
+  setInputs,
+  nextPage,
+}: {
   page: Page;
   fields: Field[];
   inputs: Inputs;

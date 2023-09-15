@@ -1,14 +1,15 @@
-import {Field, Inputs, VariableType} from "@/components/estimator/types";
-import {UseFormReturnType} from "@mantine/form";
+import { UseFormReturnType } from "@mantine/form";
 import cx from "classnames";
-import {meetsConditions} from "@/components/estimator/form/utils";
+
 import MultiSelect from "@/components/estimator/form/multiselect";
+import { meetsConditions } from "@/components/estimator/form/utils";
+import { Field, Inputs, VariableType } from "@/components/estimator/types";
 
 export default function FormField({
-                     inputs,
-                     field,
-                     form,
-                   }: {
+  inputs,
+  field,
+  form,
+}: {
   inputs: Inputs;
   field: Field;
   form: UseFormReturnType<{}>;

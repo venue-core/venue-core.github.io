@@ -1,14 +1,14 @@
 import _ from "lodash";
 
 export default function MultiSelect<T extends string | number>({
-                                                  id,
-                                                  className,
-                                                  selected = [],
-                                                  options,
-                                                  min,
-                                                  max,
-                                                  onChange,
-                                                }: {
+  id,
+  className,
+  selected = [],
+  options,
+  min,
+  max,
+  onChange,
+}: {
   id: string;
   className: string;
   selected: T[];

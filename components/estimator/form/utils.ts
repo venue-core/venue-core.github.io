@@ -1,5 +1,5 @@
-import {Field, Inputs, VariableType} from "@/components/estimator/types";
-import {evaluateCondition} from "@/components/estimator/estimate";
+import { evaluateCondition } from "@/components/estimator/estimate/utils";
+import { Field, Inputs, VariableType } from "@/components/estimator/types";
 
 export function updatedInputs(
   oldValues: Inputs,

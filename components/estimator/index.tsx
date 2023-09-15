@@ -35,7 +35,7 @@ const PRICE_QUOTE = (
   </span>
 );
 
-export default function Router({ customer = 'demo' }: { customer?: Customer }) {
+export default function Router({ customer = "demo" }: { customer?: Customer }) {
   const pages = getPages(customer);
   const router = useRouter();
   const search = useSearchParams();
@@ -60,72 +60,72 @@ export default function Router({ customer = 'demo' }: { customer?: Customer }) {
   return (
     <section className="grow bg-gradient-to-b from-white to-gray-100">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-20 pb-12">
-    <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-8rem)]">
-      <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
-        {pageIndex > 0 && (
-          <ChevronLeftIcon
-            className="text-white h-8 w-8 mt-4 ml-2 cursor-pointer"
-            onClick={() => {
-              setPageIndex((prev) => (prev === 0 ? prev : prev - 1));
-              (ref.current as any).scrollIntoView({ behavior: "smooth" });
-            }}
-          />
-        )}
-        {/*<Progress view={page} />*/}
-        {/*<!-- SVG Background Element -->*/}
-        <figure className="absolute inset-x-0 bottom-0">
-          <svg
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            viewBox="0 0 1920 100.1"
-          >
-            <path
-              fill="currentColor"
-              className="fill-white"
-              d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
-            ></path>
-          </svg>
-        </figure>
-        {/*<!-- End SVG Background Element -->*/}
-      </div>
+        <div className="relative flex flex-col bg-white shadow-lg rounded-xl h-[calc(100vh-8rem)]">
+          <div className="relative overflow-hidden min-h-[8rem] bg-blue-600 text-center rounded-t-xl">
+            {pageIndex > 0 && (
+              <ChevronLeftIcon
+                className="text-white h-8 w-8 mt-4 ml-2 cursor-pointer"
+                onClick={() => {
+                  setPageIndex((prev) => (prev === 0 ? prev : prev - 1));
+                  (ref.current as any).scrollIntoView({ behavior: "smooth" });
+                }}
+              />
+            )}
+            {/*<Progress view={page} />*/}
+            {/*<!-- SVG Background Element -->*/}
+            <figure className="absolute inset-x-0 bottom-0">
+              <svg
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                viewBox="0 0 1920 100.1"
+              >
+                <path
+                  fill="currentColor"
+                  className="fill-white"
+                  d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
+                ></path>
+              </svg>
+            </figure>
+            {/*<!-- End SVG Background Element -->*/}
+          </div>
 
-      <div className="relative z-10 -mt-12">
-        {/*<!-- Icon -->*/}
-        <span className="mx-auto flex justify-center items-center w-[62px] h-[62px] rounded-full border border-gray-200 bg-white text-slate-700 shadow-sm">
-          {pages[pageIndex]?.type === PageType.Estimate
-            ? PRICE_QUOTE
-            : CALCULATOR}
-        </span>
-        {/*<!-- End Icon -->*/}
-      </div>
+          <div className="relative z-10 -mt-12">
+            {/*<!-- Icon -->*/}
+            <span className="mx-auto flex justify-center items-center w-[62px] h-[62px] rounded-full border border-gray-200 bg-white text-slate-700 shadow-sm">
+              {pages[pageIndex]?.type === PageType.Estimate
+                ? PRICE_QUOTE
+                : CALCULATOR}
+            </span>
+            {/*<!-- End Icon -->*/}
+          </div>
 
-      <div className="h-full pb-4 overflow-y-scroll">
-        <div ref={ref} />
-        {pages.map((page, i) => (
-          <FormPage
-            key={page.id}
-            active={pageIndex === i}
-            customer={customer}
-            inputs={inputs}
-            setInputs={setInputs}
-            page={page}
-            reset={() => {
-              setInputs({});
-              setPageIndex(0);
-              (ref.current as any).scrollIntoView({ behavior: "smooth" });
-            }}
-            nextPage={() => {
-              setPageIndex((prev) =>
-                prev === pages.length - 1 ? prev : prev + 1
-              );
-              (ref.current as any).scrollIntoView({ behavior: "smooth" });
-            }}
-          />
-        ))}
-      </div>
-    </div>
+          <div className="h-full pb-4 overflow-y-scroll">
+            <div ref={ref} />
+            {pages.map((page, i) => (
+              <FormPage
+                key={page.id}
+                active={pageIndex === i}
+                customer={customer}
+                inputs={inputs}
+                setInputs={setInputs}
+                page={page}
+                reset={() => {
+                  setInputs({});
+                  setPageIndex(0);
+                  (ref.current as any).scrollIntoView({ behavior: "smooth" });
+                }}
+                nextPage={() => {
+                  setPageIndex((prev) =>
+                    prev === pages.length - 1 ? prev : prev + 1
+                  );
+                  (ref.current as any).scrollIntoView({ behavior: "smooth" });
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
