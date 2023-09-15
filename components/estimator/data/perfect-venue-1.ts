@@ -10,6 +10,6 @@ export { generateAvailabilities, LINE_ITEMS, PAGES };
 export const VENUE = {
   ...BASE_VENUE,
   name: "Perfect Venue 1",
-  email: "contact@tryonevenue.com",
+  email: "katerinewang2012@gmail.com",
   phone: "+1 760 583 5578",
 };
