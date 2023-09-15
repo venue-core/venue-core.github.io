@@ -1,6 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function Hero() {
+  const search = useSearchParams();
+  let customer = "wedding";
+  // @ts-ignore
+  for (const [key, value] of search.entries()) {
+    if (
+      ["type", "customer"].includes(key.toLowerCase()) &&
+      value.toLowerCase().includes("cater")
+    ) {
+      customer = "catering";
+    }
+  }
   return (
     <section className="relative">
       {/* Illustration behind hero content */}
@@ -51,7 +65,7 @@ export default function Hero() {
             >
               Pricing and payments built for{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-                wedding venues
+                {customer} venues
               </span>
             </h1>
             <div className="max-w-3xl mx-auto">

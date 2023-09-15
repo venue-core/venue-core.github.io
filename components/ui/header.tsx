@@ -37,9 +37,14 @@ export default function Header() {
           <nav className="hidden md:flex md:grow">
             {/* Desktop menu links */}
             <ul className="flex justify-end flex-wrap items-center">
-              {/*<li>*/}
-              {/*  <Link href="/about" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">About</Link>*/}
-              {/*</li>*/}
+              <li>
+                <Link
+                  href="/about"
+                  className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
+                >
+                  About
+                </Link>
+              </li>
               {/*<li>*/}
               {/*  <Link href="/pricing" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">Pricing</Link>*/}
               {/*</li>*/}

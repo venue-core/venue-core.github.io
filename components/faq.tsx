@@ -15,7 +15,7 @@ const QUESTIONS = [
     {
       question: "Do you support payment plans or custom billing schedules?",
       answer: [
-        "Yes! Customize your billing plans based on your business requirements. Many of our vendors opt for an initial deposit followed by payments at set intervals leading up to the wedding.",
+        "Yes! Customize your billing plans based on your business requirements. Many of our vendors opt for an initial deposit followed by payments at set intervals leading up to the booked event date.",
       ],
     },
     {

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Avatar01 from "@/public/images/avatar-01.jpg";
 import Avatar02 from "@/public/images/avatar-02.jpg";
@@ -24,7 +26,7 @@ export default function Auth() {
       <h2 className="h2 mb-8 text-center lg:text-left">
         Pricing and payments built for{" "}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-          wedding venues
+          event venues
         </span>
       </h2>
       {/* List */}

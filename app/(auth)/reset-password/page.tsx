@@ -4,7 +4,7 @@ import Illustration from "@/public/images/auth-illustration.svg";
 import Form from "./form";
 
 export const metadata = {
-  title: "Reset Password - Venue",
+  title: "Reset Password - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
 

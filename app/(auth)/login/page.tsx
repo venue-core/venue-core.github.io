@@ -6,7 +6,7 @@ import Auth from "@/components/auth";
 import Form from "./form";
 
 export const metadata = {
-  title: "Log in - Venue",
+  title: "Log in - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
 

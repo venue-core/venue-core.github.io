@@ -73,11 +73,17 @@ export default function MobileMenu() {
           leaveTo="opacity-0"
         >
           <ul className="px-5 py-2">
+            <li>
+              <Link
+                href="/about"
+                className="flex text-gray-600 hover:text-gray-900 py-2 flex justify-center"
+                onClick={() => setMobileNavOpen(false)}
+              >
+                About
+              </Link>
+            </li>
             {/*<li>*/}
-            {/*  <Link href="/about" className="flex text-gray-600 hover:text-gray-900 py-2" onClick={() => setMobileNavOpen(false)}>About</Link>*/}
-            {/*</li>*/}
-            {/*<li>*/}
-            {/*  <Link href="/pricing" className="flex text-gray-600 hover:text-gray-900 py-2" onClick={() => setMobileNavOpen(false)}>Pricing</Link>*/}
+            {/*  <Link href="/pricing" className="flex text-gray-600 hover:text-gray-900 py-2 flex justify-center" onClick={() => setMobileNavOpen(false)}>Pricing</Link>*/}
             {/*</li>*/}
             <li>
               <Link

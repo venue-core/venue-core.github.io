@@ -113,7 +113,7 @@ function Section2() {
                   data-aos-delay="200"
                 >
                   • Give your customers an easy-to-use, personalized cost
-                  estimator for your wedding venue. Simplify and speed up your
+                  estimator for your event venue. Simplify and speed up your
                   pricing process to win more deals.
                 </div>
                 <div
@@ -275,7 +275,7 @@ function Section4() {
                   data-aos-anchor="[data-aos-id-3]"
                   data-aos-delay="200"
                 >
-                  • Predict cash flow from upcoming weddings and expected
+                  • Predict cash flow from upcoming events and expected
                   payments.
                 </div>
                 <div

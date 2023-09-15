@@ -1,7 +1,7 @@
 import Estimator from "@/components/estimator";
 
 export const metadata = {
-  title: "Demo (The 1909) - Venue",
+  title: "Demo (The 1909) - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
 

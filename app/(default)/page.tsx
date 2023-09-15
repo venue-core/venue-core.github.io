@@ -5,7 +5,7 @@ import Hero from "@/components/hero";
 import Pricing from "@/components/pricing";
 
 export const metadata = {
-  title: "Home - Venue",
+  title: "Home - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
 
