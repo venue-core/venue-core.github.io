@@ -94,9 +94,7 @@ const VAR_CLASSIC_CAR: Variable = {
     "1957 Ford Fairlane - Blue & White Edition",
     "1974 VW Westphalia Bus - Orange",
     "1958 BMW Isetta - Mustard",
-    "1974 Orange VW Bus with Custom Deco",
   ],
-  default: "1974 Orange VW Bus with Custom Deco",
   required: false,
 };
 const VAR_OUTDOOR_LIGHTING: Variable = {
@@ -514,7 +512,6 @@ export const PAGES: Page[] = [
         id: "P3-Q11",
         label: "Which classic car would you like for your photos?",
         variable: VAR_CLASSIC_CAR,
-        conditions: [CONDITION_PHOTO_BOOTH],
       },
     ],
   },
@@ -876,11 +873,21 @@ const ITEM_PHOTO_BOOTH: LineItem = {
   type: "LINE_ITEM",
   category: Category.Rentals,
   basePrice: 750,
+  conditions: [[CONDITION_PHOTO_BOOTH]],
+};
+
+const ITEM_CLASSIC_CAR: LineItem = {
+  id: "LI-CC",
+  venueId: VENUE.id,
+  name: "Classic Car",
+  required: false,
+  type: "LINE_ITEM",
+  category: Category.Rentals,
   options: [
     {
       id: "LIPB-1",
       name: "1957 Ford Fairlane - Blue & White Edition",
-      basePrice: 250,
+      basePrice: 200,
       conditions: [[CONDITION_FORD]],
     },
     {
@@ -895,11 +902,6 @@ const ITEM_PHOTO_BOOTH: LineItem = {
       basePrice: 250,
       conditions: [[CONDITION_BMW]],
     },
-    {
-      id: "LIPB-4",
-      name: "1974 Orange VW Bus with Custom Deco",
-      basePrice: 0,
-    },
   ].map((o) => ({
     ...o,
     venueId: VENUE.id,
@@ -907,7 +909,6 @@ const ITEM_PHOTO_BOOTH: LineItem = {
     required: false,
     type: "LINE_ITEM",
   })),
-  conditions: [[CONDITION_PHOTO_BOOTH]],
 };
 
 const ITEM_OUTDOOR_LIGHTING: LineItem = {
@@ -1023,6 +1024,7 @@ export const LINE_ITEMS: LineItem[] = [
   ITEM_PATIO_HEATER,
   ITEM_DANCING_HALL_LIGHTING,
   ITEM_PHOTO_BOOTH,
+  ITEM_CLASSIC_CAR,
   // Fees
   ITEM_ADMIN_FEE,
   // Taxes
