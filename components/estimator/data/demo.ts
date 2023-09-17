@@ -27,7 +27,7 @@ export const VENUE = {
   ...BASE_VENUE,
   name: "ACME Inc",
   minimum: 14_000,
-  email: "katerinewang2012@gmail.com",
+  email: "katherinewang2012@gmail.com",
   phone: "+1 760 583 5578",
   depositPercentage: 0.35,
 };

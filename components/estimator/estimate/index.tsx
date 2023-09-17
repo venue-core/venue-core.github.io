@@ -16,6 +16,7 @@ import {
   ItemPrice,
   Venue,
 } from "@/components/estimator/types";
+// import ItemDetail from "@/components/estimator/estimate/item-detail";
 
 const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -44,7 +45,7 @@ export default function Estimate({
   return (
     <div>
       {/*<ItemDetail item={item} setItem={setItem} setInputs={setInputs} />*/}
-      {/*<!-- Col -->*/}
+
       <div className="overflow-y-auto">
         <div className="text-center">
           <h3 className="text-2xl font-semibold text-slate-800">
@@ -53,7 +54,6 @@ export default function Estimate({
           <p className="text-sm text-slate-500">Price Estimate #{RANDOM_NUM}</p>
         </div>
 
-        {/*<!-- Grid -->*/}
         <div className="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
           <div>
             <span className="block text-xs uppercase text-slate-500">
@@ -63,9 +63,17 @@ export default function Estimate({
               <TotalCost prices={prices} venue={venue} />
             </span>
           </div>
-          {/*<!-- End Col -->*/}
 
           <div className="sm:text-center">
+                 <span className="block text-xs uppercase text-slate-500">
+              Guests:
+            </span>
+            <span className="block text-md font-medium text-slate-800">
+              {getGuests(inputs)}
+            </span>
+          </div>
+
+          <div className="sm:text-right">
             <span className="block text-xs uppercase text-slate-500">
               Wedding Date:
             </span>
@@ -73,18 +81,8 @@ export default function Estimate({
               {getDateDue(inputs)}
             </span>
           </div>
-
-          <div className="sm:text-right">
-            <span className="block text-xs uppercase text-slate-500">
-              Guests:
-            </span>
-            <span className="block text-md font-medium text-slate-800">
-              {getGuests(inputs)}
-            </span>
-          </div>
-          {/*<!-- End Col -->*/}
         </div>
-        {/*<!-- End Grid -->*/}
+
         <Summary venue={venue} prices={prices} setItem={setItem} />
       </div>
 
@@ -233,7 +231,7 @@ function CategoryGroup({
       {prices.map((item) => (
         <li
           key={item.title}
-          className="py-3 px-4 text-sm border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+          className="py-3 px-4 text-sm border text-slate-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg cursor-pointer"
           onClick={() => setItem(item)}
         >
           <div className="flex items-center justify-between w-full">
