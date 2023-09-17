@@ -93,6 +93,7 @@ export function lineItemToPrice(
     const final = Math.max(price, minimum);
     if (!li.required && final === 0) return;
     return {
+      item: li,
       title: li.name,
       subtitle: li.subtext,
       items: li.items
@@ -101,7 +102,6 @@ export function lineItemToPrice(
       price,
       minimum,
       final,
-      category: li.category,
       missing: false,
     };
   }
@@ -112,22 +112,22 @@ export function lineItemToPrice(
     if (option) {
       const price = getItemPrice(customer, li, inputs);
       return {
+        item: li,
         title: li.name,
         subtitle: option.name !== li.name ? option.name : li.subtext,
         price,
         minimum,
         final: Math.max(price, minimum),
-        category: li.category,
         missing: false,
       };
     } else if (li.required) {
       return {
+        item: li,
         title: li.name,
         subtitle: li.subtext,
         price: 0,
         minimum,
         final: minimum,
-        category: li.category,
         missing: true,
       };
     }
@@ -137,12 +137,12 @@ export function lineItemToPrice(
   const final = Math.max(price, minimum);
   if (final === 0 && !li.required) return;
   return {
+    item: li,
     title: li.name,
     subtitle: li.subtext,
     price,
     minimum,
     final,
-    category: li.category,
     missing: li.required && final === 0,
   };
 }
@@ -237,3 +237,8 @@ export function getGuests(inputs: Inputs) {
 export function isTruthy<T>(value: T | null | undefined | false): value is T {
   return Boolean(value);
 }
+
+export const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import _ from "lodash";
 
 import { Customer, getLineItems, getVenue } from "@/components/estimator/data";
+import ItemDetail from "@/components/estimator/estimate/item-detail";
 import {
   calcTotal,
+  CURRENCY_FORMAT,
   getDateDue,
   getGuests,
   isPriceValid,
@@ -16,12 +18,6 @@ import {
   ItemPrice,
   Venue,
 } from "@/components/estimator/types";
-// import ItemDetail from "@/components/estimator/estimate/item-detail";
-
-const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
 
 const RANDOM_NUM = Math.floor(1000000 + Math.random() * 9000000);
 
@@ -44,7 +40,7 @@ export default function Estimate({
     .filter(isTruthy);
   return (
     <div>
-      {/*<ItemDetail item={item} setItem={setItem} setInputs={setInputs} />*/}
+      <ItemDetail item={item} setItem={setItem} setInputs={setInputs} />
 
       <div className="overflow-y-auto">
         <div className="text-center">
@@ -65,7 +61,7 @@ export default function Estimate({
           </div>
 
           <div className="sm:text-center">
-                 <span className="block text-xs uppercase text-slate-500">
+            <span className="block text-xs uppercase text-slate-500">
               Guests:
             </span>
             <span className="block text-md font-medium text-slate-800">
@@ -177,7 +173,7 @@ function Summary({
   prices: ItemPrice[];
   setItem: (item: ItemPrice) => void;
 }) {
-  const pricesByCategory = _.groupBy(prices, "category");
+  const pricesByCategory = _.groupBy(prices, "item.category");
   return (
     <div className="mt-4 sm:mt-8">
       <h4 className="text-sm font-semibold uppercase text-slate-800">
@@ -262,7 +258,7 @@ function LineSubtotal({
   prices: ItemPrice[];
 }) {
   const filtered = prices.filter(
-    (p) => !POST_SUBTOTAL_CATEGORIES.has(p.category)
+    (p) => !POST_SUBTOTAL_CATEGORIES.has(p.item.category)
   );
   return (
     <li
