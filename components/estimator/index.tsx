@@ -8,11 +8,11 @@ import Calculator from "public/images/calculator.svg";
 
 import DateSelector from "@/components/date/selector";
 import DatetimeSelector from "@/components/datetime/selector";
-import { Customer, getPages } from "@/components/estimator/data";
+import { getPages } from "@/components/estimator/data";
 import Estimate from "@/components/estimator/estimate";
 import Form from "@/components/estimator/form";
 import Intro from "@/components/estimator/intro";
-import { Inputs, Page, PageType } from "@/components/estimator/types";
+import { Customer, Inputs, Page, PageType } from "@/components/estimator/types";
 import TimeSelector from "@/components/time/selector";
 
 const CALCULATOR = (

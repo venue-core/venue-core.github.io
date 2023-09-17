@@ -1,4 +1,5 @@
-import { Customer, getVenue } from "@/components/estimator/data";
+import { getVenue } from "@/components/estimator/data";
+import { Customer } from "@/components/estimator/types";
 
 export default function Intro({
   customer,

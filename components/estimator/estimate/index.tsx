@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import _ from "lodash";
 
-import { Customer, getLineItems, getVenue } from "@/components/estimator/data";
+import { getLineItems, getVenue } from "@/components/estimator/data";
 import ItemDetail from "@/components/estimator/estimate/item-detail";
 import {
   calcTotal,
@@ -14,6 +14,7 @@ import {
 } from "@/components/estimator/estimate/utils";
 import {
   Category,
+  Customer,
   Inputs,
   ItemPrice,
   Venue,
@@ -40,7 +41,13 @@ export default function Estimate({
     .filter(isTruthy);
   return (
     <div>
-      <ItemDetail item={item} setItem={setItem} setInputs={setInputs} />
+      <ItemDetail
+        customer={customer}
+        inputs={inputs}
+        item={item}
+        setItem={setItem}
+        setInputs={setInputs}
+      />
 
       <div className="overflow-y-auto">
         <div className="text-center">

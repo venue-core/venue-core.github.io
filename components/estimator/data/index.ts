@@ -1,13 +1,4 @@
-import { LineItem, Page, Variable, Venue } from "@/components/estimator/types";
-
-export type Customer =
-  | "1909"
-  | "demo"
-  | "padua-hills"
-  | "perfect-venue-1"
-  | "perfect-venue-2"
-  | "plantenders"
-  | "sherman-gardens";
+import { Customer, LineItem, Page, Venue } from "@/components/estimator/types";
 
 export function getVenue(customer: Customer): Venue {
   const { VENUE } = require(`./${customer}`);

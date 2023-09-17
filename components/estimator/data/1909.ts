@@ -972,6 +972,7 @@ const ITEM_ADMIN_FEE: LineItem = {
   venueId: VENUE.id,
   name: "Admin Fee",
   subtext: "25%",
+  description: "The admin fee is calculated based off the subtotal amount.",
   required: true,
   category: Category.Fees,
   type: "ADMIN_FEE",

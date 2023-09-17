@@ -161,7 +161,7 @@ function getItemPrice(
     );
     return 0;
   }
-  const debug = li.name === "Light Passed Appetizers";
+  const debug = false;
   if (!meetsConditions(li, inputs)) return 0;
   let sum = 0;
   if (li.items) {
@@ -177,11 +177,33 @@ function getItemPrice(
       sum += getItemPrice(customer, option, inputs, level + 1, true);
     }
   }
-  let multiple: number;
+  const multiple = getMultiple(li, inputs);
+  const base = getBasePrice(li, inputs, customer);
+  sum += multiple * base;
+  return final ? Math.max(sum, li.minimum || 0) : sum;
+}
+
+export function getBasePrice(li: LineItem, inputs: Inputs, customer: Customer) {
+  const { basePrice, targets } = li;
+  if (basePrice !== undefined) {
+    return basePrice;
+  } else if (Array.isArray(targets)) {
+    return getLineItems(customer)
+      .filter((item) => (li.targets || []).includes(item.category))
+      .reduce(
+        (acc, item) => acc + getItemPrice(customer, item, inputs, 1, true),
+        0
+      );
+  } else {
+    return 0;
+  }
+}
+
+export function getMultiple(li: LineItem, inputs: Inputs) {
   if (li.multiple !== undefined) {
-    multiple = li.multiple;
+    return li.multiple;
   } else if (li.multipleVariableIds !== undefined) {
-    multiple = li.multipleVariableIds.reduce((acc, varId) => {
+    return li.multipleVariableIds.reduce((acc, varId) => {
       const value = inputs[varId];
       let multiplier: number;
       if (typeof value === "number") {
@@ -196,25 +218,8 @@ function getItemPrice(
       return acc * multiplier;
     }, 1);
   } else {
-    multiple = 1;
+    return 1;
   }
-  const { basePrice, targets } = li;
-  let base: number;
-  if (basePrice !== undefined) {
-    base = basePrice;
-  } else if (Array.isArray(targets)) {
-    base = getLineItems(customer)
-      .filter((item) => (li.targets || []).includes(item.category))
-      .reduce(
-        (acc, item) =>
-          acc + getItemPrice(customer, item, inputs, level + 1, true),
-        0
-      );
-  } else {
-    base = 0;
-  }
-  sum += multiple * base;
-  return final ? Math.max(sum, li.minimum || 0) : sum;
 }
 
 function getEventDate(inputs: Inputs) {

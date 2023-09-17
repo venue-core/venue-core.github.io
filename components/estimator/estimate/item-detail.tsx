@@ -2,13 +2,21 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
-import { CURRENCY_FORMAT } from "@/components/estimator/estimate/utils";
-import { Inputs, ItemPrice } from "@/components/estimator/types";
+import {
+  CURRENCY_FORMAT,
+  getBasePrice,
+  getMultiple,
+} from "@/components/estimator/estimate/utils";
+import { Customer, Inputs, ItemPrice } from "@/components/estimator/types";
 
 export default function ItemDetail({
+  customer,
+  inputs,
   item,
   setItem,
 }: {
+  customer: Customer;
+  inputs: Inputs;
   item: ItemPrice | null;
   setItem: (i: ItemPrice | null) => void;
   setInputs: (i: Inputs) => void;
@@ -48,9 +56,14 @@ export default function ItemDetail({
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full sm:my-8 sm:max-w-lg">
                 <div className="bg-white px-4 py-4 sm:p-6">
-                  {/*<div className="sm:flex sm:items-start">*/}
-                  {item && <Item item={item} setItem={setItem} />}
-                  {/*</div>*/}
+                  {item && (
+                    <Item
+                      customer={customer}
+                      inputs={inputs}
+                      item={item}
+                      setItem={setItem}
+                    />
+                  )}
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -67,9 +80,13 @@ export default function ItemDetail({
 // }
 
 function Item({
+  customer,
+  inputs,
   item,
   setItem,
 }: {
+  customer: Customer;
+  inputs: Inputs;
   item: ItemPrice;
   setItem: (i: ItemPrice | null) => void;
 }) {
@@ -92,10 +109,7 @@ function Item({
         {item.item.name}
       </Dialog.Title>
       <div className="text-sm text-center text-gray-500">{item.subtitle}</div>
-      {/*{item.item.basePrice !== undefined && <div className="mt-2">*/}
-      {/*  <div className="text-sm font-semibold">Price:</div>*/}
-      {/*  <p className="text-sm text-gray-500">{CURRENCY_FORMAT.format(item.item.basePrice)}</p>*/}
-      {/*</div>}*/}
+      <Price item={item} customer={customer} inputs={inputs} />
       {item.item.subtext && item.subtitle !== item.item.subtext && (
         <div className="mt-2">
           <div className="text-sm font-semibold">Details:</div>
@@ -125,4 +139,31 @@ function Item({
       </div>
     </div>
   );
+}
+
+function Price(props: { item: ItemPrice; customer: Customer; inputs: Inputs }) {
+  const { inputs, customer } = props;
+  const { item } = props.item;
+  const components = [];
+  const basePrice = getBasePrice(item, inputs, customer);
+  if (basePrice) {
+    components.push(CURRENCY_FORMAT.format(basePrice));
+    const multiple = getMultiple(item, inputs);
+    // TODO: handle multiple variable IDs here
+    if (multiple !== 1) {
+      components.push("x");
+      components.push(
+        multiple < 1 ? `${multiple * 100}%` : multiple.toString()
+      );
+    }
+  }
+  if (components.length) {
+    return (
+      <div className="mt-2">
+        <div className="text-sm font-semibold">Price:</div>
+        <p className="text-sm text-gray-500">{components.join(" ")}</p>
+      </div>
+    );
+  }
+  return null;
 }
