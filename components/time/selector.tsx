@@ -1,6 +1,6 @@
-import { Customer, getVenue } from "@/components/estimator/data";
+import { getVenue } from "@/components/estimator/data";
 import { VAR_TIME } from "@/components/estimator/data/demo";
-import { Inputs } from "@/components/estimator/types";
+import { Customer, Inputs } from "@/components/estimator/types";
 import Time from "@/components/time/time";
 
 export default function TimeSelector({

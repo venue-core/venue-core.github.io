@@ -2,14 +2,14 @@ import parse from "html-react-parser";
 
 import Calendar from "@/components/date/calendar";
 import Timezone from "@/components/date/timezone";
-import { Customer, getVenue } from "@/components/estimator/data";
+import { getVenue } from "@/components/estimator/data";
 import {
   VAR_DATE,
   VAR_DAY,
   VAR_MONTH,
   VAR_YEAR,
 } from "@/components/estimator/data/demo";
-import { Inputs, Page } from "@/components/estimator/types";
+import { Customer, Inputs, Page } from "@/components/estimator/types";
 
 export default function DateSelector({
   customer,

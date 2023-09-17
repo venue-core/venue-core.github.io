@@ -20,8 +20,8 @@ import {
   Heading,
 } from "react-aria-components";
 
-import { Customer, getAvailabilities } from "@/components/estimator/data";
-import { Availability } from "@/components/estimator/types";
+import { getAvailabilities } from "@/components/estimator/data";
+import { Availability, Customer } from "@/components/estimator/types";
 
 export default function Calendar({
   customer,

@@ -1,6 +1,6 @@
 import { format, isValid } from "date-fns";
 
-import { Customer, getLineItems } from "@/components/estimator/data";
+import { getLineItems } from "@/components/estimator/data";
 import {
   VAR_DATE,
   VAR_HEADCOUNT,
@@ -10,6 +10,7 @@ import {
 import {
   Condition,
   ConditionType,
+  Customer,
   Inputs,
   ItemPrice,
   LineItem,

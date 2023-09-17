@@ -3,7 +3,7 @@ import { AvailabilitiesProvider } from "@/components/datetime/context/availabili
 import { SelectedDateProvider } from "@/components/datetime/context/selected-date";
 import Time from "@/components/datetime/time";
 import Timezone from "@/components/datetime/timezone";
-import { Customer, getVenue } from "@/components/estimator/data";
+import { getVenue } from "@/components/estimator/data";
 import {
   VAR_DATE,
   VAR_DAY,
@@ -11,7 +11,7 @@ import {
   VAR_TIME,
   VAR_YEAR,
 } from "@/components/estimator/data/demo";
-import { Inputs } from "@/components/estimator/types";
+import { Customer, Inputs } from "@/components/estimator/types";
 
 export default function DatetimeSelector({
   customer,
