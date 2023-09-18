@@ -150,7 +150,7 @@ export function lineItemToPrice(
 }
 
 const MAX_LEVEL = 5;
-function getItemPrice(
+export function getItemPrice(
   customer: Customer,
   li: LineItem,
   inputs: Inputs,

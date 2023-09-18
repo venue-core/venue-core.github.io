@@ -536,7 +536,7 @@ export const PAGES: Page[] = [
       {
         id: "P4-Q2",
         label: "Which light passed appetizers would you like to serve?",
-        subtext: "$6 pp per item",
+        subtext: "$3 pp per item",
         variable: VAR_LIGHT_APPETIZERS,
       },
       {

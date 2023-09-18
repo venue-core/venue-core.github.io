@@ -5,6 +5,7 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import {
   CURRENCY_FORMAT,
   getBasePrice,
+  getItemPrice,
   getMultiple,
   getMultipleForVariable,
 } from "@/components/estimator/estimate/utils";
@@ -114,19 +115,23 @@ function Item({
       {item.item.subtext && item.subtitle !== item.item.subtext && (
         <div className="mt-2">
           <div className="text-sm font-semibold">Details:</div>
-          <p className="text-sm text-gray-500">{item.item.subtext}</p>
+          <div className="text-sm text-gray-500">{item.item.subtext}</div>
         </div>
       )}
       {item.item.description && (
         <div className="mt-2">
           <div className="text-sm font-semibold">Description:</div>
-          <p className="text-sm text-gray-500">{item.item.description}</p>
+          <div className="text-sm text-gray-500">
+            {format(item.item.description)}
+          </div>
         </div>
       )}
       {item.item.instructions && (
         <div className="mt-2">
           <div className="text-sm font-semibold">Instructions:</div>
-          <p className="text-sm text-gray-500">{item.item.instructions}</p>
+          <div className="text-sm text-gray-500">
+            {format(item.item.instructions)}
+          </div>
         </div>
       )}
       <div className="mt-4">
@@ -161,12 +166,16 @@ function Price(props: { item: ItemPrice; customer: Customer; inputs: Inputs }) {
       }
     }
     if (multiples.length) {
-      components.push("x");
+      components.push("×");
       components.push(
         ...intersperse(
           multiples.map((m) => (m < 1 ? `${m * 100}%` : m.toString())),
           "x"
         )
+      );
+      components.push("=");
+      components.push(
+        CURRENCY_FORMAT.format(getItemPrice(customer, item, inputs))
       );
     }
   }
@@ -183,4 +192,8 @@ function Price(props: { item: ItemPrice; customer: Customer; inputs: Inputs }) {
 
 function intersperse<T>(arr: T[], sep: T) {
   return arr.reduce<T[]>((a, v) => [...a, v, sep], []).slice(0, -1);
+}
+
+function format(value: string) {
+  return value.split("\n").map((line) => <div>{line}</div>);
 }
