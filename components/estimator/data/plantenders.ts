@@ -1,4 +1,14 @@
 import {
+  addDays,
+  addHours,
+  addMonths,
+  format,
+  getDay,
+  isFriday,
+  isSaturday,
+} from "date-fns";
+
+import {
   Availability,
   Category,
   Condition,
@@ -1165,32 +1175,21 @@ export const LINE_ITEMS: LineItem[] = [
 ];
 
 export function generateAvailabilities(): Availability[] {
-  // Bookable time range
-  const START_TIME = 10;
-
   const startDate = new Date();
-  const endDate = new Date(startDate);
-  endDate.setMonth(endDate.getMonth() + 24);
-
-  const timeSlots: Availability[] = [];
-  while (startDate < endDate) {
-    if ([5, 6].includes(startDate.getDay())) {
-      const datePart = startDate.toISOString().split("T")[0];
-      const startTimeStr = `${datePart}T${String(START_TIME).padStart(
-        2,
-        "0"
-      )}:00`;
-      const endTimeStr = `${datePart}T${String(START_TIME + 8).padStart(
-        2,
-        "0"
-      )}:00`;
-      timeSlots.push({
-        startTime: startTimeStr,
-        endTime: endTimeStr,
-      });
+  startDate.setHours(10);
+  startDate.setMinutes(0);
+  startDate.setSeconds(0);
+  startDate.setMilliseconds(0);
+  const endDate = addMonths(startDate, 24);
+  let current = startDate;
+  const results = [];
+  while (current <= endDate) {
+    if (isFriday(current) || isSaturday(current)) {
+      const startTime = format(current, "yyyy-MM-dd'T'HH:mm");
+      const endTime = format(addHours(current, 8), "yyyy-MM-dd'T'HH:mm");
+      results.push({ startTime, endTime });
     }
-    // Move on to next day
-    startDate.setDate(startDate.getDate() + 1);
+    current = addDays(current, 1);
   }
-  return timeSlots;
+  return results;
 }

@@ -6,6 +6,7 @@ import {
   CURRENCY_FORMAT,
   getBasePrice,
   getMultiple,
+  getMultipleForVariable,
 } from "@/components/estimator/estimate/utils";
 import { Customer, Inputs, ItemPrice } from "@/components/estimator/types";
 
@@ -143,17 +144,29 @@ function Item({
 
 function Price(props: { item: ItemPrice; customer: Customer; inputs: Inputs }) {
   const { inputs, customer } = props;
-  const { item } = props.item;
+  const item = props.item.option || props.item.item;
   const components = [];
   const basePrice = getBasePrice(item, inputs, customer);
   if (basePrice) {
     components.push(CURRENCY_FORMAT.format(basePrice));
-    const multiple = getMultiple(item, inputs);
-    // TODO: handle multiple variable IDs here
-    if (multiple !== 1) {
+    const multiples = [];
+    if (item.multipleVariableIds && item.multipleVariableIds.length > 1) {
+      for (const varId of item.multipleVariableIds) {
+        multiples.push(getMultipleForVariable(varId, inputs));
+      }
+    } else {
+      const multiple = getMultiple(item, inputs);
+      if (multiple !== 1) {
+        multiples.push(multiple);
+      }
+    }
+    if (multiples.length) {
       components.push("x");
       components.push(
-        multiple < 1 ? `${multiple * 100}%` : multiple.toString()
+        ...intersperse(
+          multiples.map((m) => (m < 1 ? `${m * 100}%` : m.toString())),
+          "x"
+        )
       );
     }
   }
@@ -166,4 +179,8 @@ function Price(props: { item: ItemPrice; customer: Customer; inputs: Inputs }) {
     );
   }
   return null;
+}
+
+function intersperse<T>(arr: T[], sep: T) {
+  return arr.reduce<T[]>((a, v) => [...a, v, sep], []).slice(0, -1);
 }

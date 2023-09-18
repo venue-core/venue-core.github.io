@@ -146,9 +146,10 @@ export type Availability = {
 
 export interface ItemPrice {
   item: LineItem;
+  option?: LineItem;
+  items?: ItemPrice[];
   title: string;
   subtitle?: string;
-  items?: ItemPrice[];
   price: number;
   minimum: number;
   final: number;

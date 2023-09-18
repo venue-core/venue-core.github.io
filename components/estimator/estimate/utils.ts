@@ -114,6 +114,7 @@ export function lineItemToPrice(
       const price = getItemPrice(customer, li, inputs);
       return {
         item: li,
+        option,
         title: li.name,
         subtitle: option.name !== li.name ? option.name : li.subtext,
         price,
@@ -204,22 +205,25 @@ export function getMultiple(li: LineItem, inputs: Inputs) {
   if (li.multiple !== undefined) {
     return li.multiple;
   } else if (li.multipleVariableIds !== undefined) {
-    return li.multipleVariableIds.reduce((acc, varId) => {
-      const value = inputs[varId];
-      let multiplier: number;
-      if (typeof value === "number") {
-        multiplier = value;
-      } else if (Array.isArray(value)) {
-        multiplier = value.length;
-      } else if (typeof value === "string" && !isNaN(Number(value))) {
-        multiplier = Number(value);
-      } else {
-        multiplier = 0;
-      }
-      return acc * multiplier;
-    }, 1);
+    return li.multipleVariableIds.reduce(
+      (acc, varId) => acc * getMultipleForVariable(varId, inputs),
+      1
+    );
   } else {
     return 1;
+  }
+}
+
+export function getMultipleForVariable(varId: string, inputs: Inputs) {
+  const value = inputs[varId];
+  if (typeof value === "number") {
+    return value;
+  } else if (Array.isArray(value)) {
+    return value.length;
+  } else if (typeof value === "string" && !isNaN(Number(value))) {
+    return Number(value);
+  } else {
+    return 0;
   }
 }
 
