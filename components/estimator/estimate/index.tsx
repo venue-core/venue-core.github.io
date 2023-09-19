@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import _ from "lodash";
 
 import { getLineItems, getVenue } from "@/components/estimator/data";
@@ -7,6 +8,7 @@ import {
   calcTotal,
   CURRENCY_FORMAT,
   getDateDue,
+  getEventDate,
   getGuests,
   isPriceValid,
   isTruthy,
@@ -96,11 +98,11 @@ export default function Estimate({
             your date.
           </p>
         )}
-        <p className="mt-2 text-sm text-slate-500">
+        <div className="mt-2 text-sm text-slate-500">
           If you have any questions, please contact us at{" "}
           <a
             className="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline font-medium"
-            href="#"
+            href={`mailto: ${venue.email}`}
           >
             {venue.email}
           </a>{" "}
@@ -111,31 +113,10 @@ export default function Estimate({
           >
             {venue.phone}
           </a>
-        </p>
+        </div>
       </div>
 
-      {venue.depositPercentage && (
-        <div className="px-4 mt-4 flex justify-between">
-          <div>
-            <div className="text-xs uppercase font-semibold">Due Today:</div>
-            <div className="text-md flex">
-              <span>
-                {CURRENCY_FORMAT.format(
-                  calcTotal(prices, venue, true) * venue.depositPercentage
-                )}
-              </span>
-            </div>
-          </div>
-          <div>
-            <button className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group">
-              <span>Reserve</span>
-              <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                -&gt;
-              </span>
-            </button>
-          </div>
-        </div>
-      )}
+      <Deposit venue={venue} prices={prices} inputs={inputs} />
 
       {venue.notes && (
         <div className="mt-4 px-4">
@@ -339,4 +320,39 @@ function TotalCost({ prices, venue }: { prices: ItemPrice[]; venue: Venue }) {
   } else {
     return <div className="text-red-500">Invalid Selections</div>;
   }
+}
+
+function Deposit({
+  venue,
+  prices,
+  inputs,
+}: {
+  venue: Venue;
+  prices: ItemPrice[];
+  inputs: Inputs;
+}) {
+  if (!venue.depositPercentage) return null;
+  const total = calcTotal(prices, venue, true);
+  const deposit = total * venue.depositPercentage;
+  return (
+    <div className="px-4 mt-4 flex justify-between">
+      <div>
+        <div className="text-xs uppercase font-semibold">Due Today:</div>
+        <div className="text-md flex">{CURRENCY_FORMAT.format(deposit)}</div>
+      </div>
+      <div>
+        <Link
+          href={`/payment/checkout?type=DEPOSIT&amount=${deposit.toFixed(
+            2
+          )}&date=${getEventDate(inputs).getTime()}`}
+          className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
+        >
+          <span>Reserve</span>
+          <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+            -&gt;
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
 }

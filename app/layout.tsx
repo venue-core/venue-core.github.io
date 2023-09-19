@@ -3,8 +3,7 @@ import "./css/style.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 
-import Footer from "@/components/ui/footer";
-import Header from "@/components/ui/header";
+import Preline from "@/components/preline";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Avatar",
+  title: "Home - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
 
@@ -37,10 +36,8 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}
       >
-        <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
-          <Header />
-          {children}
-        </div>
+        <Preline />
+        {children}
       </body>
     </html>
   );

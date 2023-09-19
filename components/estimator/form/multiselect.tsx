@@ -39,11 +39,11 @@ export default function MultiSelect<T extends string | number>({
             <option key={o}>{o}</option>
           ))}
       </select>
-      <div className="mt-2">
+      <div className="mt-2 space-y-1">
         {selected.map((v) => (
           <span
             key={v}
-            className="inline-block cursor-pointer bg-blue-50 text-blue-800 text-xs font-medium mr-2 px-2 py-0.5 rounded"
+            className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-blue-500 text-white"
           >
             <span>{v.toString()}</span>
             <span

@@ -227,7 +227,7 @@ export function getMultipleForVariable(varId: string, inputs: Inputs) {
   }
 }
 
-function getEventDate(inputs: Inputs) {
+export function getEventDate(inputs: Inputs) {
   const year = inputs[VAR_YEAR.id] as number;
   const month = (inputs[VAR_MONTH.id] as number) - 1;
   const date = inputs[VAR_DATE.id] as number;
