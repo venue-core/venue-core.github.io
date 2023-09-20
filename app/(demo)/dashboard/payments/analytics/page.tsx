@@ -1,23 +1,23 @@
+import Revenue from "@/components/analytics/revenue";
+
 export const metadata = {
-  title: "Dashboard - OneVenue",
+  title: "Analytics - Payments - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
 
-export default function Home() {
+export default function Analytics() {
   return (
-    <div>
+    <header>
       <div className="mb-2 text-sm font-semibold text-blue-600 uppercase">
-        Home
+        Payments
       </div>
       <h1 className="block text-2xl font-bold text-gray-800 sm:text-3xl">
-        Welcome back Katherine!
+        Analytics
       </h1>
       <div className="mt-5 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
-        {/*<p className="mt-2 text-lg text-gray-800">*/}
-        {/*  This is a simple application layout with sidebar and header examples*/}
-        {/*  using Tailwind CSS.*/}
-        {/*</p>*/}
+        <Revenue />
+        <Revenue />
       </div>
-    </div>
+    </header>
   );
 }

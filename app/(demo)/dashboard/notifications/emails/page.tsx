@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Notifications - OneVenue",
+  title: "Emails - Notifications - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
 
@@ -10,7 +10,7 @@ export default function Notifications() {
         Notifications
       </div>
       <h1 className="block text-2xl font-bold text-gray-800 sm:text-3xl">
-        Application Layout: Sidebar & Header using Tailwind CSS
+        Email Templates
       </h1>
       <p className="mt-2 text-lg text-gray-800">
         This is a simple application layout with sidebar and header examples

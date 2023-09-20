@@ -1,3 +1,5 @@
+import { PlusIcon } from "@heroicons/react/24/outline";
+
 import DateSelect from "@/components/date-select";
 import DeleteButton from "@/components/delete-button";
 import FilterButton from "@/components/dropdown-filter";
@@ -8,9 +10,17 @@ import { SelectedItemsProvider } from "@/app/selected-items-context";
 import InvoicesTable from "./invoices-table";
 
 export const metadata = {
-  title: "Payments - OneVenue",
+  title: "Invoices - Payments - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
+
+export default function Invoices() {
+  return (
+    <SelectedItemsProvider>
+      <Content />
+    </SelectedItemsProvider>
+  );
+}
 
 const INVOICES = [
   {
@@ -125,13 +135,16 @@ const INVOICES = [
   },
 ];
 
-function InvoicesContent() {
+function Content() {
   return (
-    <div className="px-4 sm:px-6 lg:px-8 pb-8 w-full max-w-[96rem] mx-auto">
+    <div className="pb-4 w-full max-w-[96rem] mx-auto">
       {/* Page header */}
       <div className="sm:flex sm:justify-between sm:items-center mb-5">
         {/* Left: Title */}
         <div className="mb-4 sm:mb-0">
+          <div className="text-sm font-semibold text-blue-600 uppercase">
+            Payments
+          </div>
           <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold">
             Invoices
           </h1>
@@ -140,15 +153,10 @@ function InvoicesContent() {
         {/* Right: Actions */}
         <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
           {/* Search form */}
-          <SearchForm placeholder="Search by invoice ID…" />
+          <SearchForm placeholder="Search by ID…" />
           {/* Create invoice button */}
-          <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
-            <svg
-              className="w-4 h-4 fill-current opacity-50 shrink-0"
-              viewBox="0 0 16 16"
-            >
-              <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-            </svg>
+          <button className="btn-sm bg-blue-600 hover:bg-blue-500 text-white">
+            <PlusIcon className="w-4 h-4 stroke-2" />
             <span className="hidden xs:block ml-2">Create Invoice</span>
           </button>
         </div>
@@ -160,8 +168,8 @@ function InvoicesContent() {
         <div className="mb-4 sm:mb-0">
           <ul className="flex flex-wrap -m-1">
             <li className="m-1">
-              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-indigo-500 text-white duration-150 ease-in-out">
-                All <span className="ml-1 text-indigo-200">67</span>
+              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-blue-600 text-white duration-150 ease-in-out">
+                All <span className="ml-1 text-blue-200">67</span>
               </button>
             </li>
             <li className="m-1">
@@ -207,13 +215,5 @@ function InvoicesContent() {
         <PaginationClassic />
       </div>
     </div>
-  );
-}
-
-export default function Invoices() {
-  return (
-    <SelectedItemsProvider>
-      <InvoicesContent />
-    </SelectedItemsProvider>
   );
 }
