@@ -14,8 +14,7 @@ export default function Analytics() {
       <h1 className="block text-2xl font-bold text-gray-800 sm:text-3xl">
         Analytics
       </h1>
-      <div className="mt-5 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
-        <Revenue />
+      <div className="mt-5 space-y-4">
         <Revenue />
       </div>
     </header>

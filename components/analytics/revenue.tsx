@@ -53,7 +53,6 @@ export default function Revenue() {
       {
         label: "Collected",
         data: [200_000, 220_000, 150_000, 0, 0, 0],
-        // data: [2800, 1700, 900, 2900, 1950, 3100],
         backgroundColor: tailwindConfig.theme.colors.slate[300],
         hoverBackgroundColor: tailwindConfig.theme.colors.slate[400],
         barPercentage: 0.66,
@@ -117,7 +116,6 @@ function Graph({ data, width, height }: Props) {
             },
             ticks: {
               maxTicksLimit: 8,
-              // minTicksLimit: 1 ,
               callback: (value) => formatValue(+value),
               color: darkMode ? textColor.dark : textColor.light,
             },
@@ -216,7 +214,7 @@ function Graph({ data, width, height }: Props) {
               // Label
               const label = document.createElement("span");
               label.classList.add("text-slate-500", "dark:text-slate-400");
-              label.style.fontSize = tailwindConfig.theme.fontSize.sm[0];
+              label.style.fontSize = tailwindConfig.theme.fontSize.sm[1];
               label.style.lineHeight =
                 tailwindConfig.theme.fontSize.sm[1].lineHeight;
               const labelText = document.createTextNode(item.text);

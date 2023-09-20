@@ -1,5 +1,8 @@
 import {
+  BanknotesIcon,
   BellAlertIcon,
+  CalendarIcon,
+  ChartBarIcon,
   ChatBubbleBottomCenterTextIcon,
   ClockIcon,
   Cog6ToothIcon,
@@ -24,18 +27,23 @@ export const PATHS: Path[] = [
     icon: <HomeIcon className="w-4 h-4" />,
   },
   {
+    title: "Calendar",
+    url: "/dashboard/calendar",
+    icon: <CalendarIcon className="w-4 h-4" />,
+  },
+  {
     title: "Payments",
-    icon: <CurrencyDollarIcon className="w-4 h-4" />,
+    icon: <BanknotesIcon className="w-4 h-4" />,
     paths: [
       {
         title: "Invoices",
         url: "/dashboard/payments/invoices",
-        icon: <ClockIcon className="w-4 h-4" />,
+        icon: <CurrencyDollarIcon className="w-4 h-4" />,
       },
       {
         title: "Analytics",
         url: "/dashboard/payments/analytics",
-        icon: <InboxIcon className="w-4 h-4" />,
+        icon: <ChartBarIcon className="w-4 h-4" />,
       },
     ],
   },
