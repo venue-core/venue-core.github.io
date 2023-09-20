@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default function MobileMenu() {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
@@ -100,10 +101,8 @@ export default function MobileMenu() {
                 className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 w-full my-2"
                 onClick={() => setMobileNavOpen(false)}
               >
-                <span>Request a demo</span>
-                <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                  -&gt;
-                </span>
+                Request a demo
+                <ArrowRightIcon className="h-4 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2" />
               </Link>
             </li>
           </ul>

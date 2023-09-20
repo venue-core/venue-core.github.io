@@ -1,3 +1,5 @@
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+
 import { getVenue } from "@/components/estimator/data";
 import { Customer } from "@/components/estimator/types";
 
@@ -21,10 +23,8 @@ export default function Intro({
           className="mt-8 btn-sm flex items-center text-white mx-auto text-sm font-medium py-2 px-4 m-2 bg-blue-600 group transition duration-500"
           onClick={() => nextPage()}
         >
-          <span>Start</span>
-          <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-            -&gt;
-          </span>
+          Start
+          <ArrowRightIcon className="h-3 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1" />
         </button>
       </div>
     </div>

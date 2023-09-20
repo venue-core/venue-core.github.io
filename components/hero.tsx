@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { CustomerType, getCustomerType } from "@/components/utils/customer";
 
@@ -77,17 +78,13 @@ export default function Hero() {
                 data-aos="zoom-y-out"
                 data-aos-delay="300"
               >
-                <div>
-                  <Link
-                    className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0 group"
-                    href="/waitlist"
-                  >
-                    Request a demo
-                    <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                      -&gt;
-                    </span>
-                  </Link>
-                </div>
+                <Link
+                  className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0 group"
+                  href="/waitlist"
+                >
+                  Request a demo
+                  <ArrowRightIcon className="h-4 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2" />
+                </Link>
               </div>
             </div>
           </div>

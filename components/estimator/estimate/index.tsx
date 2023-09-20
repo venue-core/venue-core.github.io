@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import _ from "lodash";
 
 import { getLineItems, getVenue } from "@/components/estimator/data";
@@ -134,13 +135,11 @@ export default function Estimate({
       {/*<!-- Buttons -->*/}
       <div className="mt-8 px-4 flex justify-start gap-x-2">
         <button
-          className="block w-full btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
+          className="w-full btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
           onClick={() => restart()}
         >
-          <span>Restart</span>
-          <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-            -&gt;
-          </span>
+          Restart
+          <ArrowRightIcon className="h-3 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1" />
         </button>
       </div>
     </div>
@@ -347,10 +346,8 @@ function Deposit({
           )}&date=${getEventDate(inputs).getTime()}`}
           className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group"
         >
-          <span>Reserve</span>
-          <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-            -&gt;
-          </span>
+          Reserve
+          <ArrowRightIcon className="h-3 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1" />
         </Link>
       </div>
     </div>

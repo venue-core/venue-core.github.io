@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useForm } from "@mantine/form";
 
 import FormField from "@/components/estimator/form/field";
@@ -62,12 +63,10 @@ export default function Form({
       <div className="block">
         <button
           type="submit"
-          className="block btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group w-full mx-auto"
+          className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 group w-full mx-auto"
         >
           <span>Continue</span>
-          <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-            -&gt;
-          </span>
+          <ArrowRightIcon className="h-3 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1" />
         </button>
       </div>
     </form>

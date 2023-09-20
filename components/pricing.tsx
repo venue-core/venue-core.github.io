@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Illustration from "@/public/images/pricing-illustration.svg";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default function Pricing() {
   const [annual, setAnnual] = useState<boolean>(true);
@@ -566,9 +567,7 @@ export default function Pricing() {
                 href="/waitlist"
               >
                 Free Trial{" "}
-                <span className="hidden lg:block tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                  -&gt;
-                </span>
+                <ArrowRightIcon className="text-white hidden lg:block h-4 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2" />
               </Link>
             </div>
             <div className="flex flex-col justify-center p-4 bg-blue-500 bg-opacity-25 md:border-l border-slate-300 order-2 md:order-none">
@@ -577,9 +576,7 @@ export default function Pricing() {
                 href="/waitlist"
               >
                 Free Trial{" "}
-                <span className="hidden lg:block tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                  -&gt;
-                </span>
+                <ArrowRightIcon className="text-white hidden lg:block h-4 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2" />
               </Link>
             </div>
             <div className="flex flex-col justify-center p-4 bg-blue-500 bg-opacity-25 md:border-l border-slate-300 order-3 md:order-none">
@@ -588,9 +585,7 @@ export default function Pricing() {
                 href="/waitlist"
               >
                 Free Trial{" "}
-                <span className="hidden lg:block tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                  -&gt;
-                </span>
+                <ArrowRightIcon className="text-white hidden lg:block h-4 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2" />
               </Link>
             </div>
           </div>

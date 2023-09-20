@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useForm } from "@mantine/form";
 
 import PasswordInput from "@/components/ui/password";
@@ -94,10 +95,8 @@ export default function Form() {
           className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 w-full group disabled:opacity-50"
           disabled={loading}
         >
-          Log in{" "}
-          <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-            -&gt;
-          </span>
+          Log in
+          <ArrowRightIcon className="h-3 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1" />
         </button>
       </div>
     </form>

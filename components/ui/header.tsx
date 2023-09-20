@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import Logo from "./logo";
 import MobileMenu from "./mobile-menu";
@@ -86,10 +87,8 @@ export default function Header() {
                   href="/waitlist"
                   className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 ml-3 group"
                 >
-                  <span>Request a demo</span>
-                  <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                    -&gt;
-                  </span>
+                  Request a demo
+                  <ArrowRightIcon className="h-4 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2" />
                 </Link>
               </li>
             </ul>
