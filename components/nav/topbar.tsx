@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { Cog6ToothIcon, CogIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftOnRectangleIcon,
+  Cog6ToothIcon,
+  CogIcon,
+} from "@heroicons/react/24/outline";
 
 import Logo from "@/components/nav/logo";
 
@@ -62,6 +66,11 @@ function Profile() {
       title: "Settings",
       url: "/dashboard/settings",
       icon: <Cog6ToothIcon className="w-4 h-4 flex-none" />,
+    },
+    {
+      title: "Logout",
+      url: "/",
+      icon: <ArrowLeftOnRectangleIcon className="w-4 h-4 flex-none" />,
     },
   ];
   return (
