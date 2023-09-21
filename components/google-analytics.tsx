@@ -1,6 +1,7 @@
 import Script from "next/script";
 
 export default function GoogleAnalytics({ tagId }: { tagId: string }) {
+  if (process.env.NODE_ENV === 'development') return null;
   return (
     <>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${tagId}`} />
