@@ -3,14 +3,14 @@ import {
   BellAlertIcon,
   CalendarIcon,
   ChartBarIcon,
-  ChatBubbleBottomCenterTextIcon,
   ClockIcon,
   Cog6ToothIcon,
   CurrencyDollarIcon,
+  FolderIcon,
   HomeIcon,
   InboxIcon,
-  NewspaperIcon,
   RectangleStackIcon,
+  TableCellsIcon,
 } from "@heroicons/react/24/outline";
 
 export interface Path {
@@ -61,28 +61,28 @@ export const PATHS: Path[] = [
         url: "/dashboard/notifications/emails",
         icon: <InboxIcon className="w-4 h-4" />,
       },
-      // {
-      //   title: "Templates",
-      //   icon: <NewspaperIcon className="w-4 h-4" />,
-      //   paths: [
-      //     {
-      //       title: "Emails",
-      //       url: "/dashboard/notifications/emails",
-      //       icon: <InboxIcon className="w-4 h-4" />,
-      //     },
-      //     {
-      //       title: "Text Messages",
-      //       url: "/dashboard/notifications/texts",
-      //       icon: <ChatBubbleBottomCenterTextIcon className="w-4 h-4" />,
-      //     },
-      //   ],
-      // },
     ],
   },
   {
-    title: "Products",
-    url: "/dashboard/products",
+    title: "Events",
     icon: <RectangleStackIcon className="w-4 h-4" />,
+    paths: [
+      {
+        title: "Services",
+        url: "/dashboard/events/services",
+        icon: <TableCellsIcon className="w-4 h-4" />,
+      },
+      {
+        title: "Forms",
+        url: "/dashboard/events/forms",
+        icon: <FolderIcon className="w-4 h-4" />,
+      },
+      {
+        title: "Analytics",
+        url: "/dashboard/events/analytics",
+        icon: <ChartBarIcon className="w-4 h-4" />,
+      },
+    ],
   },
   {
     title: "Settings",

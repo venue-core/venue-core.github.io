@@ -1,8 +1,8 @@
 import "./css/style.css";
 
 import { Inter } from "next/font/google";
-import Script from "next/script";
 
+import GoogleAnalytics from "@/components/google-analytics";
 import Preline from "@/components/preline";
 
 const inter = Inter({
@@ -24,15 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.svg" />
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-324NEVCL3L" />
-      <Script id="google-analytics">
-        {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-324NEVCL3L');
-          `}
-      </Script>
+      <GoogleAnalytics tagId="G-324NEVCL3L" />
       <body
         className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}
       >

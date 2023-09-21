@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 function Content({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72 h-[calc(100vh-3rem)] overflow-x-scroll">
+    <div className="w-full pt-8 px-4 sm:px-6 md:px-8 lg:pl-72 h-[calc(100vh-3rem)] overflow-x-scroll">
       {children}
     </div>
   );
