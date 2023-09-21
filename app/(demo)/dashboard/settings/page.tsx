@@ -10,13 +10,9 @@ export default function Settings() {
         Settings
       </div>
       <h1 className="block text-2xl font-bold text-gray-800 sm:text-3xl">
-        Application Layout: Sidebar & Header using Tailwind CSS
+        Account
       </h1>
-      <p className="mt-2 text-lg text-gray-800">
-        This is a simple application layout with sidebar and header examples
-        using Tailwind CSS.
-      </p>
-      <div className="mt-5 flex flex-col items-center gap-2 sm:flex-row sm:gap-3"></div>
+      <div className="mt-4"></div>
     </header>
   );
 }

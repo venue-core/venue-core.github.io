@@ -8,7 +8,7 @@ import HTMLEditor from "@/components/editor";
 import {
   EMAIL,
   Email,
-} from "@/app/(demo)/dashboard/notifications/emails/1/data";
+} from "@/app/(demo)/dashboard/notifications/emails/[id]/data";
 
 export default function Form() {
   const [email, setEmail] = useState<Email>();

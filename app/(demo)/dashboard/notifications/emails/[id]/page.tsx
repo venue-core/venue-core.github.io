@@ -1,9 +1,13 @@
-import Form from "@/app/(demo)/dashboard/notifications/emails/1/form";
+import Form from "@/app/(demo)/dashboard/notifications/emails/[id]/form";
 
 export const metadata = {
   title: "Email - Notifications - OneVenue",
   description: "Empower venue managers to close more deals more efficiently",
 };
+
+export async function generateStaticParams() {
+  return [{ id: '1' }];
+}
 
 export default function Email() {
   return (
