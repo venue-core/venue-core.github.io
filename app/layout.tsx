@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.svg" />
-      <GoogleAnalytics tagId="G-324NEVCL3L" />
+      <GoogleAnalytics tagId="G-ZQC9VQJMG9" />
       <body
         className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}
       >
