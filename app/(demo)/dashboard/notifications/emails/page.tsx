@@ -1,4 +1,4 @@
-import {redirect} from "next/navigation";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Emails - Notifications - OneVenue",
@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 export default function Emails() {
-  redirect('/dashboard/notifications/emails/1');
+  redirect("/dashboard/notifications/emails/1");
   return (
     <header>
       <div className="mb-2 text-sm font-semibold text-blue-600 uppercase">

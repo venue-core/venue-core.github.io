@@ -1,6 +1,7 @@
 import {
   BanknotesIcon,
-  BellAlertIcon, CalculatorIcon,
+  BellAlertIcon,
+  CalculatorIcon,
   CalendarIcon,
   ChartBarIcon,
   ClockIcon,

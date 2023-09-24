@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 export async function generateStaticParams() {
-  return [{ id: '1' }];
+  return [{ id: "1" }];
 }
 
 export default function Email() {
