@@ -18,24 +18,39 @@ export async function generateStaticParams() {
 }
 
 const INVOICE1 = {
-  subtotal: 3000,
-  tax: 300,
-  total: 3300,
-  paid: 3300,
-  due: 0,
+  subtotal: 13_305,
+  admin: 3_326.25,
+  tax: 1_579.97,
+  total: 18_211.22,
+  paid: 8_000,
+  due: 10_211.22,
   items: [
-    { item: "Venue", quantity: 1, rate: 8000, amount: 8000 },
-    { item: "Catering Services", quantity: 1, rate: 8000, amount: 8000 },
-    { item: "Bar Services", quantity: 1, rate: 8000, amount: 8000 },
-    { item: "Rental Services", quantity: 1, rate: 8000, amount: 8000 },
-    { item: "Insurance", quantity: 1, rate: 8000, amount: 8000 },
+    { item: "Venue", quantity: 1, rate: 7750, amount: 7750 },
+    { item: "Catering Services", quantity: 1, rate: 3210, amount: 3210 },
+    { item: "Bar Services", quantity: 1, rate: 1200, amount: 1200 },
+    { item: "Rental Services", quantity: 1, rate: 895, amount: 895 },
+    { item: "Insurance", quantity: 1, rate: 250, amount: 250 },
   ],
 };
-const INVOICE2 = {};
+const INVOICE2 = {
+  subtotal: 13_605,
+  admin: 3_401.25,
+  tax: 1_615.59,
+  total: 18_621.48,
+  paid: 8_000,
+  due: 10_211.22,
+  items: [
+    { item: "Venue", quantity: 1, rate: 7750, amount: 7750 },
+    { item: "Catering Services", quantity: 1, rate: 3510, amount: 3510 },
+    { item: "Bar Services", quantity: 1, rate: 1200, amount: 1200 },
+    { item: "Rental Services", quantity: 1, rate: 895, amount: 895 },
+    { item: "Insurance", quantity: 1, rate: 250, amount: 250 },
+  ],
+};
 
-export default function Invoice() {
-  const date = INVOICE_1_DATE;
-  const invoice = INVOICE1;
+export default function Invoice({ params }: { params: { id: string } }) {
+  const date = params.id === '1' ? INVOICE_1_DATE : INVOICE_2_DATE;
+  const invoice = params.id === '1' ? INVOICE1 : INVOICE2;
   return (
     <div className="bg-gray-50">
       <div className="max-w-[85rem] px-2 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
@@ -213,7 +228,16 @@ export default function Invoice() {
 
                   <dl className="grid sm:grid-cols-5 gap-x-3">
                     <dt className="col-span-3 font-semibold text-gray-800 dark:text-gray-200">
-                      Tax:
+                      Admin Fee (25%):
+                    </dt>
+                    <dd className="col-span-2 text-gray-500">
+                      {CURRENCY_FORMAT.format(invoice.admin)}
+                    </dd>
+                  </dl>
+
+                  <dl className="grid sm:grid-cols-5 gap-x-3">
+                    <dt className="col-span-3 font-semibold text-gray-800 dark:text-gray-200">
+                      Tax (9.5%):
                     </dt>
                     <dd className="col-span-2 text-gray-500">
                       {CURRENCY_FORMAT.format(invoice.tax)}
