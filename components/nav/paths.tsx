@@ -64,27 +64,27 @@ export const PATHS: Path[] = [
       },
     ],
   },
-  {
-    title: "Events",
-    icon: <RectangleStackIcon className="w-4 h-4" />,
-    paths: [
-      // {
-      //   title: "Services",
-      //   url: "/dashboard/events/services",
-      //   icon: <TableCellsIcon className="w-4 h-4" />,
-      // },
-      {
-        title: "Calculator",
-        url: "/dashboard/events/calculator",
-        icon: <CalculatorIcon className="w-4 h-4" />,
-      },
-      // {
-      //   title: "Analytics",
-      //   url: "/dashboard/events/analytics",
-      //   icon: <ChartBarIcon className="w-4 h-4" />,
-      // },
-    ],
-  },
+  // {
+  // title: "Events",
+  // icon: <RectangleStackIcon className="w-4 h-4" />,
+  // paths: [
+  // {
+  //   title: "Services",
+  //   url: "/dashboard/events/services",
+  //   icon: <TableCellsIcon className="w-4 h-4" />,
+  // },
+  // {
+  //   title: "Calculator",
+  //   url: "/dashboard/events/calculator",
+  //   icon: <CalculatorIcon className="w-4 h-4" />,
+  // },
+  // {
+  //   title: "Analytics",
+  //   url: "/dashboard/events/analytics",
+  //   icon: <ChartBarIcon className="w-4 h-4" />,
+  // },
+  // ],
+  // },
   // {
   //   title: "Settings",
   //   url: "/dashboard/settings",
