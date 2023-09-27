@@ -49,8 +49,8 @@ const INVOICE2 = {
 };
 
 export default function Invoice({ params }: { params: { id: string } }) {
-  const date = params.id === '1' ? INVOICE_1_DATE : INVOICE_2_DATE;
-  const invoice = params.id === '1' ? INVOICE1 : INVOICE2;
+  const date = params.id === "1" ? INVOICE_1_DATE : INVOICE_2_DATE;
+  const invoice = params.id === "1" ? INVOICE1 : INVOICE2;
   return (
     <div className="bg-gray-50">
       <div className="max-w-[85rem] px-2 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
@@ -169,7 +169,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
                 </div>
 
                 {invoice.items.map((item) => (
-                  <>
+                  <div key={item.item}>
                     <div className="hidden sm:block border-b border-gray-200 dark:border-gray-700"></div>
                     <div
                       className="grid grid-cols-3 sm:grid-cols-5 gap-2"
@@ -209,7 +209,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
                       </div>
                     </div>
                     <div className="sm:hidden border-b border-gray-200 dark:border-gray-700"></div>
-                  </>
+                  </div>
                 ))}
               </div>
             </div>
