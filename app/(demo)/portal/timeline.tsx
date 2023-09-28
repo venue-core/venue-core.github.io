@@ -2,7 +2,7 @@ import { format } from "date-fns";
 
 import { EVENTS } from "@/app/(demo)/portal/data";
 
-export function Timeline() {
+export default function Timeline() {
   return (
     <ol className="relative border-l border-gray-300">
       {EVENTS.map((e) => (

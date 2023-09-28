@@ -1,10 +1,14 @@
 import React from "react";
+import cx from "classnames";
 import { addDays, format } from "date-fns";
+import _ from "lodash";
 
 import { CURRENCY_FORMAT } from "@/components/estimator/estimate/utils";
 import {
-  INVOICE_1_DATE,
-  INVOICE_2_DATE,
+  ADMIN_FEE_RATE,
+  INVOICE1,
+  INVOICE2,
+  TAX_RATE,
   USER,
   VENUE,
 } from "@/app/(demo)/portal/data";
@@ -18,38 +22,10 @@ export async function generateStaticParams() {
   return [{ id: "1" }, { id: "2" }];
 }
 
-const ADMIN_FEE_RATE = 0.25;
-const TAX_RATE = 0.095;
-const INVOICE1 = {
-  paid: 8_000,
-  items: [
-    { item: "Venue", amount: 7750 },
-    { item: "Catering Services", amount: 3210 },
-    { item: "Bar Services", amount: 1200 },
-    { item: "Rental Services", amount: 895 },
-    { item: "Insurance", amount: 250 },
-  ],
-};
-const INVOICE2 = {
-  paid: 8_000,
-  items: [
-    { item: "Venue", amount: 7750 },
-    { item: "Catering Services", amount: 3510 },
-    { item: "Bar Services", amount: 1200 },
-    { item: "Rental Services", amount: 895 },
-    { item: "Insurance", amount: 250 },
-  ],
-};
-
 export default function Invoice({ params }: { params: { id: string } }) {
-  const date = params.id === "1" ? INVOICE_1_DATE : INVOICE_2_DATE;
   const invoice = params.id === "1" ? INVOICE1 : INVOICE2;
+  const date = invoice.date;
 
-  const subtotal = invoice.items.reduce((acc, item) => acc + item.amount, 0);
-  const admin = subtotal * ADMIN_FEE_RATE;
-  const subtotal2 = subtotal + admin;
-  const tax = subtotal2 * TAX_RATE;
-  const total = subtotal + admin + tax;
   return (
     <div className="bg-gray-50">
       <div className="max-w-[85rem] px-2 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
@@ -132,28 +108,60 @@ export default function Invoice({ params }: { params: { id: string } }) {
                   </div>
                 </div>
 
-                {invoice.items.map((item) => (
-                  <React.Fragment key={item.item}>
-                    <div className="block border-b border-gray-200"></div>
-                    <div className="grid grid-cols-2" key={item.item}>
-                      <div>
-                        <h5 className="hidden text-xs font-medium text-gray-500 uppercase">
-                          Item
-                        </h5>
-                        <p className="font-medium text-gray-800">{item.item}</p>
+                {invoice.items.map((item) => {
+                  const subitems = _.groupBy(item.subitems, "category");
+                  return (
+                    <React.Fragment key={item.item}>
+                      <div className="block border-b border-gray-200"></div>
+                      <div
+                        className="grid grid-cols-2 text-gray-800"
+                        key={item.item}
+                      >
+                        <div className="font-medium">{item.item}</div>
+                        <div className="text-right">
+                          {item.amount === 0
+                            ? "Included"
+                            : CURRENCY_FORMAT.format(item.amount)}
+                        </div>
                       </div>
-                      <div>
-                        <h5 className="hidden text-right text-xs font-medium text-gray-500 uppercase">
-                          Amount
-                        </h5>
-                        <p className="text-right text-gray-800">
-                          {CURRENCY_FORMAT.format(item.amount)}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="hidden border-b border-gray-200"></div>
-                  </React.Fragment>
-                ))}
+                      {Object.entries(subitems).map(([category, subitems]) => {
+                        const hasCategory = category !== "undefined";
+                        return (
+                          <div
+                            key={category}
+                            className="text-sm text-slate-600"
+                          >
+                            {hasCategory && (
+                              <div className="ml-4 mb-2 font-semibold">
+                                {category}
+                              </div>
+                            )}
+                            <div className="grid grid-cols-2">
+                              {subitems.map((item) => (
+                                <React.Fragment key={item.item}>
+                                  <div
+                                    className={cx(
+                                      "mb-1",
+                                      hasCategory ? "ml-8" : "ml-4"
+                                    )}
+                                  >
+                                    {item.item}
+                                  </div>
+                                  <div className="text-right mb-1">
+                                    {item.amount === 0
+                                      ? "Included"
+                                      : CURRENCY_FORMAT.format(item.amount)}
+                                  </div>
+                                </React.Fragment>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <div className="hidden border-b border-gray-200"></div>
+                    </React.Fragment>
+                  );
+                })}
               </div>
             </div>
 
@@ -165,25 +173,25 @@ export default function Invoice({ params }: { params: { id: string } }) {
                       Subtotal:
                     </dt>
                     <dd className="col-span-2 text-gray-500">
-                      {CURRENCY_FORMAT.format(subtotal)}
+                      {CURRENCY_FORMAT.format(invoice.subtotal)}
                     </dd>
                   </dl>
 
                   <dl className="grid sm:grid-cols-5 gap-x-3">
                     <dt className="col-span-3 font-semibold text-gray-800">
-                      Admin Fee (25%):
+                      Admin Fee ({ADMIN_FEE_RATE * 100}%):
                     </dt>
                     <dd className="col-span-2 text-gray-500">
-                      {CURRENCY_FORMAT.format(admin)}
+                      {CURRENCY_FORMAT.format(invoice.admin)}
                     </dd>
                   </dl>
 
                   <dl className="grid sm:grid-cols-5 gap-x-3">
                     <dt className="col-span-3 font-semibold text-gray-800">
-                      Tax (9.5%):
+                      Tax ({TAX_RATE * 100}%):
                     </dt>
                     <dd className="col-span-2 text-gray-500">
-                      {CURRENCY_FORMAT.format(tax)}
+                      {CURRENCY_FORMAT.format(invoice.tax)}
                     </dd>
                   </dl>
 
@@ -192,7 +200,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
                       Total:
                     </dt>
                     <dd className="col-span-2 text-gray-500">
-                      {CURRENCY_FORMAT.format(total)}
+                      {CURRENCY_FORMAT.format(invoice.total)}
                     </dd>
                   </dl>
 
@@ -210,7 +218,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
                       Due balance:
                     </dt>
                     <dd className="col-span-2 text-gray-500">
-                      {CURRENCY_FORMAT.format(total - invoice.paid)}
+                      {CURRENCY_FORMAT.format(invoice.total - invoice.paid)}
                     </dd>
                   </dl>
                 </div>
