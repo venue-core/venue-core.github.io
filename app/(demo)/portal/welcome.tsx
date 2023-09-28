@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { USER, VENUE } from "@/app/(demo)/portal/data";
 import ChangeModal from "@/app/(demo)/portal/modal";
+import {format} from "date-fns";
 
 export default function Welcome() {
   const [show, setShow] = useState(false);
@@ -13,10 +14,13 @@ export default function Welcome() {
     <div className="mb-4 text-center">
       <ChangeModal show={show} setShow={setShow} />
       <div className="mb-2 text-base tracking-wide font-semibold text-blue-600 uppercase">
-        Portal - {VENUE.name}
+        {VENUE.name}
       </div>
       <div className="block text-2xl font-bold text-gray-800 sm:text-3xl">
         Welcome back {USER.firstName}!
+      </div>
+      <div className="mt-2 text-gray-500">
+        {USER.event}, {format(USER.date, "MMMM d, YYY")}
       </div>
       <div className="mt-4">
         <Link

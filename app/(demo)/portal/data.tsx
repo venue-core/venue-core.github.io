@@ -22,6 +22,8 @@ export const USER = {
     state: "CA",
     zipcode: "94122",
   },
+  event: "Katherine and Itachi's",
+  date: new Date(2024, 4, 25),
 };
 
 export const TODAY = new Date();
