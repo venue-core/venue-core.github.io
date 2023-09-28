@@ -6,6 +6,7 @@ import { CURRENCY_FORMAT } from "@/components/estimator/estimate/utils";
 export const VENUE = {
   name: "Padua Hills",
   email: "jennifer@paduaweddings.com",
+  phone: "+1 909 624 8628",
   address: {
     street: "4467 Padua Ave.",
     city: "Claremont",
@@ -101,6 +102,7 @@ export const TAX_RATE = 0.095;
 const _INVOICE1 = {
   date: INVOICE_1_DATE,
   paid: 8_000,
+  due: 8_000,
   items: [
     {
       item: "Venue",
@@ -175,6 +177,7 @@ const _INVOICE1 = {
 const _INVOICE2 = {
   date: INVOICE_2_DATE,
   paid: 8_000,
+  due: 8_000,
   items: [
     {
       item: "Venue",

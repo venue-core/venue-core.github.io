@@ -36,7 +36,7 @@ export default function Welcome() {
       <div className="my-4">
         <div
           className="cursor-pointer btn text-white bg-blue-600 hover:bg-blue-700 w-full group disabled:opacity-50"
-          onClick={(evt) => setShow(true)}
+          onClick={() => setShow(true)}
         >
           Request Changes{" "}
           <span className="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">

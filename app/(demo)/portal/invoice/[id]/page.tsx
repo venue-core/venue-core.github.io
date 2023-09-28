@@ -179,7 +179,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
 
                   <dl className="grid sm:grid-cols-5 gap-x-3">
                     <dt className="col-span-3 font-semibold text-gray-800">
-                      Admin Fee ({ADMIN_FEE_RATE * 100}%):
+                      Admin Fee ({ADMIN_FEE_RATE * 100}%*):
                     </dt>
                     <dd className="col-span-2 text-gray-500">
                       {CURRENCY_FORMAT.format(invoice.admin)}
@@ -215,10 +215,20 @@ export default function Invoice({ params }: { params: { id: string } }) {
 
                   <dl className="grid sm:grid-cols-5 gap-x-3">
                     <dt className="col-span-3 font-semibold text-gray-800">
-                      Due balance:
+                      Amount outstanding:
                     </dt>
                     <dd className="col-span-2 text-gray-500">
                       {CURRENCY_FORMAT.format(invoice.total - invoice.paid)}
+                    </dd>
+                  </dl>
+
+                  <dl className="grid sm:grid-cols-5 gap-x-3">
+                    <dt className="col-span-3 font-semibold text-gray-800">
+                      <div>Amount due:</div>
+                      <div className="text-xs text-gray-500">{format(addDays(date, 14), "MM/dd/yyyy")}</div>
+                    </dt>
+                    <dd className="col-span-2 text-gray-500">
+                      {CURRENCY_FORMAT.format(invoice.due)}
                     </dd>
                   </dl>
                 </div>
@@ -229,17 +239,27 @@ export default function Invoice({ params }: { params: { id: string } }) {
               <h4 className="text-lg font-semibold text-gray-800">
                 Thank you!
               </h4>
-              <p className="text-gray-500">
+              <p className="mt-2 text-gray-500">
+                * Please note that the admin fee is NOT gratuity. We suggest a 15% gratuity to show appreciation for staff.
+              </p>
+              <p className="mt-2 text-gray-500">
                 If you have any questions concerning this invoice, use the
                 following contact information:
               </p>
-              <div className="mt-2">
-                <p className="block text-sm font-medium text-gray-800">
-                  jennifer@paduaweddings.com
-                </p>
-                <p className="block text-sm font-medium text-gray-800">
-                  +1 (760) 583-5578
-                </p>
+              <div className="mt-2 space-y-2">
+                <a
+                  className="block text-sm font-medium text-gray-800 hover:underline"
+                  href={`mailto:${VENUE.email}`}
+                >
+                  {VENUE.email}
+                </a>
+                <a
+                  className="block text-sm font-medium text-gray-800 hover:underline"
+                  href={`tel:${VENUE.phone.replace(/ /g, "").replace("ext", ",")}`}
+                >
+                  {VENUE.phone}
+                </a>
+
               </div>
             </div>
           </div>
