@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { format } from "date-fns";
 
 import { USER, VENUE } from "@/app/(demo)/portal/data";
 import ChangeModal from "@/app/(demo)/portal/modal";
-import {format} from "date-fns";
 
 export default function Welcome() {
   const [show, setShow] = useState(false);
