@@ -68,7 +68,7 @@ function Statistics1() {
             </div>
 
             <div className="text-center">
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
+              <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-gray-200">
                 {s.count}
               </h3>
             </div>
