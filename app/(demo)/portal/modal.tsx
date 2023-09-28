@@ -1,10 +1,10 @@
 "use client";
 
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
-import { EVENTS } from "@/app/(demo)/portal/data";
+import { EventsContext } from "@/app/(demo)/portal/data";
 
 export default function ChangeModal({
   show,
@@ -13,6 +13,7 @@ export default function ChangeModal({
   show: boolean;
   setShow: (s: boolean) => void;
 }) {
+  const { addEvent } = useContext(EventsContext);
   const [request, setRequest] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const cancelRef = useRef(null);
@@ -97,7 +98,8 @@ export default function ChangeModal({
                           className="btn w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 disabled:opacity-50"
                           onClick={async () => {
                             setSubmitting(true);
-                            EVENTS.unshift({
+                            await new Promise((r) => setTimeout(r, 1000));
+                            addEvent({
                               title: "Change Requested",
                               date: new Date(),
                               user: "Katherine Wang",
@@ -108,7 +110,6 @@ export default function ChangeModal({
                                 </div>
                               ),
                             });
-                            await new Promise((r) => setTimeout(r, 1000));
                             setSubmitting(false);
                             setRequest("");
                             setShow(false);

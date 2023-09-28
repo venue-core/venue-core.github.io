@@ -1,3 +1,6 @@
+"use client";
+
+import { createContext, useState } from "react";
 import Link from "next/link";
 import { addDays, format } from "date-fns";
 
@@ -95,6 +98,32 @@ export const EVENTS = [
     content: <div>Scheduled tour for Jul 15th, 2023 10:00AM</div>,
   },
 ];
+
+type Event = {
+  title: string;
+  date: Date;
+  user: string;
+  content?: React.ReactNode;
+};
+interface Context {
+  events: Event[];
+  addEvent: (event: Event) => void;
+}
+
+export const EventsContext = createContext<Context>({} as unknown as Context);
+
+export const EventsProvider: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => {
+  const [events, setEvents] = useState<Context["events"]>(EVENTS);
+  return (
+    <EventsContext.Provider
+      value={{ events, addEvent: (e) => setEvents([e, ...events]) }}
+    >
+      {children}
+    </EventsContext.Provider>
+  );
+};
 
 export const ADMIN_FEE_RATE = 0.22;
 export const TAX_RATE = 0.095;
@@ -274,7 +303,7 @@ export const PAYMENTS = [
   {
     title: "Next Payment",
     amount: 8_000,
-    color: "blue-600",
+    color: "blue-500",
     subtitle: (
       <div>
         <div>{format(addDays(TODAY, NEXT_PAYMENT_DAYS), "E LLL d, yyy")}</div>

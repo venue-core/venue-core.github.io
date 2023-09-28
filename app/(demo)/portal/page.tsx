@@ -1,3 +1,4 @@
+import { EventsProvider } from "@/app/(demo)/portal/data";
 import Payments from "@/app/(demo)/portal/payments";
 import Timeline from "@/app/(demo)/portal/timeline";
 import Welcome from "@/app/(demo)/portal/welcome";
@@ -9,10 +10,12 @@ export const metadata = {
 
 export default function Portal() {
   return (
-    <div className="mt-8 px-8 max-w-md mx-auto">
-      <Welcome />
-      <Tabs />
-    </div>
+    <EventsProvider>
+      <div className="mt-8 px-8 max-w-md mx-auto">
+        <Welcome />
+        <Tabs />
+      </div>
+    </EventsProvider>
   );
 }
 

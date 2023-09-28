@@ -1,3 +1,5 @@
+"use client";
+
 import { CURRENCY_FORMAT } from "@/components/estimator/estimate/utils";
 import { PAYMENTS } from "@/app/(demo)/portal/data";
 

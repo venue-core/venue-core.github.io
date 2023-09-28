@@ -225,7 +225,9 @@ export default function Invoice({ params }: { params: { id: string } }) {
                   <dl className="grid sm:grid-cols-5 gap-x-3">
                     <dt className="col-span-3 font-semibold text-gray-800">
                       <div>Amount due:</div>
-                      <div className="text-xs text-gray-500">{format(addDays(date, 14), "MM/dd/yyyy")}</div>
+                      <div className="text-xs text-gray-500">
+                        {format(addDays(date, 14), "MM/dd/yyyy")}
+                      </div>
                     </dt>
                     <dd className="col-span-2 text-gray-500">
                       {CURRENCY_FORMAT.format(invoice.due)}
@@ -240,7 +242,8 @@ export default function Invoice({ params }: { params: { id: string } }) {
                 Thank you!
               </h4>
               <p className="mt-2 text-gray-500">
-                * Please note that the admin fee is NOT gratuity. We suggest a 15% gratuity to show appreciation for staff.
+                * Please note that the admin fee is NOT gratuity. We suggest a
+                15% gratuity to show appreciation for staff.
               </p>
               <p className="mt-2 text-gray-500">
                 If you have any questions concerning this invoice, use the
@@ -255,11 +258,12 @@ export default function Invoice({ params }: { params: { id: string } }) {
                 </a>
                 <a
                   className="block text-sm font-medium text-gray-800 hover:underline"
-                  href={`tel:${VENUE.phone.replace(/ /g, "").replace("ext", ",")}`}
+                  href={`tel:${VENUE.phone
+                    .replace(/ /g, "")
+                    .replace("ext", ",")}`}
                 >
                   {VENUE.phone}
                 </a>
-
               </div>
             </div>
           </div>
