@@ -135,18 +135,19 @@ const _INVOICE1 = {
           amount: 900,
         },
         { category: "Appetizers", item: "Mini Ceviche Tostadas", amount: 1050 },
+        { category: "Appetizers", item: "Charcuterie Board", amount: 2000 },
 
         {
           category: "Buffet",
           item: "Braised Short Ribs (100 person min)",
-          amount: 7900,
+          amount: 0,
         },
         {
           category: "Buffet",
           item: "Swordfish (market price, estimate)",
-          amount: 8000,
+          amount: 10000,
         },
-        { category: "Buffet", item: "Roast Leg of Lamb", amount: 7350 },
+        { category: "Buffet", item: "Roast Leg of Lamb", amount: 0 },
 
         { category: "Side Dishes", item: "Twice Baked Potatoes", amount: 0 },
         { category: "Side Dishes", item: "Grilled Asparagus", amount: 0 },
@@ -163,7 +164,7 @@ const _INVOICE1 = {
     {
       item: "Bar Services",
       subitems: [
-        { item: "4 hours - Superior Brands", amount: 4500 },
+        { item: "6 hours - Superior Brands", amount: 5300 },
         { item: "Setup Fee", amount: 750 },
       ],
     },
@@ -210,18 +211,19 @@ const _INVOICE2 = {
           amount: 900,
         },
         { category: "Appetizers", item: "Mini Ceviche Tostadas", amount: 1050 },
+        { category: "Appetizers", item: "Charcuterie Board", amount: 2000 },
 
         {
           category: "Buffet",
           item: "Braised Short Ribs (100 person min)",
-          amount: 7900,
+          amount: 0,
         },
         {
           category: "Buffet",
           item: "Swordfish (market price, estimate)",
-          amount: 8000,
+          amount: 10000,
         },
-        { category: "Buffet", item: "Roast Leg of Lamb", amount: 7350 },
+        { category: "Buffet", item: "Roast Leg of Lamb", amount: 0 },
 
         { category: "Side Dishes", item: "Twice Baked Potatoes", amount: 0 },
         { category: "Side Dishes", item: "Grilled Asparagus", amount: 0 },
@@ -238,7 +240,7 @@ const _INVOICE2 = {
     {
       item: "Bar Services",
       subitems: [
-        { item: "4 hours - Superior Brands", amount: 4500 },
+        { item: "6 hours - Superior Brands", amount: 5300 },
         { item: "Setup Fee", amount: 750 },
       ],
     },
