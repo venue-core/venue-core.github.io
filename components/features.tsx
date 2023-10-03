@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Analytics from "@/public/images/features/analytics.png";
 import Calculator from "@/public/images/features/calculator.png";
 import Invoices from "@/public/images/features/invoices.png";
+import Portal from "@/public/images/features/portal.png";
 import Scheduling from "@/public/images/features/scheduling.png";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
@@ -18,6 +19,7 @@ export default function Features() {
       <Section2 />
       <Section3 />
       <Section4 />
+      <Section5 />
     </>
   );
 }
@@ -28,7 +30,6 @@ function Section1() {
   return (
     <section>
       <div className="relative max-w-7xl mx-auto">
-        {/* Bg */}
         <div
           className="absolute inset-0 rounded-tr-[100px] bg-gradient-to-tr from-blue-600 to-blue-500 pointer-events-none -z-10"
           aria-hidden="true"
@@ -36,9 +37,7 @@ function Section1() {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="py-20">
-            {/* Section content */}
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-between">
-              {/* Section header */}
               <div
                 className="md:max-w-xl mb-12 md:mb-20 shrink-0 md:order-0"
                 data-aos="fade-up"
@@ -73,7 +72,6 @@ function Section1() {
                 </div>
               </div>
 
-              {/* Image */}
               <div
                 className="flex justify-center mb-6"
                 data-aos="fade-up"
@@ -104,7 +102,7 @@ function Section2() {
         />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="pt-20">
+          <div className="pt-20 pb-12">
             {/* Section content */}
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-end">
               {/* Content */}
@@ -260,19 +258,15 @@ function Section4() {
   return (
     <section data-aos-id-4>
       <div className="relative max-w-7xl mx-auto">
-        {/* Bg */}
         <div
           className="absolute inset-0 rounded-tl-[100px] mb-24 md:mb-0 bg-gradient-to-b from-slate-100 pointer-events-none -z-10"
           aria-hidden="true"
         />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="pt-20">
-            {/* Section content */}
+          <div className="pt-20 pb-12">
             <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-end">
-              {/* Content */}
               <div className="w-[512px] max-w-full shrink-0 md:order-1">
-                {/* Copy */}
                 <h2
                   className="h2 mb-4"
                   data-aos="fade-up"
@@ -314,6 +308,83 @@ function Section4() {
                     data-aos-anchor="[data-aos-id-4]"
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Section5() {
+  return (
+    <section>
+      <div className="relative max-w-7xl mx-auto">
+        <div
+          className="absolute inset-0 rounded-tr-[100px] bg-gradient-to-tr from-blue-600 to-blue-500 pointer-events-none -z-10"
+          aria-hidden="true"
+        />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="py-20">
+            <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-between">
+              <div
+                className="md:max-w-xl mb-12 md:mb-20 shrink-0 md:order-0"
+                data-aos="fade-up"
+              >
+                <h2
+                  className="h2 text-white mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="100"
+                >
+                  Customer Portal
+                </h2>
+                <div
+                  className="text-lg text-blue-50 mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="200"
+                >
+                  • Provide your customers clarity on their scheduled payments
+                  and requested changes for the event.
+                </div>
+                <div
+                  className="text-lg text-blue-50 mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="300"
+                >
+                  • Customers can view their invoices and communicate directly
+                  with the venue manager through the portal.
+                </div>
+                <div
+                  className="max-w-xs mx-auto sm:max-w-none my-8"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-2]"
+                  data-aos-delay="300"
+                >
+                  <Link
+                    className="btn-sm inline-flex items-center text-blue-600 bg-white group shadow-sm"
+                    href="/portal"
+                  >
+                    View Demo
+                    <ArrowRightIcon className="h-4 stroke-2 tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2" />
+                  </Link>
+                </div>
+              </div>
+
+              <div
+                className="flex justify-center mb-6"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <Image
+                  src={Portal}
+                  width={400}
+                  alt="Portal"
+                />
               </div>
             </div>
           </div>
