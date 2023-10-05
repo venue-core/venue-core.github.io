@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Analytics from "@/public/images/features/analytics.png";
 import Calculator from "@/public/images/features/calculator.png";
 import Invoices from "@/public/images/features/invoices.png";
+import Invoices2 from "@/public/images/features/invoices-2.png";
 import Portal from "@/public/images/features/portal.png";
 import Scheduling from "@/public/images/features/scheduling.png";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -15,12 +16,137 @@ import { CustomerType, getCustomerType } from "@/components/utils/customer";
 export default function Features() {
   return (
     <>
-      <Section1 />
-      <Section2 />
-      <Section3 />
-      <Section4 />
-      <Section5 />
+      <Section0 />
+      <Section01 />
+      {/*<Section1 />*/}
+      {/*<Section2 />*/}
+      {/*<Section3 />*/}
+      {/*<Section4 />*/}
+      {/*<Section5 />*/}
     </>
+  );
+}
+
+function Section0() {
+  return (
+    <section>
+      <div className="relative max-w-7xl mx-auto">
+        <div
+          className="absolute inset-0 rounded-tr-[100px] bg-gradient-to-tr from-blue-600 to-blue-500 pointer-events-none -z-10"
+          aria-hidden="true"
+        />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="py-20">
+            <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-between">
+              <div
+                className="md:max-w-xl mb-12 md:mb-20 shrink-0 md:order-0"
+                data-aos="fade-up"
+              >
+                <h2
+                  className="h2 text-white mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="100"
+                >
+                  Payment plans, ready to use out-of-the-box
+                </h2>
+                <div
+                  className="text-lg text-blue-50 mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="200"
+                >
+                  • Your customers can pay in 12 monthly zero-interest installments.
+                </div>
+                <div
+                  className="text-lg text-blue-50 mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="300"
+                >
+                  • Order sizes increase 40% compared to using traditional payment plans.<sup>1</sup>
+                </div>
+              </div>
+
+              <div
+                className="flex justify-center mb-6"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <div className="relative">
+                  <Image src={Portal} width={400} alt="Scheduling" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="text-white text-sm pb-8 block">
+            <sup>1</sup> Quantifying The Incremental Impact of Afterpay” Mastercard 2021 (figures based on US data)
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Section01() {
+  return (
+    <section data-aos-id-2>
+      <div className="relative max-w-7xl mx-auto">
+        <div
+          className="absolute inset-0 rounded-tl-[100px] mb-24 md:mb-0 bg-gradient-to-b from-slate-100 pointer-events-none -z-10"
+          aria-hidden="true"
+        />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="pt-20 pb-12">
+            <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row items-center justify-end">
+              <div className="w-[512px] max-w-full shrink-0 md:order-1">
+                <h2
+                  className="h2 mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="100"
+                >
+                  Smart invoice and payment management
+                </h2>
+                <div
+                  className="text-lg text-slate-500 mb-4"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="200"
+                >
+                  • Instantly see all paid, outstanding, and upcoming invoices.
+                </div>
+                <div
+                  className="text-lg text-slate-500 mb-8"
+                  data-aos="fade-up"
+                  data-aos-anchor="[data-aos-id-3]"
+                  data-aos-delay="300"
+                >
+                  • Automated email and text message reminders to boost your
+                  payment collection.
+                </div>
+              </div>
+
+              <div className="w-full max-w-sm md:max-w-none md:mr-8 mt-8 md:mt-0">
+                <div className="relative mx-auto mb-12">
+                  <Image
+                    src={Invoices2}
+                    className="md:max-w-none"
+                    width={500}
+                    height={283}
+                    alt="Invoices"
+                    data-aos="fade-up"
+                    data-aos-anchor="[data-aos-id-2]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -380,11 +506,7 @@ function Section5() {
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                <Image
-                  src={Portal}
-                  width={400}
-                  alt="Portal"
-                />
+                <Image src={Portal} width={400} alt="Portal" />
               </div>
             </div>
           </div>

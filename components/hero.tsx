@@ -57,10 +57,10 @@ export default function Hero() {
               className="text-4xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
               data-aos="zoom-y-out"
             >
-              Pricing and payments built for{" "}
+              Payments built for{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
                 {customerType === CustomerType.Wedding
-                  ? "wedding venues"
+                  ? "event venues"
                   : "caterers"}
               </span>
             </h1>
@@ -70,8 +70,8 @@ export default function Hero() {
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
-                Beat competitors with fast, flexible price estimates and a
-                modern payments management system.
+                Increase revenue with payment plans and modern payments
+                collection.
               </p>
               <div
                 className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"
